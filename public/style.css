@@ -1,11 +1,10 @@
 #noscript-message {
-    width: 250px;
-    font-family: Roboto;
-    font-size: 32px;
-    font-weight: 100;
-   
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 50px;
+  font-weight: 500;
 }
