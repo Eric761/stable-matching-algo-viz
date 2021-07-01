@@ -12,12 +12,13 @@ import {
 } from "react-icons/fa";
 import { BsSkipForwardFill } from "react-icons/bs";
 import { ImShuffle } from "react-icons/im";
-import { GrRotateRight } from "react-icons/gr";
+import { RiRestartFill } from "react-icons/ri";
 import {
   HeaderContainer,
   NavContainer,
   IconContainer,
   ToggleContainer,
+  StyledLink,
 } from "./HeaderElements";
 
 const StyledSwitch = withStyles((theme) => ({
@@ -84,10 +85,15 @@ const Header = ({ handleChangeBgColor }) => {
     <HeaderContainer>
       <NavContainer>
         <FaInfoCircle className={`nav-icon-style-${state}`} />
-        <FaGithub className={`nav-icon-style-${state}`} />
+        <a
+          href="https://github.com/Eric761/stable-matching-algo-viz"
+          target="_blank"
+        >
+          <FaGithub className={`nav-icon-style-${state}`} />
+        </a>
       </NavContainer>
       <IconContainer>
-        <GrRotateRight className={`icon-style-${state}`} />
+        <RiRestartFill className={`restart-icon-style-${state}`} />
         <ImShuffle className={`icon-style-${state}`} />
         <FaPlay className={`icon-style-${state}`} />
         <BsSkipForwardFill className={`icon-style-${state}`} />

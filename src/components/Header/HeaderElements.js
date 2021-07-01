@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
   height: 60px;
@@ -11,6 +12,13 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 
   .nav-icon-style-true {
     color: #b5b9aa;
@@ -38,10 +46,41 @@ export const NavContainer = styled.div`
   }
 `;
 
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .restart-icon-style-true {
+    color: #a9bf20;
+    height: 30px;
+    width: 30px;
+    margin: 0 12px;
+    cursor: pointer;
+
+    &:hover {
+      color: #dcff00;
+    }
+  }
+  .restart-icon-style-false {
+    color: #545454;
+    height: 30px;
+    width: 30px;
+    margin: 0 12px;
+    cursor: pointer;
+    transition: 0.1s ease-in;
+
+    &:hover {
+      color: #000000;
+    }
+  }
 
   .icon-style-true {
     color: #a9bf20;
