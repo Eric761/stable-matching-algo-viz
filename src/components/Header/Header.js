@@ -20,7 +20,7 @@ import {
   ToggleContainer,
 } from "./HeaderElements";
 
-const IOSSwitch = withStyles((theme) => ({
+const StyledSwitch = withStyles((theme) => ({
   root: {
     width: 52,
     height: 26,
@@ -97,7 +97,7 @@ const Header = ({ handleChangeBgColor }) => {
         <FaFileUpload className={`icon-style-${state}`} />
       </IconContainer>
       <ToggleContainer>
-        <IOSSwitch checked={state} onChange={handleChange} />
+        <StyledSwitch checked={state} onChange={handleChange} />
       </ToggleContainer>
     </HeaderContainer>
   );

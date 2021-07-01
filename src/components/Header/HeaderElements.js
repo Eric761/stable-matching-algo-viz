@@ -68,4 +68,8 @@ export const IconContainer = styled.div`
   }
 `;
 
-export const ToggleContainer = styled.div``;
+export const ToggleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
