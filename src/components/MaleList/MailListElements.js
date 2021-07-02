@@ -32,6 +32,7 @@ export const StyledInput = styled(Input)`
   input {
     font-size: 25px;
     font-weight: 550;
+    font-family: "Baloo Chettan 2", cursive;
     color: grey;
     text-align: left;
     cursor: pointer;
