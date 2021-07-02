@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./components/Header/Header";
 import Notifier from "./components/Notifier/Notifier";
+import MailList from "./components/MaleList/MailList";
 
 const App = () => {
   const [styleBg, setStyleBg] = useState({
@@ -21,6 +22,7 @@ const App = () => {
     <div className="App" style={styleBg}>
       <Notifier />
       <Header handleChangeBgColor={handleChangeBgColor} />
+      <MailList />
     </div>
   );
 };
