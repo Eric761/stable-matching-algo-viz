@@ -48,6 +48,9 @@ export const NavContainer = styled.div`
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     text-decoration: none;
   }

@@ -24,7 +24,7 @@ const MailList = () => {
             ) : (
               <StyledFaChevronCircleDown onClick={toggle} />
             )}
-            <StyledInput defaultValue="Hello world" />
+            <StyledInput defaultValue="Hello world" spellCheck="false" />
             <StyledRiDeleteBack2Fill />
           </StyledPaper>
         );

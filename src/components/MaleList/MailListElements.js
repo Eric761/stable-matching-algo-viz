@@ -36,6 +36,7 @@ export const StyledInput = styled(Input)`
     color: grey;
     text-align: left;
     cursor: pointer;
+    text-transform: capitalize;
   }
 `;
 
