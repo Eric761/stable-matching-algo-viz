@@ -6,40 +6,33 @@ import {
   StyledFaChevronCircleRight,
   StyledFaChevronCircleDown,
   StyledRiDeleteBack2Fill,
-} from "./MailListElements";
-import { defaultArrangement } from "../helper/arrangement";
+} from "../MainListElements";
+import { defaultArrangement } from "../../helper/arrangement";
 
-let maleConfig = defaultArrangement.male.map((elem) => {
+let femaleConfig = defaultArrangement.female.map((elem) => {
   return elem.name;
 });
 
-const MailList = () => {
-  // let maleConfig = defaultArrangement.male.map((elem) => {
-  //   return elem.name;
-  // });
-
+const FemaleList = () => {
   const [right, setRight] = useState(true);
-  const [maleArr, setMaleArr] = useState(maleConfig);
+  const [femaleArr, setFemaleArr] = useState(femaleConfig);
   const toggle = () => {
     setRight(!right);
   };
-  console.log(maleArr);
+  console.log(femaleArr);
 
   const handleNameChange = (event) => {
     console.log(event.target);
-    // Wrong Approach: Everytime new element gets created
-    // setMaleArr([...maleArr, ([event.target.name] = event.target.value)]);
-    // Right Approach
     let ind = event.target.id;
     // Make a shallow copy of the array
-    let ar = [...maleArr];
+    let ar = [...femaleArr];
     ar[ind] = event.target.value;
-    setMaleArr(ar);
+    setFemaleArr(ar);
   };
 
   return (
     <LeftContainer>
-      {maleArr.map((elem, index) => {
+      {femaleArr.map((elem, index) => {
         return (
           <StyledPaper elevation={10} key={index}>
             {right ? (
@@ -62,4 +55,4 @@ const MailList = () => {
   );
 };
 
-export default MailList;
+export default FemaleList;
