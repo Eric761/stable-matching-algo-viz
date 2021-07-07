@@ -48,6 +48,7 @@ const MaleList = () => {
               <StyledFaChevronCircleDown onClick={toggle} />
             )}
             <StyledInput
+              autoComplete="off"
               placeholder="Enter name"
               spellCheck="false"
               value={elem}
