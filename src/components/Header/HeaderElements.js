@@ -15,6 +15,9 @@ export const NavContainer = styled.div`
 
   a {
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &:hover {
       text-decoration: none;
     }
