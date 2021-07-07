@@ -5,12 +5,12 @@ import MainList from "./components/MainList/MainList";
 
 const App = () => {
   const [styleBg, setStyleBg] = useState({
-    backgroundColor: "black",
+    backgroundColor: "#0e0e0e",
   });
   const handleChangeBgColor = (val) => {
     if (val) {
       setStyleBg({
-        backgroundColor: "black",
+        backgroundColor: "#0e0e0e",
       });
     } else {
       setStyleBg({
