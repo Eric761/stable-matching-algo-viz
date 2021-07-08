@@ -4,7 +4,7 @@ import FemaleList from "./FemaleList/FemaleList";
 
 const MainList = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <MaleList />
       <FemaleList />
     </div>
