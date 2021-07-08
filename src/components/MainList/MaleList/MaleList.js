@@ -72,7 +72,11 @@ const MaleList = ({ male, handleFemalePreferences }) => {
             {elem.toggle &&
               elem.preferences.map((pref, ind) => {
                 return (
-                  <PreferenceList ind={ind} len={elem.preferences.length}>
+                  <PreferenceList
+                    ind={ind}
+                    len={elem.preferences.length}
+                    key={ind}
+                  >
                     <StyledMdDragHandle />
                     <ListItem>{pref}</ListItem>
                   </PreferenceList>
