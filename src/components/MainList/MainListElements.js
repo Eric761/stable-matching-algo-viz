@@ -17,7 +17,7 @@ export const StyledPaper = styled(Paper)`
   /* min-height: ${({ len, flag }) =>
     flag ? `${(len + 1) * 55}px` : "55px"}; */
   width: 420px;
-  margin: 10px auto;
+  margin: 15px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
