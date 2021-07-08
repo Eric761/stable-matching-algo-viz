@@ -47,6 +47,7 @@ export const PreferenceList = styled.div`
   cursor: move;
   padding: 8px;
   padding-left: 5px;
+  min-height: 53px;
   border-bottom-left-radius: ${({ ind, len }) =>
     ind === len - 1 ? "30px" : ""};
   border-bottom-right-radius: ${({ ind, len }) =>

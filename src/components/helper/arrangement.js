@@ -234,11 +234,11 @@ const defaultArrangement = {
     },
     {
       name: "Loki",
-      preferences: ["Sylvie", "Maeve", "Jasmine", "Sylvie", "Zoe"],
+      preferences: ["Sylvie", "Maeve", "Jasmine", "Emma", "Zoe"],
     },
     {
       name: "Otis",
-      preferences: ["Maeve", "Jasmine", "Maeve", "Sylvie", "Zoe"],
+      preferences: ["Maeve", "Jasmine", "Emma", "Sylvie", "Zoe"],
     },
   ],
   female: [

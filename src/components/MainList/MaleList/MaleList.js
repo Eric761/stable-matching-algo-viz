@@ -11,18 +11,19 @@ import {
   StyledRiDeleteBack2Fill,
   StyledMdDragHandle,
 } from "../MainListElements";
-import { defaultArrangement } from "../../helper/arrangement";
 
 // let maleConfig = defaultArrangement.male.map((elem) => {
 //   return elem.name;
 // });
-let obj = defaultArrangement.male.map((elem) => {
-  return { name: elem.name, preferences: elem.preferences, toggle: false };
-});
+// let obj = defaultArrangement.male.map((elem) => {
+//   return { name: elem.name, preferences: elem.preferences, toggle: false };
+// });
 
-const MaleList = () => {
+const MaleList = ({ male, handleFemalePreferences }) => {
+  let obj = male.map((elem) => {
+    return { ...elem, toggle: false };
+  });
   console.log(obj);
-  // const [maleArr, setMaleArr] = useState(maleConfig);
   const [maleArr, setMaleArr] = useState(obj);
 
   const toggle = (ind) => {
@@ -43,6 +44,7 @@ const MaleList = () => {
     // Make a shallow copy of the array
     let ar = [...maleArr];
     ar[ind].name = event.target.value;
+    handleFemalePreferences(ind, event.target.value);
     setMaleArr(ar);
   };
 
