@@ -2,22 +2,34 @@ import React, { useState } from "react";
 import {
   LeftContainer,
   StyledPaper,
+  List,
+  PreferenceList,
+  ListItem,
   StyledInput,
   StyledFaChevronCircleRight,
   StyledFaChevronCircleDown,
   StyledRiDeleteBack2Fill,
+  StyledMdDragHandle,
 } from "../MainListElements";
 import { defaultArrangement } from "../../helper/arrangement";
 
-let femaleConfig = defaultArrangement.female.map((elem) => {
-  return elem.name;
+// let femaleConfig = defaultArrangement.female.map((elem) => {
+//   return elem.name;
+// });
+let obj = defaultArrangement.female.map((elem) => {
+  return { name: elem.name, preferences: elem.preferences, toggle: false };
 });
 
 const FemaleList = () => {
-  const [right, setRight] = useState(true);
-  const [femaleArr, setFemaleArr] = useState(femaleConfig);
-  const toggle = () => {
-    setRight(!right);
+  console.log(obj);
+  const [femaleArr, setFemaleArr] = useState(obj);
+
+  const toggle = (ind) => {
+    console.log(ind);
+    let ar = [...femaleArr];
+    let temp = ar[ind].toggle;
+    ar[ind].toggle = !temp;
+    setFemaleArr(ar);
   };
   console.log(femaleArr);
 
@@ -29,26 +41,36 @@ const FemaleList = () => {
     ar[ind] = event.target.value;
     setFemaleArr(ar);
   };
-
   return (
     <LeftContainer>
       {femaleArr.map((elem, index) => {
         return (
           <StyledPaper elevation={10} key={index}>
-            {right ? (
-              <StyledFaChevronCircleRight onClick={toggle} />
-            ) : (
-              <StyledFaChevronCircleDown onClick={toggle} />
-            )}
-            <StyledInput
-              autoComplete="off"
-              placeholder="Enter name"
-              spellCheck="false"
-              value={elem}
-              onChange={handleNameChange}
-              id={index}
-            />
-            <StyledRiDeleteBack2Fill />
+            <List flag={elem.toggle}>
+              {!elem.toggle ? (
+                <StyledFaChevronCircleRight onClick={() => toggle(index)} />
+              ) : (
+                <StyledFaChevronCircleDown onClick={() => toggle(index)} />
+              )}
+              <StyledInput
+                autoComplete="off"
+                placeholder="Enter name"
+                spellCheck="false"
+                value={elem.name}
+                onChange={handleNameChange}
+                id={index}
+              />
+              <StyledRiDeleteBack2Fill />
+            </List>
+            {elem.toggle &&
+              elem.preferences.map((pref, ind) => {
+                return (
+                  <PreferenceList ind={ind} len={elem.preferences.length}>
+                    <StyledMdDragHandle />
+                    <ListItem>{pref}</ListItem>
+                  </PreferenceList>
+                );
+              })}
           </StyledPaper>
         );
       })}
