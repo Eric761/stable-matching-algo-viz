@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   LeftContainer,
   StyledPaper,
@@ -12,19 +12,15 @@ import {
   StyledMdDragHandle,
 } from "../MainListElements";
 
-// let maleConfig = defaultArrangement.male.map((elem) => {
-//   return elem.name;
-// });
-// let obj = defaultArrangement.male.map((elem) => {
-//   return { name: elem.name, preferences: elem.preferences, toggle: false };
-// });
-
 const MaleList = ({ male, handleFemalePreferences }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false };
   });
   console.log(obj);
   const [maleArr, setMaleArr] = useState(obj);
+  const [dragging, setDragging] = useState(false);
+  const dragItem = useRef();
+  const dragItemNode = useRef();
 
   const toggle = (ind) => {
     console.log(ind);
@@ -46,6 +42,62 @@ const MaleList = ({ male, handleFemalePreferences }) => {
     ar[ind].name = event.target.value;
     handleFemalePreferences(ind, event.target.value);
     setMaleArr(ar);
+  };
+
+  const handleDragStart = (e, item) => {
+    console.log("Staring Drag...");
+    dragItemNode.current = e.target;
+    dragItemNode.current.addEventListener("dragend", handleDragEnd);
+    dragItem.current = item;
+    setTimeout(() => {
+      setDragging(true);
+    }, 0);
+  };
+
+  const handleDragEnter = (e, targetItem) => {
+    console.log("Entering a drag target", targetItem);
+    // 1st condition: Items are different
+    // 2nd condition: Group should be same
+    if (
+      dragItemNode.current !== e.target &&
+      dragItem.current.index === targetItem.index
+    ) {
+      console.log("Target is NOT the same as dragged item");
+      setMaleArr((maleArr) => {
+        // let newMaleArr = JSON.parse(JSON.stringify(maleArr));
+        // Make a shallow copy of the array
+        let newMaleArr = [...maleArr];
+        newMaleArr[targetItem.index].preferences.splice(
+          targetItem.ind,
+          0,
+          newMaleArr[dragItem.current.index].preferences.splice(
+            dragItem.current.ind,
+            1
+          )[0]
+        );
+        dragItem.current = targetItem;
+        // localStorage.setItem('List', JSON.stringify(newList));
+        return newMaleArr;
+      });
+    }
+  };
+
+  const handleDragEnd = (e) => {
+    setDragging(false);
+    dragItem.current = null;
+    dragItemNode.current.removeEventListener("dragend", handleDragEnd);
+    dragItemNode.current = null;
+  };
+
+  const getStyles = (item) => {
+    if (
+      dragging &&
+      dragItem.current.index === item.index &&
+      dragItem.current.ind === item.ind
+    ) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -76,6 +128,16 @@ const MaleList = ({ male, handleFemalePreferences }) => {
                     ind={ind}
                     len={elem.preferences.length}
                     key={ind}
+                    draggable
+                    onDragStart={(e) => handleDragStart(e, { index, ind })}
+                    onDragEnter={
+                      dragging
+                        ? (e) => {
+                            handleDragEnter(e, { index, ind });
+                          }
+                        : null
+                    }
+                    styleFlag={getStyles({ index, ind })}
                   >
                     <StyledMdDragHandle />
                     <ListItem>{pref}</ListItem>

@@ -48,6 +48,7 @@ export const PreferenceList = styled.div`
   padding: 8px;
   padding-left: 5px;
   min-height: 53px;
+  background-color: ${({ styleFlag }) => (styleFlag ? "darkgrey" : "")};
   border-bottom-left-radius: ${({ ind, len }) =>
     ind === len - 1 ? "30px" : ""};
   border-bottom-right-radius: ${({ ind, len }) =>
