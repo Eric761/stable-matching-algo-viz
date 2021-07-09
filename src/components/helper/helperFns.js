@@ -46,4 +46,18 @@ const addFemaleIndices = (male, female) => {
   return newFemaleArray;
 };
 
-export { addMaleIndices, addFemaleIndices };
+const removeMaleIndex = (female, ind) => {
+  female.forEach((elem, i) => {
+    elem.preferences.splice(ind[i], 1);
+  });
+  return female;
+};
+
+const removeFemaleIndex = (male, ind) => {
+  male.forEach((elem, i) => {
+    elem.preferences.splice(ind[i], 1);
+  });
+  return male;
+};
+
+export { addMaleIndices, addFemaleIndices, removeFemaleIndex, removeMaleIndex };

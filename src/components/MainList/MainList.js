@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import MaleList from "./MaleList/MaleList";
 import FemaleList from "./FemaleList/FemaleList";
 import { defaultArrangement } from "../helper/arrangement";
-import { addMaleIndices, addFemaleIndices } from "../helper/helperFns";
+import {
+  addMaleIndices,
+  addFemaleIndices,
+  removeMaleIndex,
+  removeFemaleIndex,
+} from "../helper/helperFns";
 
 let newMaleArray = addMaleIndices(
   defaultArrangement.male,
@@ -56,12 +61,22 @@ const MainList = () => {
     setFemaleArray(tempFemale);
   };
 
+  const handleDeleteMaleList = (maleArr, indexArr) => {
+    let tempFemale = removeMaleIndex(femaleArray, indexArr);
+    let tempArr = addMaleIndices(maleArr, tempFemale);
+    setFemaleArray(tempFemale);
+    setMaleArray(tempArr);
+    console.log(tempArr);
+    return tempArr;
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <MaleList
         male={maleArray}
         handleFemalePreferences={handleFemalePreferences}
         handleFemaleArr={handleFemaleArr}
+        handleDeleteMaleList={handleDeleteMaleList}
       />
       <FemaleList
         female={femaleArray}

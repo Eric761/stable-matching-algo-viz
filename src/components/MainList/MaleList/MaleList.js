@@ -12,7 +12,12 @@ import {
   StyledMdDragHandle,
 } from "../MainListElements";
 
-const MaleList = ({ male, handleFemalePreferences, handleFemaleArr }) => {
+const MaleList = ({
+  male,
+  handleFemalePreferences,
+  handleFemaleArr,
+  handleDeleteMaleList,
+}) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false };
   });
@@ -107,6 +112,15 @@ const MaleList = ({ male, handleFemalePreferences, handleFemaleArr }) => {
     return false;
   };
 
+  const handleDeleteItem = (ind) => {
+    // let temp = [...maleArr];
+    let tempIndex = maleArr[ind].index;
+    maleArr.splice(ind, 1);
+    console.log(maleArr, ind, tempIndex);
+    let newMaleArr = handleDeleteMaleList(maleArr, tempIndex);
+    setMaleArr(newMaleArr);
+  };
+
   return (
     <LeftContainer>
       {maleArr.map((elem, index) => {
@@ -126,7 +140,9 @@ const MaleList = ({ male, handleFemalePreferences, handleFemaleArr }) => {
                 onChange={handleNameChange}
                 id={index}
               />
-              <StyledRiDeleteBack2Fill />
+              <StyledRiDeleteBack2Fill
+                onClick={() => handleDeleteItem(index)}
+              />
             </List>
             {elem.toggle &&
               elem.preferences.map((pref, ind) => {
