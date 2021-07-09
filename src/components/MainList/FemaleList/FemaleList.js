@@ -19,11 +19,17 @@ import {
 //   return { name: elem.name, preferences: elem.preferences, toggle: false };
 // });
 
-const FemaleList = ({ female, handleMalePreferences, handleMaleArr }) => {
+const FemaleList = ({
+  female,
+  handleMalePreferences,
+  handleMaleArr,
+  handleDeleteFemaleList,
+}) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false };
   });
   console.log(obj);
+  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
   const [femaleArr, setFemaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
@@ -105,6 +111,15 @@ const FemaleList = ({ female, handleMalePreferences, handleMaleArr }) => {
     return false;
   };
 
+  const handleDeleteItem = (ind) => {
+    // let temp = [...maleArr];
+    let tempIndex = femaleArr[ind].index;
+    femaleArr.splice(ind, 1);
+    console.log(femaleArr, ind, tempIndex);
+    let newFemaleArr = handleDeleteFemaleList(femaleArr, tempIndex);
+    setFemaleArr(newFemaleArr);
+  };
+
   return (
     <LeftContainer>
       {femaleArr.map((elem, index) => {
@@ -124,7 +139,9 @@ const FemaleList = ({ female, handleMalePreferences, handleMaleArr }) => {
                 onChange={handleNameChange}
                 id={index}
               />
-              <StyledRiDeleteBack2Fill />
+              <StyledRiDeleteBack2Fill
+                onClick={() => handleDeleteItem(index)}
+              />
             </List>
             {elem.toggle &&
               elem.preferences.map((pref, ind) => {

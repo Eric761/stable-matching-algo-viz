@@ -70,6 +70,15 @@ const MainList = () => {
     return tempArr;
   };
 
+  const handleDeleteFemaleList = (femaleArr, indexArr) => {
+    let tempMale = removeFemaleIndex(maleArray, indexArr);
+    let tempArr = addFemaleIndices(tempMale, femaleArr);
+    setMaleArray(tempMale);
+    setFemaleArray(tempArr);
+    console.log(tempArr);
+    return tempArr;
+  };
+
   return (
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <MaleList
@@ -82,6 +91,7 @@ const MainList = () => {
         female={femaleArray}
         handleMalePreferences={handleMalePreferences}
         handleMaleArr={handleMaleArr}
+        handleDeleteFemaleList={handleDeleteFemaleList}
       />
     </div>
   );
