@@ -22,6 +22,7 @@ const MaleList = ({
     return { ...elem, toggle: false };
   });
   console.log(obj);
+  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteMaleList fn!!
   const [maleArr, setMaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
