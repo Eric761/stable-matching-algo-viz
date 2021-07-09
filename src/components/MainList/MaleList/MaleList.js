@@ -57,12 +57,13 @@ const MaleList = ({ male, handleFemalePreferences }) => {
   const handleDragEnter = (e, targetItem) => {
     console.log("Entering a drag target", targetItem);
     // 1st condition: Items should be different
+    // (inorder to place the item in original position, 1st condition is removed !)
     // 2nd condition: Group should be same
     if (
       // dragItemNode.current !== e.target &&
       dragItem.current.index === targetItem.index
     ) {
-      console.log("Target is NOT the same as dragged item");
+      console.log("Swapping..");
       setMaleArr((maleArr) => {
         // let newMaleArr = JSON.parse(JSON.stringify(maleArr));
         // Make a shallow copy of the array
