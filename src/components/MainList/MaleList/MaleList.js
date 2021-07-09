@@ -56,10 +56,10 @@ const MaleList = ({ male, handleFemalePreferences }) => {
 
   const handleDragEnter = (e, targetItem) => {
     console.log("Entering a drag target", targetItem);
-    // 1st condition: Items are different
+    // 1st condition: Items should be different
     // 2nd condition: Group should be same
     if (
-      dragItemNode.current !== e.target &&
+      // dragItemNode.current !== e.target &&
       dragItem.current.index === targetItem.index
     ) {
       console.log("Target is NOT the same as dragged item");
@@ -139,8 +139,10 @@ const MaleList = ({ male, handleFemalePreferences }) => {
                     }
                     styleFlag={getStyles({ index, ind })}
                   >
-                    <StyledMdDragHandle />
-                    <ListItem>{pref}</ListItem>
+                    <StyledMdDragHandle styleFlag={getStyles({ index, ind })} />
+                    <ListItem styleFlag={getStyles({ index, ind })}>
+                      {pref}
+                    </ListItem>
                   </PreferenceList>
                 );
               })}

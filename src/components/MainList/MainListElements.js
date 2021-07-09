@@ -123,6 +123,7 @@ export const StyledMdDragHandle = styled(MdDragHandle)`
   margin-right: 22px;
   color: #4a4a4a;
   cursor: move;
+  display: ${({ styleFlag }) => (styleFlag ? "none" : "")};
 
   &:hover {
     color: #000000;
@@ -135,4 +136,5 @@ export const ListItem = styled.span`
   font-family: "Baloo Chettan 2", cursive;
   color: grey;
   text-transform: capitalize;
+  display: ${({ styleFlag }) => (styleFlag ? "none" : "")};
 `;
