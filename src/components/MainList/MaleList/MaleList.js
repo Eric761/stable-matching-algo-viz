@@ -12,7 +12,7 @@ import {
   StyledMdDragHandle,
 } from "../MainListElements";
 
-const MaleList = ({ male, handleFemalePreferences }) => {
+const MaleList = ({ male, handleFemalePreferences, handleFemaleArr }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false };
   });
@@ -78,6 +78,12 @@ const MaleList = ({ male, handleFemalePreferences }) => {
         );
         dragItem.current = targetItem;
         // localStorage.setItem('List', JSON.stringify(newList));
+        // let tempArr = [...maleArr];
+        // tempArr.forEach((val) => {
+        //   delete val.toggle;
+        // });
+        console.log(newMaleArr);
+        handleFemaleArr(newMaleArr);
         return newMaleArr;
       });
     }

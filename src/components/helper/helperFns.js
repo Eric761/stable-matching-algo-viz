@@ -1,6 +1,6 @@
 // Storing indices of male & female occuring in opposite gender preferences array
 
-const addIndices = (male, female) => {
+const addMaleIndices = (male, female) => {
   let newMaleArray = [];
   male.forEach((elem) => {
     let { name, preferences } = elem;
@@ -20,6 +20,10 @@ const addIndices = (male, female) => {
     newMaleArray.push(tempObj);
   });
 
+  return newMaleArray;
+};
+
+const addFemaleIndices = (male, female) => {
   let newFemaleArray = [];
   female.forEach((elem) => {
     let { name, preferences } = elem;
@@ -39,10 +43,7 @@ const addIndices = (male, female) => {
     newFemaleArray.push(tempObj);
   });
 
-  return {
-    newMaleArray,
-    newFemaleArray,
-  };
+  return newFemaleArray;
 };
 
-export default addIndices;
+export { addMaleIndices, addFemaleIndices };

@@ -19,7 +19,7 @@ import {
 //   return { name: elem.name, preferences: elem.preferences, toggle: false };
 // });
 
-const FemaleList = ({ female, handleMalePreferences }) => {
+const FemaleList = ({ female, handleMalePreferences, handleMaleArr }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false };
   });
@@ -81,6 +81,7 @@ const FemaleList = ({ female, handleMalePreferences }) => {
         );
         dragItem.current = targetItem;
         // localStorage.setItem('List', JSON.stringify(newList));
+        handleMaleArr(newFemaleArr);
         return newFemaleArr;
       });
     }
