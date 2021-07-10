@@ -66,8 +66,6 @@ const MainList = () => {
     let tempArr = addMaleIndices(maleArr, tempFemale);
     setFemaleArray(tempFemale);
     setMaleArray(tempArr);
-    console.log(tempArr);
-    return tempArr;
   };
 
   const handleDeleteFemaleList = (femaleArr, indexArr) => {
@@ -75,8 +73,6 @@ const MainList = () => {
     let tempArr = addFemaleIndices(tempMale, femaleArr);
     setMaleArray(tempMale);
     setFemaleArray(tempArr);
-    console.log(tempArr);
-    return tempArr;
   };
 
   return (

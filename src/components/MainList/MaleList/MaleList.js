@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   LeftContainer,
   StyledPaper,
@@ -22,11 +22,17 @@ const MaleList = ({
     return { ...elem, toggle: false };
   });
   console.log(obj);
-  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteMaleList fn!!
+
   const [maleArr, setMaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragItemNode = useRef();
+
+  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteMaleList fn !!
+  // Now, Fixed !!
+  useEffect(() => {
+    setMaleArr(obj);
+  }, [male]);
 
   const toggle = (ind) => {
     console.log(ind);
@@ -83,7 +89,6 @@ const MaleList = ({
           )[0]
         );
         dragItem.current = targetItem;
-        // localStorage.setItem('List', JSON.stringify(newList));
         // let tempArr = [...maleArr];
         // tempArr.forEach((val) => {
         //   delete val.toggle;
@@ -113,13 +118,20 @@ const MaleList = ({
     return false;
   };
 
+  //  let temp = [...maleArr];
+  //  let tempIndex = maleArr[ind].index;
+  //  maleArr.splice(ind, 1);
+  //  console.log(maleArr, ind, tempIndex);
+  //  let newMaleArr = handleDeleteMaleList(maleArr, tempIndex);
+  //  setMaleArr(newMaleArr);
+
   const handleDeleteItem = (ind) => {
     // let temp = [...maleArr];
     let tempIndex = maleArr[ind].index;
     maleArr.splice(ind, 1);
     console.log(maleArr, ind, tempIndex);
-    let newMaleArr = handleDeleteMaleList(maleArr, tempIndex);
-    setMaleArr(newMaleArr);
+    handleDeleteMaleList(maleArr, tempIndex);
+    // setMaleArr(temp);
   };
 
   return (

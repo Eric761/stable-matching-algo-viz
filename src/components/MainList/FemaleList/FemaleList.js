@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   LeftContainer,
   StyledPaper,
@@ -29,11 +29,17 @@ const FemaleList = ({
     return { ...elem, toggle: false };
   });
   console.log(obj);
-  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
+
   const [femaleArr, setFemaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragItemNode = useRef();
+
+  // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
+  // Now, Fixed !!
+  useEffect(() => {
+    setFemaleArr(obj);
+  }, [female]);
 
   const toggle = (ind) => {
     console.log(ind);
@@ -112,12 +118,12 @@ const FemaleList = ({
   };
 
   const handleDeleteItem = (ind) => {
-    // let temp = [...maleArr];
+    // let temp = [...femaleArr];
     let tempIndex = femaleArr[ind].index;
     femaleArr.splice(ind, 1);
     console.log(femaleArr, ind, tempIndex);
-    let newFemaleArr = handleDeleteFemaleList(femaleArr, tempIndex);
-    setFemaleArr(newFemaleArr);
+    handleDeleteFemaleList(femaleArr, tempIndex);
+    // setFemaleArr(femaleArr);
   };
 
   return (
