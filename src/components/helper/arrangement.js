@@ -39,7 +39,7 @@ const maleNames = [
   "Cooper",
   "Copper",
   "Dexter",
-  "Diesel",
+  "Dom",
   "Duke",
   "Elvis",
   "Eric",
