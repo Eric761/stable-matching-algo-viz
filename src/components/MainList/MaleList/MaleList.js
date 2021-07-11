@@ -33,6 +33,9 @@ const MaleList = ({
   // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteMaleList fn !!
   // Now, Fixed !!
   useEffect(() => {
+    maleArr.forEach((item, ind) => {
+      obj[ind].toggle = item.toggle;
+    });
     setMaleArr(obj);
   }, [male]);
 
