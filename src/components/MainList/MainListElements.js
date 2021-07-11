@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Paper, Input } from "@material-ui/core";
 import { FaChevronCircleDown, FaChevronCircleRight } from "react-icons/fa";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import { MdDragHandle } from "react-icons/md";
+import { MdDragHandle, MdAddCircle } from "react-icons/md";
 
 export const LeftContainer = styled.div`
   display: flex;
@@ -137,4 +137,15 @@ export const ListItem = styled.span`
   color: grey;
   text-transform: capitalize;
   display: ${({ styleFlag }) => (styleFlag ? "none" : "")};
+`;
+
+export const StyledMdAddCircle = styled(MdAddCircle)`
+  height: 50px;
+  width: 50px;
+  color: #4a4a4a;
+  margin-top: 18px;
+  cursor: pointer;
+  &:hover {
+    color: #000000;
+  }
 `;

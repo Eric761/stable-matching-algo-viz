@@ -10,6 +10,7 @@ import {
   StyledFaChevronCircleDown,
   StyledRiDeleteBack2Fill,
   StyledMdDragHandle,
+  StyledMdAddCircle,
 } from "../MainListElements";
 
 const MaleList = ({
@@ -17,6 +18,7 @@ const MaleList = ({
   handleFemalePreferences,
   handleFemaleArr,
   handleDeleteMaleList,
+  handleAddMaleItem,
 }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false };
@@ -134,6 +136,10 @@ const MaleList = ({
     // setMaleArr(temp);
   };
 
+  const addMaleItem = () => {
+    handleAddMaleItem();
+  };
+
   return (
     <LeftContainer>
       {maleArr.map((elem, index) => {
@@ -185,6 +191,7 @@ const MaleList = ({
           </StyledPaper>
         );
       })}
+      <StyledMdAddCircle onClick={addMaleItem} />
     </LeftContainer>
   );
 };

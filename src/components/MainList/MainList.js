@@ -7,6 +7,8 @@ import {
   addFemaleIndices,
   removeMaleIndex,
   removeFemaleIndex,
+  addMaleItem,
+  addFemaleItem,
 } from "../helper/helperFns";
 
 let newMaleArray = addMaleIndices(
@@ -75,19 +77,38 @@ const MainList = () => {
     setFemaleArray(tempArr);
   };
 
+  const handleAddMaleItem = () => {
+    let { newMaleArr, newFemaleArr } = addMaleItem(maleArray, femaleArray);
+    setMaleArray(newMaleArr);
+    setFemaleArray(newFemaleArr);
+  };
+
+  const handleAddFemaleItem = () => {
+    let { newMaleArr, newFemaleArr } = addFemaleItem(maleArray, femaleArray);
+    setMaleArray(newMaleArr);
+    setFemaleArray(newFemaleArr);
+  };
+
   return (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
       <MaleList
         male={maleArray}
         handleFemalePreferences={handleFemalePreferences}
         handleFemaleArr={handleFemaleArr}
         handleDeleteMaleList={handleDeleteMaleList}
+        handleAddMaleItem={handleAddMaleItem}
       />
       <FemaleList
         female={femaleArray}
         handleMalePreferences={handleMalePreferences}
         handleMaleArr={handleMaleArr}
         handleDeleteFemaleList={handleDeleteFemaleList}
+        handleAddFemaleItem={handleAddFemaleItem}
       />
     </div>
   );
