@@ -84,6 +84,8 @@ const MaleList = ({
       setMaleArr((maleArr) => {
         // let newMaleArr = JSON.parse(JSON.stringify(maleArr));
         // Make a shallow copy of the array
+        // A shallow copy means the first level is copied, deeper levels are referenced.
+        // For deep copy: JSON.parse(JSON.stringify(maleArr))
         let newMaleArr = [...maleArr];
         newMaleArr[targetItem.index].preferences.splice(
           targetItem.ind,
