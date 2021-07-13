@@ -10,6 +10,11 @@ const App = () => {
   const [shuffle, setShuffle] = useState(false);
   const [reset, setReset] = useState(false);
   const [saveFile, setSaveFile] = useState(false);
+  const [uploadFile, setUploadFile] = useState({
+    state: false,
+    event: "",
+  });
+
   const handleChangeBgColor = (val) => {
     if (val) {
       setStyleBg({
@@ -30,6 +35,12 @@ const App = () => {
   const handleSaveFile = (state) => {
     setSaveFile(state);
   };
+  const handleInputFile = (newEvent, newState) => {
+    setUploadFile({
+      state: newState,
+      event: newEvent,
+    });
+  };
   return (
     <div className="App" style={styleBg}>
       <Notifier />
@@ -38,14 +49,17 @@ const App = () => {
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
         handleSaveFile={handleSaveFile}
+        handleInputFile={handleInputFile}
       />
       <MainList
         shuffle={shuffle}
         reset={reset}
         saveFile={saveFile}
+        uploadFile={uploadFile}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
         handleSaveFile={handleSaveFile}
+        handleInputFile={handleInputFile}
       />
     </div>
   );

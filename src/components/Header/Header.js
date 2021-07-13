@@ -80,11 +80,15 @@ const Header = ({
   handleRandomConfig,
   handleReset,
   handleSaveFile,
+  handleInputFile,
 }) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
     setState(!state);
     handleChangeBgColor(!state);
+  };
+  const handleUploadFile = (event) => {
+    handleInputFile(event, true);
   };
   return (
     <HeaderContainer>
@@ -114,7 +118,15 @@ const Header = ({
           className={`icon-style-${state}`}
           onClick={() => handleSaveFile(true)}
         />
-        <FaFileUpload className={`icon-style-${state}`} />
+        <label for="upload-file">
+          <FaFileUpload className={`icon-style-${state}`} />
+        </label>
+        <input
+          id="upload-file"
+          type="file"
+          accept="application/json"
+          onChange={handleUploadFile}
+        />
       </IconContainer>
       <ToggleContainer>
         <StyledSwitch checked={state} onChange={handleChange} />

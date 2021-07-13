@@ -64,6 +64,12 @@ export const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .restart-icon-style-true {
     color: #a9bf20;
     height: 30px;

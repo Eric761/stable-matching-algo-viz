@@ -4,6 +4,7 @@ import {
   femaleNames,
   minimumEntityCount,
   maximumEntityCount,
+  maximumCharCount,
 } from "./arrangement.js";
 
 const addMaleIndices = (male, female) => {
@@ -267,6 +268,57 @@ const userSaveFile = (data, filename, type) => {
   }
 };
 
+const validateJSONConfig = (config) => {
+  let { male, female } = config;
+  if (!male || !Array.isArray(male)) {
+    throw "Missing male array in configuration object.";
+  }
+  if (!female || !Array.isArray(female)) {
+    throw "Missing female array in configuration object.";
+  }
+  if (male.length < minimumEntityCount) {
+    throw "Male array does not meet minimum length of required elements.";
+  }
+  if (male.length > maximumEntityCount) {
+    throw "Male array exceeds maximum length of required elements.";
+  }
+  if (female.length < minimumEntityCount) {
+    throw "Female array does not meet minimum length of required elements.";
+  }
+  if (female.length > maximumEntityCount) {
+    throw "Female array exceeds maximum length of required elements.";
+  }
+
+  for (let entity of [...male, ...female]) {
+    let { name, preferences, index } = entity;
+    if (!name || !preferences || !index)
+      throw "An entity is missing required fields.";
+    if (
+      !(typeof name == "string" || name instanceof String) ||
+      name.length > maximumCharCount ||
+      /[^a-z]/gi.test(name)
+    ) {
+      throw "An entity has an invalid name.";
+    }
+    if (
+      !Array.isArray(preferences) ||
+      !preferences.every((x) => typeof x == "string" || x instanceof String)
+    ) {
+      throw "An entity has invalid preferences.";
+    }
+    if (
+      !Array.isArray(index) ||
+      !index.every((x) => typeof x == "number" || x instanceof Number)
+    ) {
+      throw "An entity has invalid index array.";
+    }
+  }
+
+  if (!isValidConfig(male, female)) {
+    throw "The configuration is invalid due to inconsistencies in entity occurence.";
+  }
+};
+
 export {
   addMaleIndices,
   addFemaleIndices,
@@ -277,4 +329,5 @@ export {
   randomConfigClick,
   isValidConfig,
   userSaveFile,
+  validateJSONConfig,
 };

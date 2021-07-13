@@ -12,6 +12,7 @@ import {
   randomConfigClick,
   isValidConfig,
   userSaveFile,
+  validateJSONConfig,
 } from "../helper/helperFns";
 
 let newMaleArray = addMaleIndices(
@@ -28,9 +29,11 @@ const MainList = ({
   shuffle,
   reset,
   saveFile,
+  uploadFile,
   handleRandomConfig,
   handleReset,
   handleSaveFile,
+  handleInputFile,
 }) => {
   const [maleArray, setMaleArray] = useState(
     JSON.parse(JSON.stringify(newMaleArray))
@@ -77,7 +80,34 @@ const MainList = ({
       }
       handleSaveFile(false);
     }
-  }, [saveFile]);
+    if (uploadFile.state && uploadFile.event) {
+      console.log(uploadFile);
+      let file = uploadFile.event.target.files[0];
+      let reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.addEventListener("load", function (readerEvent) {
+        try {
+          let config = JSON.parse(readerEvent.target.result);
+          // This would throw an error if anything is wrong and prevent further lines in the same block from being executed;
+          console.log(config);
+          validateJSONConfig(config);
+          setFlagBtn(false);
+          setMaleArray([...config.male]);
+          setFemaleArray([...config.female]);
+          setTimeout(() => {
+            handleInputFile("", false);
+            setFlagBtn(true);
+          }, 500);
+        } catch (error) {
+          // Shows an error in the UI.
+          alert(error);
+        } finally {
+          // Make sure to reset the value of this file input to reload the same file, if given the same file.
+          uploadFile.event.target.value = "";
+        }
+      });
+    }
+  }, [saveFile, uploadFile]);
 
   const handleMaleArr = (arr) => {
     let tempArr = addMaleIndices(maleArray, arr);
