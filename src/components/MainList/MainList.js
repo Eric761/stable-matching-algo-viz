@@ -10,6 +10,8 @@ import {
   addMaleItem,
   addFemaleItem,
   randomConfigClick,
+  isValidConfig,
+  userSaveFile,
 } from "../helper/helperFns";
 
 let newMaleArray = addMaleIndices(
@@ -22,7 +24,14 @@ let newFemaleArray = addFemaleIndices(
   defaultArrangement.female
 );
 
-const MainList = ({ shuffle, reset, handleRandomConfig, handleReset }) => {
+const MainList = ({
+  shuffle,
+  reset,
+  saveFile,
+  handleRandomConfig,
+  handleReset,
+  handleSaveFile,
+}) => {
   const [maleArray, setMaleArray] = useState(
     JSON.parse(JSON.stringify(newMaleArray))
   );
@@ -54,6 +63,21 @@ const MainList = ({ shuffle, reset, handleRandomConfig, handleReset }) => {
       }, 500);
     }
   }, [shuffle, reset]);
+
+  useEffect(() => {
+    if (saveFile) {
+      if (isValidConfig(maleArray, femaleArray)) {
+        userSaveFile(
+          JSON.stringify({ male: maleArray, female: femaleArray }, null, 5),
+          "configuration.json",
+          "application/json"
+        );
+      } else {
+        alert("Invalid config!");
+      }
+      handleSaveFile(false);
+    }
+  }, [saveFile]);
 
   const handleMaleArr = (arr) => {
     let tempArr = addMaleIndices(maleArray, arr);

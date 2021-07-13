@@ -9,6 +9,7 @@ const App = () => {
   });
   const [shuffle, setShuffle] = useState(false);
   const [reset, setReset] = useState(false);
+  const [saveFile, setSaveFile] = useState(false);
   const handleChangeBgColor = (val) => {
     if (val) {
       setStyleBg({
@@ -26,6 +27,9 @@ const App = () => {
   const handleReset = (state) => {
     setReset(state);
   };
+  const handleSaveFile = (state) => {
+    setSaveFile(state);
+  };
   return (
     <div className="App" style={styleBg}>
       <Notifier />
@@ -33,12 +37,15 @@ const App = () => {
         handleChangeBgColor={handleChangeBgColor}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
+        handleSaveFile={handleSaveFile}
       />
       <MainList
         shuffle={shuffle}
         reset={reset}
+        saveFile={saveFile}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
+        handleSaveFile={handleSaveFile}
       />
     </div>
   );

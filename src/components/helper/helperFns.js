@@ -211,6 +211,62 @@ const randomConfigClick = () => {
   };
 };
 
+const isValidConfig = (maleArr, femaleArr) => {
+  let maleName = maleArr.map((item) => item.name);
+  let totalElements = [...maleArr, ...femaleArr];
+
+  // Checks if all names are unique whether
+  // they be on the same group or not.
+  let totalElementsName = totalElements.map((elem) => elem.name);
+  let set = new Set(totalElementsName);
+  if (set.size !== totalElementsName.length) return false;
+  let ct = { male: {}, female: {} };
+
+  // This loop counts every object of every group and adds one for each time it counts it.
+  for (let entity of totalElements) {
+    let { name: name1, preferences } = entity;
+
+    // if any required property is undefined then the configuration is invalid
+    if (!entity || !name1 || !preferences) return false;
+    let group1 = maleName.indexOf(name1) == -1 ? "female" : "male";
+
+    ct[group1][name1] = !ct[group1][name1] ? 1 : ct[group1][name1] + 1;
+    for (let name2 of preferences) {
+      let group2 = group1 == "male" ? "female" : "male";
+      ct[group2][name2] = !ct[group2][name2] ? 1 : ct[group2][name2] + 1;
+    }
+  }
+
+  // For the configuration to be valid, all entities of the same group must have the same number of countings.
+  for (let group in ct) {
+    let counts = Object.values(ct[group]);
+    if (!counts.every((x) => x == counts[0])) return false;
+  }
+
+  return true;
+};
+
+const userSaveFile = (data, filename, type) => {
+  let file = new Blob([data], { type: type });
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(file, filename);
+  } else {
+    let a = document.createElement("a");
+    let url = URL.createObjectURL(file);
+
+    a.href = url;
+    a.download = filename;
+
+    document.body.appendChild(a);
+    a.click();
+
+    setTimeout(function () {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }, 0);
+  }
+};
+
 export {
   addMaleIndices,
   addFemaleIndices,
@@ -219,4 +275,6 @@ export {
   addMaleItem,
   addFemaleItem,
   randomConfigClick,
+  isValidConfig,
+  userSaveFile,
 };

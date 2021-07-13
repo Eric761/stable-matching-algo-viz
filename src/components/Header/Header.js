@@ -75,7 +75,12 @@ const StyledSwitch = withStyles((theme) => ({
   );
 });
 
-const Header = ({ handleChangeBgColor, handleRandomConfig, handleReset }) => {
+const Header = ({
+  handleChangeBgColor,
+  handleRandomConfig,
+  handleReset,
+  handleSaveFile,
+}) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
     setState(!state);
@@ -105,7 +110,10 @@ const Header = ({ handleChangeBgColor, handleRandomConfig, handleReset }) => {
         <BsSkipForwardFill className={`icon-style-${state}`} />
         <FaPause className={`icon-style-${state}`} />
         <FaStop className={`icon-style-${state}`} />
-        <FaSave className={`icon-style-${state}`} />
+        <FaSave
+          className={`icon-style-${state}`}
+          onClick={() => handleSaveFile(true)}
+        />
         <FaFileUpload className={`icon-style-${state}`} />
       </IconContainer>
       <ToggleContainer>
