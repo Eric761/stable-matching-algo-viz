@@ -7,6 +7,8 @@ const App = () => {
   const [styleBg, setStyleBg] = useState({
     backgroundColor: "#0e0e0e",
   });
+  const [shuffle, setShuffle] = useState(false);
+  const [reset, setReset] = useState(false);
   const handleChangeBgColor = (val) => {
     if (val) {
       setStyleBg({
@@ -18,11 +20,26 @@ const App = () => {
       });
     }
   };
+  const handleRandomConfig = (state) => {
+    setShuffle(state);
+  };
+  const handleReset = (state) => {
+    setReset(state);
+  };
   return (
     <div className="App" style={styleBg}>
       <Notifier />
-      <Header handleChangeBgColor={handleChangeBgColor} />
-      <MainList />
+      <Header
+        handleChangeBgColor={handleChangeBgColor}
+        handleRandomConfig={handleRandomConfig}
+        handleReset={handleReset}
+      />
+      <MainList
+        shuffle={shuffle}
+        reset={reset}
+        handleRandomConfig={handleRandomConfig}
+        handleReset={handleReset}
+      />
     </div>
   );
 };

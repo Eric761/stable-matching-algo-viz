@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MaleList from "./MaleList/MaleList";
 import FemaleList from "./FemaleList/FemaleList";
 import { defaultArrangement } from "../helper/arrangement";
@@ -9,6 +9,7 @@ import {
   removeFemaleIndex,
   addMaleItem,
   addFemaleItem,
+  randomConfigClick,
 } from "../helper/helperFns";
 
 let newMaleArray = addMaleIndices(
@@ -21,9 +22,38 @@ let newFemaleArray = addFemaleIndices(
   defaultArrangement.female
 );
 
-const MainList = () => {
-  const [maleArray, setMaleArray] = useState(newMaleArray);
-  const [femaleArray, setFemaleArray] = useState(newFemaleArray);
+const MainList = ({ shuffle, reset, handleRandomConfig, handleReset }) => {
+  const [maleArray, setMaleArray] = useState(
+    JSON.parse(JSON.stringify(newMaleArray))
+  );
+  const [femaleArray, setFemaleArray] = useState(
+    JSON.parse(JSON.stringify(newFemaleArray))
+  );
+  const [flagBtn, setFlagBtn] = useState(true);
+
+  useEffect(() => {
+    if (shuffle) {
+      let { randomFinalMaleArr, randomFinalFemaleArr } = randomConfigClick();
+      setFlagBtn(false);
+      setMaleArray(randomFinalMaleArr);
+      setFemaleArray(randomFinalFemaleArr);
+      handleRandomConfig(false);
+      // To avoid undefined behaviour of toggle property in respective gender array!
+      setTimeout(() => {
+        setFlagBtn(true);
+      }, 500);
+    }
+    if (reset) {
+      setFlagBtn(false);
+      setMaleArray(JSON.parse(JSON.stringify(newMaleArray)));
+      setFemaleArray(JSON.parse(JSON.stringify(newFemaleArray)));
+      handleReset(false);
+      setTimeout(() => {
+        console.log(maleArray, femaleArray);
+        setFlagBtn(true);
+      }, 500);
+    }
+  }, [shuffle, reset]);
 
   const handleMaleArr = (arr) => {
     let tempArr = addMaleIndices(maleArray, arr);
@@ -102,6 +132,7 @@ const MainList = () => {
         handleFemaleArr={handleFemaleArr}
         handleDeleteMaleList={handleDeleteMaleList}
         handleAddMaleItem={handleAddMaleItem}
+        flagBtn={flagBtn}
       />
       <FemaleList
         female={femaleArray}
@@ -109,6 +140,7 @@ const MainList = () => {
         handleMaleArr={handleMaleArr}
         handleDeleteFemaleList={handleDeleteFemaleList}
         handleAddFemaleItem={handleAddFemaleItem}
+        flagBtn={flagBtn}
       />
     </div>
   );

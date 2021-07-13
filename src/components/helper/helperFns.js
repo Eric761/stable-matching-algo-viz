@@ -1,5 +1,10 @@
 // Storing indices of male & female occuring in opposite gender preferences array
-import { maleNames, femaleNames } from "./arrangement.js";
+import {
+  maleNames,
+  femaleNames,
+  minimumEntityCount,
+  maximumEntityCount,
+} from "./arrangement.js";
 
 const addMaleIndices = (male, female) => {
   let newMaleArray = [];
@@ -82,6 +87,14 @@ const shuffleArray = (preferenceArr) => {
   return { preferenceArr, mapIndex };
 };
 
+const randomArraySized = (array, size) => {
+  // Deep Clone: Used to prevent mutating the original array.
+  let shuffledArray = shuffleArray(
+    JSON.parse(JSON.stringify(array))
+  ).preferenceArr;
+  return shuffledArray.slice(0, size);
+};
+
 const addMaleItem = (maleArr, femaleArr) => {
   let nameMaleArr = [];
   let nameFemaleArr = [];
@@ -162,6 +175,42 @@ const addFemaleItem = (maleArr, femaleArr) => {
   return { newMaleArr, newFemaleArr };
 };
 
+const randomConfigClick = () => {
+  let range = maximumEntityCount - minimumEntityCount;
+  let randomMaleCount =
+    Math.floor(Math.random() * (range + 1)) + minimumEntityCount;
+  let randomFemaleCount =
+    Math.floor(Math.random() * (range + 1)) + minimumEntityCount;
+  // Get the names for each group.
+  let randomMaleNames = randomArraySized(maleNames, randomMaleCount);
+  let randomFemaleNames = randomArraySized(femaleNames, randomFemaleCount);
+  let randomMaleArr = randomMaleNames.map((item) => {
+    let tempArr = shuffleArray(
+      JSON.parse(JSON.stringify(randomFemaleNames))
+    ).preferenceArr;
+    return {
+      name: item,
+      preferences: tempArr,
+    };
+  });
+  let randomFemaleArr = randomFemaleNames.map((item) => {
+    let tempArr = shuffleArray(
+      JSON.parse(JSON.stringify(randomMaleNames))
+    ).preferenceArr;
+    return {
+      name: item,
+      preferences: tempArr,
+    };
+  });
+  let randomFinalMaleArr = addMaleIndices(randomMaleArr, randomFemaleArr);
+  let randomFinalFemaleArr = addFemaleIndices(randomMaleArr, randomFemaleArr);
+  console.log(randomFinalMaleArr, randomFinalFemaleArr);
+  return {
+    randomFinalMaleArr,
+    randomFinalFemaleArr,
+  };
+};
+
 export {
   addMaleIndices,
   addFemaleIndices,
@@ -169,4 +218,5 @@ export {
   removeMaleIndex,
   addMaleItem,
   addFemaleItem,
+  randomConfigClick,
 };

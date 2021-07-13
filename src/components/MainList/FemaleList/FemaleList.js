@@ -26,6 +26,7 @@ const FemaleList = ({
   handleMaleArr,
   handleDeleteFemaleList,
   handleAddFemaleItem,
+  flagBtn,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false };
@@ -40,9 +41,11 @@ const FemaleList = ({
   // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
   // Now, Fixed !!
   useEffect(() => {
-    femaleArr.forEach((item, ind) => {
-      obj[ind].toggle = item.toggle;
-    });
+    if (flagBtn) {
+      femaleArr.forEach((item, ind) => {
+        obj[ind].toggle = item.toggle;
+      });
+    }
     setFemaleArr(obj);
   }, [female]);
 

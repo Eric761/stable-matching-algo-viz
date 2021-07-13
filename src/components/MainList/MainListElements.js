@@ -44,7 +44,7 @@ export const PreferenceList = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  cursor: move;
+  cursor: grab;
   padding: 8px;
   padding-left: 5px;
   min-height: 53px;
@@ -122,7 +122,7 @@ export const StyledMdDragHandle = styled(MdDragHandle)`
   margin-left: 8px;
   margin-right: 22px;
   color: #4a4a4a;
-  cursor: move;
+  cursor: grab;
   display: ${({ styleFlag }) => (styleFlag ? "none" : "")};
 
   &:hover {

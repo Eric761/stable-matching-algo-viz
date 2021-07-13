@@ -75,7 +75,7 @@ const StyledSwitch = withStyles((theme) => ({
   );
 });
 
-const Header = ({ handleChangeBgColor }) => {
+const Header = ({ handleChangeBgColor, handleRandomConfig, handleReset }) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
     setState(!state);
@@ -93,8 +93,14 @@ const Header = ({ handleChangeBgColor }) => {
         </a>
       </NavContainer>
       <IconContainer>
-        <RiRestartFill className={`restart-icon-style-${state}`} />
-        <ImShuffle className={`icon-style-${state}`} />
+        <RiRestartFill
+          className={`restart-icon-style-${state}`}
+          onClick={() => handleReset(true)}
+        />
+        <ImShuffle
+          className={`icon-style-${state}`}
+          onClick={() => handleRandomConfig(true)}
+        />
         <FaPlay className={`icon-style-${state}`} />
         <BsSkipForwardFill className={`icon-style-${state}`} />
         <FaPause className={`icon-style-${state}`} />
