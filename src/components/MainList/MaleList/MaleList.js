@@ -12,6 +12,7 @@ import {
   StyledMdDragHandle,
   StyledMdAddCircle,
 } from "../MainListElements";
+import Collapse from "@material-ui/core/Collapse";
 
 const MaleList = ({
   male,
@@ -152,51 +153,62 @@ const MaleList = ({
     <LeftContainer>
       {maleArr.map((elem, index) => {
         return (
-          <StyledPaper elevation={10} key={index}>
-            <List flag={elem.toggle}>
-              {!elem.toggle ? (
-                <StyledFaChevronCircleRight onClick={() => toggle(index)} />
-              ) : (
-                <StyledFaChevronCircleDown onClick={() => toggle(index)} />
-              )}
-              <StyledInput
-                autoComplete="off"
-                placeholder="Enter name"
-                spellCheck="false"
-                value={elem.name}
-                onChange={handleNameChange}
-                id={index}
-              />
-              <StyledRiDeleteBack2Fill
-                onClick={() => handleDeleteItem(index)}
-              />
-            </List>
-            {elem.toggle &&
-              elem.preferences.map((pref, ind) => {
-                return (
-                  <PreferenceList
-                    ind={ind}
-                    len={elem.preferences.length}
-                    key={ind}
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, { index, ind })}
-                    onDragEnter={
-                      dragging
-                        ? (e) => {
-                            handleDragEnter(e, { index, ind });
-                          }
-                        : null
-                    }
-                    styleFlag={getStyles({ index, ind })}
-                  >
-                    <StyledMdDragHandle styleFlag={getStyles({ index, ind })} />
-                    <ListItem styleFlag={getStyles({ index, ind })}>
-                      {pref}
-                    </ListItem>
-                  </PreferenceList>
-                );
-              })}
-          </StyledPaper>
+          <Collapse
+            in={elem.toggle}
+            collapsedHeight="85px"
+            timeout="auto"
+            style={{
+              overflow: "inherit",
+            }}
+          >
+            <StyledPaper elevation={10} key={index}>
+              <List flag={elem.toggle}>
+                {!elem.toggle ? (
+                  <StyledFaChevronCircleRight onClick={() => toggle(index)} />
+                ) : (
+                  <StyledFaChevronCircleDown onClick={() => toggle(index)} />
+                )}
+                <StyledInput
+                  autoComplete="off"
+                  placeholder="Enter name"
+                  spellCheck="false"
+                  value={elem.name}
+                  onChange={handleNameChange}
+                  id={index}
+                />
+                <StyledRiDeleteBack2Fill
+                  onClick={() => handleDeleteItem(index)}
+                />
+              </List>
+              {elem.toggle &&
+                elem.preferences.map((pref, ind) => {
+                  return (
+                    <PreferenceList
+                      ind={ind}
+                      len={elem.preferences.length}
+                      key={ind}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, { index, ind })}
+                      onDragEnter={
+                        dragging
+                          ? (e) => {
+                              handleDragEnter(e, { index, ind });
+                            }
+                          : null
+                      }
+                      styleFlag={getStyles({ index, ind })}
+                    >
+                      <StyledMdDragHandle
+                        styleFlag={getStyles({ index, ind })}
+                      />
+                      <ListItem styleFlag={getStyles({ index, ind })}>
+                        {pref}
+                      </ListItem>
+                    </PreferenceList>
+                  );
+                })}
+            </StyledPaper>
+          </Collapse>
         );
       })}
       <StyledMdAddCircle onClick={addMaleItem} />

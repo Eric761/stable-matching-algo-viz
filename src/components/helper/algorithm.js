@@ -148,3 +148,5 @@ class SMPAlgo {
     this.capture.endProcess();
   }
 }
+
+export { ProcessCapture, SMPAlgo, Entity };

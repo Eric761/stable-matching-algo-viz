@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MaleList from "./MaleList/MaleList";
 import FemaleList from "./FemaleList/FemaleList";
+import AnimationCol from "./AnimationCol/AnimationCol";
 import { defaultArrangement } from "../helper/arrangement";
 import {
   addMaleIndices,
@@ -188,6 +189,7 @@ const MainList = ({
         handleAddMaleItem={handleAddMaleItem}
         flagBtn={flagBtn}
       />
+      <AnimationCol male={maleArray[0]} female={femaleArray[0]} flag={true} />
       <FemaleList
         female={femaleArray}
         handleMalePreferences={handleMalePreferences}
