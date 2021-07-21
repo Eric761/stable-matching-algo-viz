@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Paper, Input } from "@material-ui/core";
 import { FaChevronCircleDown, FaChevronCircleRight } from "react-icons/fa";
 import { RiDeleteBack2Fill } from "react-icons/ri";
@@ -20,7 +20,27 @@ export const StyledPaper = styled(Paper)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: ${({ highlight, bgColor }) =>
+    bgColor !== "" && highlight
+      ? bgColor
+      : highlight
+      ? "#6cdbff !important"
+      : ""};
   /* transition: min-height 0.25s ease-in !important; */
+`;
+
+export const AnimationStyledPaper = styled(Paper)`
+  border-radius: 30px !important;
+  min-height: ${(props) => (props.flag ? "inherit" : "55px")}!important;
+  width: 420px;
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: ${({ styleElementFlag }) => (styleElementFlag ? "1" : "0")};
+  background-color: ${({ highlight, bgColor }) =>
+    highlight ? "#6cdbff !important" : bgColor};
 `;
 
 export const List = styled.div`
@@ -50,7 +70,7 @@ export const AnimationList = styled.div`
   border-bottom-right-radius: ${({ flag }) => (flag ? "0px" : "")};
   padding-top: ${({ flag }) => (flag ? "6px" : "")};
   padding-bottom: ${({ flag }) => (flag ? "5px" : "")};
-  background-color: ${({ flag }) => (flag ? "lightblue" : "")};
+  background-color: ${({ flag }) => (flag ? "#6cdbff" : "")};
 `;
 
 export const Name = styled.span`
@@ -81,6 +101,8 @@ export const PreferenceList = styled.div`
   &:hover {
     background-color: lightgrey;
   }
+  background-color: ${({ highlight }) =>
+    highlight ? "lightgrey !important" : ""};
 `;
 
 export const StyledInput = styled(Input)`

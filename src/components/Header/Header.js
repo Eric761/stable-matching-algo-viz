@@ -81,6 +81,7 @@ const Header = ({
   handleReset,
   handleSaveFile,
   handleInputFile,
+  handlePlay,
 }) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
@@ -110,7 +111,10 @@ const Header = ({
           className={`icon-style-${state}`}
           onClick={() => handleRandomConfig(true)}
         />
-        <FaPlay className={`icon-style-${state}`} />
+        <FaPlay
+          className={`icon-style-${state}`}
+          onClick={() => handlePlay(true)}
+        />
         <BsSkipForwardFill className={`icon-style-${state}`} />
         <FaPause className={`icon-style-${state}`} />
         <FaStop className={`icon-style-${state}`} />

@@ -28,6 +28,8 @@ const FemaleList = ({
   handleDeleteFemaleList,
   handleAddFemaleItem,
   flagBtn,
+  highlightFemaleIndex,
+  bgColor,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false };
@@ -38,6 +40,18 @@ const FemaleList = ({
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragItemNode = useRef();
+  // const myRef = useRef(new Array());
+
+  useEffect(() => {
+    if (highlightFemaleIndex !== -1) {
+      // window.scrollTo(0, myRef.current[highlightFemaleIndex].offsetTop);
+      let femaleEntity = document.getElementsByClassName(
+        `female-${highlightFemaleIndex}`
+      );
+      console.log(femaleEntity[0]);
+      femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [highlightFemaleIndex]);
 
   // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
   // Now, Fixed !!
@@ -151,7 +165,14 @@ const FemaleList = ({
               overflow: "inherit",
             }}
           >
-            <StyledPaper elevation={10} key={index}>
+            <StyledPaper
+              elevation={10}
+              key={index}
+              // ref={(element) => myRef.current.push(element)}
+              className={"female-" + index}
+              highlight={highlightFemaleIndex === index ? true : false}
+              bgColor={bgColor}
+            >
               <List flag={elem.toggle}>
                 {!elem.toggle ? (
                   <StyledFaChevronCircleRight onClick={() => toggle(index)} />

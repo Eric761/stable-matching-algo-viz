@@ -6,7 +6,7 @@ class Scheduler {
 
   add(callback, duration, skip = false) {
     if (!skip) {
-      this.add({ callback, duration, active: false, done: false });
+      this.queue.push({ callback, duration, active: false, done: false });
     }
     if (this.disable) return;
     let curr = this.queue[0];

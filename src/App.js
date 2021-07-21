@@ -14,6 +14,9 @@ const App = () => {
     state: false,
     event: "",
   });
+  const [play, setPlay] = useState(false);
+  const [SMPVizActive, setSMPVizActive] = useState(false);
+  const [SMPVizDone, setSMPVizDone] = useState(false);
 
   const handleChangeBgColor = (val) => {
     if (val) {
@@ -41,6 +44,9 @@ const App = () => {
       event: newEvent,
     });
   };
+  const handlePlay = (state) => {
+    setPlay(state);
+  };
   return (
     <div className="App" style={styleBg}>
       <Notifier />
@@ -50,16 +56,21 @@ const App = () => {
         handleReset={handleReset}
         handleSaveFile={handleSaveFile}
         handleInputFile={handleInputFile}
+        handlePlay={handlePlay}
       />
       <MainList
         shuffle={shuffle}
         reset={reset}
         saveFile={saveFile}
         uploadFile={uploadFile}
+        play={play}
+        SMPVizActive={SMPVizActive}
+        SMPVizDone={SMPVizDone}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
         handleSaveFile={handleSaveFile}
         handleInputFile={handleInputFile}
+        handlePlay={handlePlay}
       />
     </div>
   );

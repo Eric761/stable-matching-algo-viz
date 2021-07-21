@@ -133,7 +133,7 @@ class SMPAlgo {
       if (female.allotPartner(male)) {
         curPartner.addRejection(curPartner.partner);
         curPartner.partner = null;
-        this.single.push(this.male[this.getIndexByName(currentPartner.name)]);
+        this.single.push(this.male[this.getIndexByName(curPartner.name)]);
         this.engage(male, female);
         this.single.shift();
         // Male in break refers to the new partner of this female.

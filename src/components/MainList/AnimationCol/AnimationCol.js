@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyledPaper,
+  AnimationStyledPaper,
   AnimationList,
   Name,
   PreferenceList,
@@ -10,15 +10,56 @@ import {
 } from "../MainListElements";
 import Collapse from "@material-ui/core/Collapse";
 
-const AnimationCol = ({ male, female, flag }) => {
+const AnimationCol = ({
+  male,
+  female,
+  showFemaleEntity,
+  toggleOpacity,
+  expandMalePreference,
+  expandFemalePreference,
+  scrollMaleIndex,
+  scrollFemaleIndex,
+  highlightMalePrefIndex,
+  highlightFemalePrefIndex,
+  bgColor,
+}) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
-  const [styleFemaleElement, setStyleFemaleElement] = useState({
-    opacity: 0,
-  });
-  setTimeout(() => {
-    setToggleMale(true);
-  }, 2000);
+  const [styleElementFlag, setStyleElementFlag] = useState(false);
+  const [malePrefInd, setMalePrefInd] = useState(-1);
+  const [femalePrefInd, setFemalePrefInd] = useState(-1);
+
+  useEffect(() => {
+    setStyleElementFlag(toggleOpacity);
+  }, [toggleOpacity]);
+  useEffect(() => {
+    let fm = expandMalePreference;
+    let ff = expandFemalePreference;
+    setToggleMale(fm);
+    setToggleFemale(ff);
+  }, [expandMalePreference, expandFemalePreference]);
+  useEffect(() => {
+    if (scrollMaleIndex) {
+      let maleEntity = document.getElementsByClassName("entity-male");
+      console.log(maleEntity[0]);
+      maleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [scrollMaleIndex]);
+  useEffect(() => {
+    if (scrollFemaleIndex) {
+      let femaleEntity = document.getElementsByClassName("entity-female");
+      console.log(femaleEntity[0]);
+      femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [scrollFemaleIndex]);
+  useEffect(() => {
+    if (highlightMalePrefIndex !== -1) {
+      setMalePrefInd(highlightMalePrefIndex);
+    }
+    if (highlightFemalePrefIndex !== -1) {
+      setFemalePrefInd(highlightFemalePrefIndex);
+    }
+  }, [highlightMalePrefIndex, highlightFemalePrefIndex]);
 
   return (
     <>
@@ -38,7 +79,13 @@ const AnimationCol = ({ male, female, flag }) => {
             overflow: "inherit",
           }}
         >
-          <StyledPaper elevation={10}>
+          <AnimationStyledPaper
+            elevation={10}
+            styleElementFlag={styleElementFlag}
+            highlight={!toggleMale && bgColor === ""}
+            className="entity-male"
+            bgColor={bgColor}
+          >
             <AnimationList flag={toggleMale}>
               {!toggleMale ? (
                 <StyledFaChevronCircleRight animation={true} />
@@ -48,23 +95,30 @@ const AnimationCol = ({ male, female, flag }) => {
               <Name>{male.name}</Name>
             </AnimationList>
             {toggleMale &&
-              male.preferences.map((pref, ind) => {
+              male.preferencesName.map((pref, ind) => {
                 return (
                   <PreferenceList
                     ind={ind}
-                    len={male.preferences.length}
+                    len={male.preferencesName.length}
                     key={ind}
                     animation={true}
+                    highlight={malePrefInd === ind ? true : false}
                   >
                     <ListItem animation={true}>{pref}</ListItem>
                   </PreferenceList>
                 );
               })}
-          </StyledPaper>
+          </AnimationStyledPaper>
         </Collapse>
-        {flag && (
+        {showFemaleEntity && (
           <>
-            <StyledPaper elevation={10} style={styleFemaleElement}>
+            <AnimationStyledPaper
+              elevation={10}
+              styleElementFlag={styleElementFlag}
+              highlight={!toggleFemale && bgColor === ""}
+              className="entity-female"
+              bgColor={bgColor}
+            >
               <AnimationList flag={toggleFemale}>
                 {!toggleFemale ? (
                   <StyledFaChevronCircleRight animation={true} />
@@ -74,19 +128,20 @@ const AnimationCol = ({ male, female, flag }) => {
                 <Name>{female.name}</Name>
               </AnimationList>
               {toggleFemale &&
-                female.preferences.map((pref, ind) => {
+                female.preferencesName.map((pref, ind) => {
                   return (
                     <PreferenceList
                       ind={ind}
-                      len={female.preferences.length}
+                      len={female.preferencesName.length}
                       key={ind}
                       animation={true}
+                      highlight={femalePrefInd === ind ? true : false}
                     >
                       <ListItem animation={true}>{pref}</ListItem>
                     </PreferenceList>
                   );
                 })}
-            </StyledPaper>
+            </AnimationStyledPaper>
           </>
         )}
       </div>

@@ -319,6 +319,17 @@ const validateJSONConfig = (config) => {
   }
 };
 
+const nameIndexMapper = (config) => {
+  let mapper = {};
+  for (let group in config) {
+    for (let index = 0; index < config[group].length; index++) {
+      let { name } = config[group][index];
+      mapper[name] = index;
+    }
+  }
+  return mapper;
+};
+
 export {
   addMaleIndices,
   addFemaleIndices,
@@ -330,4 +341,5 @@ export {
   isValidConfig,
   userSaveFile,
   validateJSONConfig,
+  nameIndexMapper,
 };
