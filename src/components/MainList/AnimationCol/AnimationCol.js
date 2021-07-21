@@ -22,6 +22,7 @@ const AnimationCol = ({
   highlightMalePrefIndex,
   highlightFemalePrefIndex,
   bgColor,
+  engageIndex,
 }) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
@@ -85,8 +86,9 @@ const AnimationCol = ({
             highlight={!toggleMale && bgColor === ""}
             className="entity-male"
             bgColor={bgColor}
+            engageIndex={-1}
           >
-            <AnimationList flag={toggleMale}>
+            <AnimationList flag={toggleMale} engageIndex={-1}>
               {!toggleMale ? (
                 <StyledFaChevronCircleRight animation={true} />
               ) : (
@@ -103,6 +105,7 @@ const AnimationCol = ({
                     key={ind}
                     animation={true}
                     highlight={malePrefInd === ind ? true : false}
+                    engageHighlight={false}
                   >
                     <ListItem animation={true}>{pref}</ListItem>
                   </PreferenceList>
@@ -118,8 +121,9 @@ const AnimationCol = ({
               highlight={!toggleFemale && bgColor === ""}
               className="entity-female"
               bgColor={bgColor}
+              engageIndex={engageIndex}
             >
-              <AnimationList flag={toggleFemale}>
+              <AnimationList flag={toggleFemale} engageIndex={engageIndex}>
                 {!toggleFemale ? (
                   <StyledFaChevronCircleRight animation={true} />
                 ) : (
@@ -136,6 +140,7 @@ const AnimationCol = ({
                       key={ind}
                       animation={true}
                       highlight={femalePrefInd === ind ? true : false}
+                      engageHighlight={engageIndex === ind ? true : false}
                     >
                       <ListItem animation={true}>{pref}</ListItem>
                     </PreferenceList>

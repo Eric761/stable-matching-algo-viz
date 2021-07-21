@@ -47,8 +47,8 @@ class Entity {
     let partnerIndex = this.parent.getIndexByName(this.partner.name);
     let otherIndex = this.parent.getIndexByName(entity.name);
     if (
-      this.preferences.indexOf(partnerIndex) >
-      this.preferences.indexOf(otherIndex)
+      this.preferencesIndex.indexOf(partnerIndex) >
+      this.preferencesIndex.indexOf(otherIndex)
     ) {
       return true;
     }

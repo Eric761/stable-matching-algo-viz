@@ -70,6 +70,7 @@ const MainList = ({
   const [bgColor, setBgColor] = useState("");
   const [bgLeftColor, setBgLeftColor] = useState({});
   const [bgRightColor, setBgRightColor] = useState({});
+  const [engageIndex, setEngageIndex] = useState(-1);
 
   const animationStep = () => {
     let { process, content } = stableMarriageProcessQueue.shift();
@@ -151,13 +152,10 @@ const MainList = ({
 
     // Break Process
     else if (process === "break") {
-      // groundFemaleDOM.classList.add("engage");
-
-      let oldPartnerIndex = female.preferencesName.indexOf(dumped.name);
-      // groundFemaleDOM
-      //   .querySelector(".preference")
-      //   .children[oldPartnerIndex].classList.add("partner-highlight");
-
+      animationQueue.add(function () {
+        let oldPartnerIndex = female.preferencesName.indexOf(dumped.name);
+        setEngageIndex(oldPartnerIndex);
+      }, 250);
       animationQueue.add(function () {
         setShowFemaleEntity(true);
       }, 250);
@@ -169,10 +167,44 @@ const MainList = ({
       }, 250);
       animationQueue.add(function () {
         let maleIndex = female.preferencesName.indexOf(male.name);
-        setHighlightMalePrefIndex(maleIndex);
+        setHighlightFemalePrefIndex(maleIndex);
         // notifier.queueMessage('warning', `${female.name} breaks up with current partner ${dumped.name} and engages with ${male.name}.`, 2000);
       }, 500);
+      animationQueue.add(function () {
+        setExpandMalePreference(false);
+      }, 250);
+      animationQueue.add(function () {
+        setExpandFemalePreference(false);
+      }, 250);
+      animationQueue.add(function () {
+        let dumpedMaleIndex = stableMarriageNameIndex[dumped.name];
+        setBgColor("orange !important");
+        setBgLeftColor({ index: curMaleIndex, color: "orange !important" });
+        setBgLeftColor({ index: dumpedMaleIndex, color: "pink !important" });
+      }, 500);
+    }
 
+    // Reject Process
+    else if (process === "reject") {
+      // This is the animation for reject.
+      // Reject means the female stays with their current partner, opposite of break.
+      animationQueue.add(function () {
+        let partnerIndex = female.preferencesName.indexOf(female.partner.name);
+        setEngageIndex(partnerIndex);
+      }, 250);
+      animationQueue.add(function () {
+        setShowFemaleEntity(true);
+      }, 250);
+      animationQueue.add(function () {
+        setExpandFemalePreference(true);
+      }, 250);
+      animationQueue.add(function () {
+        setScrollFemaleIndex(true);
+      }, 250);
+      animationQueue.add(function () {
+        let maleIndex = female.preferencesName.indexOf(male.name);
+        setHighlightFemalePrefIndex(maleIndex);
+      }, 250);
       animationQueue.add(function () {
         setExpandMalePreference(false);
       }, 250);
@@ -180,17 +212,32 @@ const MainList = ({
         setExpandFemalePreference(false);
       }, 250);
 
-      // animationQueue.add(function () {
-      //   groundMaleDOM.classList.remove("reject");
-      //   groundMaleDOM.classList.add("engage");
+      animationQueue.add(function () {
+        setBgColor("pink !important");
+        // notifier.queueMessage(
+        //   "warning",
+        //   `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name}.`,
+        //   2000
+        // );
+      }, 250);
+      animationQueue.add(function () {
+        setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
+        setBgRightColor({
+          index: curFemaleIndex,
+          color: "pink !important",
+        });
+      }, 250);
 
-      //   male.element.classList.remove("reject");
-      //   male.element.classList.add("engage");
+      animationQueue.add(function () {
+        setBgRightColor({
+          index: curFemaleIndex,
+          color: "orange !important",
+        });
+      }, 500);
+    }
 
-      //   dumped.element.classList.remove("engage");
-      //   dumped.element.classList.add("reject");
-      // }, 500);
-    } else if (process === "done") {
+    // Last step process
+    else if (process === "done") {
       // Animation for when the process is done. Removes the elements.
       animationQueue.add(function () {
         setToggleOpacity(false);
@@ -204,15 +251,18 @@ const MainList = ({
         setBgColor("");
         setBgLeftColor({});
         setBgRightColor({});
+        setHighlightMalePrefIndex(-1);
+        setHighlightFemalePrefIndex(-1);
+        setEngageIndex(-1);
       }, 250);
     }
-    // if (stableMarriageProcessQueue.length == 0) {
-    //   return;
-    // } else {
-    //   animationQueue.add(function () {
-    //     animationStep();
-    //   }, 250);
-    // }
+    if (stableMarriageProcessQueue.length == 0) {
+      return;
+    } else {
+      animationQueue.add(function () {
+        animationStep();
+      }, 250);
+    }
   };
 
   useEffect(() => {
@@ -312,17 +362,6 @@ const MainList = ({
         // TODO
 
         // SMPVizActive = true;
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
-        animationStep();
         animationStep();
       }
       //   else if (stableMarriageVisualizationRunning && animationQueue.disable) {
@@ -429,6 +468,7 @@ const MainList = ({
         highlightMalePrefIndex={highlightMalePrefIndex}
         highlightFemalePrefIndex={highlightFemalePrefIndex}
         bgColor={bgColor}
+        engageIndex={engageIndex}
       />
       <FemaleList
         female={femaleArray}

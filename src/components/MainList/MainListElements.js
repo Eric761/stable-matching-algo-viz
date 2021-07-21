@@ -35,8 +35,12 @@ export const AnimationStyledPaper = styled(Paper)`
   justify-content: center;
   align-items: center;
   opacity: ${({ styleElementFlag }) => (styleElementFlag ? "1" : "0")};
-  background-color: ${({ highlight, bgColor }) =>
-    highlight ? "#6cdbff !important" : bgColor};
+  background-color: ${({ highlight, bgColor, engageIndex }) =>
+    highlight
+      ? engageIndex === -1
+        ? "#6cdbff !important"
+        : "orange !important"
+      : bgColor};
 `;
 
 export const List = styled.div`
@@ -66,7 +70,8 @@ export const AnimationList = styled.div`
   border-bottom-right-radius: ${({ flag }) => (flag ? "0px" : "")};
   padding-top: ${({ flag }) => (flag ? "6px" : "")};
   padding-bottom: ${({ flag }) => (flag ? "5px" : "")};
-  background-color: ${({ flag }) => (flag ? "#6cdbff" : "")};
+  background-color: ${({ flag, engageIndex }) =>
+    flag ? (engageIndex === -1 ? "#6cdbff" : "orange") : ""};
 `;
 
 export const Name = styled.span`
@@ -97,8 +102,8 @@ export const PreferenceList = styled.div`
   &:hover {
     background-color: lightgrey;
   }
-  background-color: ${({ highlight }) =>
-    highlight ? "lightgrey !important" : ""};
+  background-color: ${({ highlight, engageHighlight }) =>
+    engageHighlight ? "orange" : highlight ? "lightgrey" : ""};
 `;
 
 export const StyledInput = styled(Input)`
