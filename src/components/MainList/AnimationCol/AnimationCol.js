@@ -54,12 +54,13 @@ const AnimationCol = ({
     }
   }, [scrollFemaleIndex]);
   useEffect(() => {
-    if (highlightMalePrefIndex !== -1) {
-      setMalePrefInd(highlightMalePrefIndex);
-    }
-    if (highlightFemalePrefIndex !== -1) {
-      setFemalePrefInd(highlightFemalePrefIndex);
-    }
+    // if (highlightMalePrefIndex !== -1) {
+    // }
+    // if (highlightFemalePrefIndex !== -1) {
+    // }
+    // Will move to updated preference index !
+    setMalePrefInd(highlightMalePrefIndex);
+    setFemalePrefInd(highlightFemalePrefIndex);
   }, [highlightMalePrefIndex, highlightFemalePrefIndex]);
 
   return (
