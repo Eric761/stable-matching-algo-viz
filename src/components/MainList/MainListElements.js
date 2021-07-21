@@ -21,11 +21,7 @@ export const StyledPaper = styled(Paper)`
   justify-content: center;
   align-items: center;
   background-color: ${({ highlight, bgColor }) =>
-    bgColor !== "" && highlight
-      ? bgColor
-      : highlight
-      ? "#6cdbff !important"
-      : ""};
+    bgColor !== "" ? bgColor : highlight ? "#6cdbff !important" : ""};
   /* transition: min-height 0.25s ease-in !important; */
 `;
 

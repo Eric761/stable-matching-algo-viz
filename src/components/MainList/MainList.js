@@ -68,12 +68,14 @@ const MainList = ({
   const [highlightMalePrefIndex, setHighlightMalePrefIndex] = useState(-1);
   const [highlightFemalePrefIndex, setHighlightFemalePrefIndex] = useState(-1);
   const [bgColor, setBgColor] = useState("");
-  const [bgLeftColor, setBgLeftColor] = useState("");
-  const [bgRightColor, setBgRightColor] = useState("");
+  const [bgLeftColor, setBgLeftColor] = useState({});
+  const [bgRightColor, setBgRightColor] = useState({});
 
   const animationStep = () => {
     let { process, content } = stableMarriageProcessQueue.shift();
     let { male, female, dumped } = content;
+    let curMaleIndex = stableMarriageNameIndex[male.name];
+    let curFemaleIndex = stableMarriageNameIndex[female.name];
     // If the process is in between
     if (process !== "done" && process !== "start") {
       animationQueue.add(function () {
@@ -95,7 +97,6 @@ const MainList = ({
 
     // 1st Step
     if (process === "start") {
-      let curMaleIndex = stableMarriageNameIndex[male.name];
       animationQueue.add(function () {
         setHighlightMaleIndex(curMaleIndex);
       }, 250);
@@ -107,7 +108,6 @@ const MainList = ({
 
     // Engage Process
     else if (process === "engage") {
-      let curFemaleIndex = stableMarriageNameIndex[female.name];
       animationQueue.add(function () {
         setHighlightFemaleIndex(curFemaleIndex);
       }, 250);
@@ -136,8 +136,11 @@ const MainList = ({
         setBgColor("orange !important");
       }, 500);
       animationQueue.add(function () {
-        setBgLeftColor("orange !important");
-        setBgRightColor("orange !important");
+        setBgLeftColor({ index: curMaleIndex, color: "orange !important" });
+        setBgRightColor({
+          index: curFemaleIndex,
+          color: "orange !important",
+        });
         // notifier.queueMessage(
         //   "warning",
         //   `${male.name} is engaged with ${female.name}.`,
@@ -199,8 +202,8 @@ const MainList = ({
         setScrollMaleIndex(false);
         setScrollFemaleIndex(false);
         setBgColor("");
-        setBgLeftColor("");
-        setBgRightColor("");
+        setBgLeftColor({});
+        setBgRightColor({});
       }, 250);
     }
     // if (stableMarriageProcessQueue.length == 0) {

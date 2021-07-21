@@ -32,7 +32,7 @@ const FemaleList = ({
   bgColor,
 }) => {
   let obj = female.map((elem) => {
-    return { ...elem, toggle: false };
+    return { ...elem, toggle: false, color: "" };
   });
   console.log(obj);
 
@@ -51,7 +51,11 @@ const FemaleList = ({
       console.log(femaleEntity[0]);
       femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
     }
-  }, [highlightFemaleIndex]);
+    if (Object.keys(bgColor).length !== 0) {
+      femaleArr[bgColor.index].color = bgColor.color;
+      setFemaleArr(femaleArr);
+    }
+  }, [highlightFemaleIndex, bgColor]);
 
   // It's not updating to obj while re-rendering wrt parent component, So I returned a new array from handleDeleteFemaleList fn!!
   // Now, Fixed !!
@@ -171,7 +175,7 @@ const FemaleList = ({
               // ref={(element) => myRef.current.push(element)}
               className={"female-" + index}
               highlight={highlightFemaleIndex === index ? true : false}
-              bgColor={bgColor}
+              bgColor={elem.color}
             >
               <List flag={elem.toggle}>
                 {!elem.toggle ? (
