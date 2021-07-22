@@ -23,6 +23,7 @@ const AnimationCol = ({
   highlightFemalePrefIndex,
   bgColor,
   engageIndex,
+  showAnimationColor,
 }) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
@@ -88,8 +89,13 @@ const AnimationCol = ({
             className="entity-male"
             bgColor={bgColor}
             engageIndex={-1}
+            toggle={toggleMale}
           >
-            <AnimationList flag={toggleMale} engageIndex={-1}>
+            <AnimationList
+              flag={toggleMale}
+              engageIndex={-1}
+              showAnimationColor={showAnimationColor}
+            >
               {!toggleMale ? (
                 <StyledFaChevronCircleRight animation={true} />
               ) : (
@@ -107,6 +113,7 @@ const AnimationCol = ({
                     animation={true}
                     highlight={malePrefInd === ind ? true : false}
                     engageHighlight={false}
+                    showAnimationColor={showAnimationColor}
                   >
                     <ListItem animation={true}>{pref}</ListItem>
                   </PreferenceList>
@@ -123,8 +130,13 @@ const AnimationCol = ({
               className="entity-female"
               bgColor={bgColor}
               engageIndex={engageIndex}
+              toggle={toggleFemale}
             >
-              <AnimationList flag={toggleFemale} engageIndex={engageIndex}>
+              <AnimationList
+                flag={toggleFemale}
+                engageIndex={engageIndex}
+                showAnimationColor={showAnimationColor}
+              >
                 {!toggleFemale ? (
                   <StyledFaChevronCircleRight animation={true} />
                 ) : (
@@ -142,6 +154,7 @@ const AnimationCol = ({
                       animation={true}
                       highlight={femalePrefInd === ind ? true : false}
                       engageHighlight={engageIndex === ind ? true : false}
+                      showAnimationColor={showAnimationColor}
                     >
                       <ListItem animation={true}>{pref}</ListItem>
                     </PreferenceList>

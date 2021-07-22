@@ -47,6 +47,12 @@ const App = () => {
   const handlePlay = (state) => {
     setPlay(state);
   };
+  const handleVizActive = (state) => {
+    setSMPVizActive(state);
+  };
+  const handleVizDone = (state) => {
+    setSMPVizDone(state);
+  };
   return (
     <div className="App" style={styleBg}>
       <Notifier />
@@ -71,6 +77,8 @@ const App = () => {
         handleSaveFile={handleSaveFile}
         handleInputFile={handleInputFile}
         handlePlay={handlePlay}
+        handleVizActive={handleVizActive}
+        handleVizDone={handleVizDone}
       />
     </div>
   );

@@ -21,8 +21,10 @@ const MaleList = ({
   handleDeleteMaleList,
   handleAddMaleItem,
   flagBtn,
+  play,
   highlightMaleIndex,
   bgColor,
+  showAnimationCol,
 }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -45,8 +47,9 @@ const MaleList = ({
       maleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
     }
     if (Object.keys(bgColor).length !== 0) {
-      maleArr[bgColor.index].color = bgColor.color;
-      setMaleArr(maleArr);
+      let ar = [...maleArr];
+      ar[bgColor.index].color = bgColor.color;
+      setMaleArr(ar);
     }
   }, [highlightMaleIndex, bgColor]);
 
@@ -62,6 +65,7 @@ const MaleList = ({
   }, [male]);
 
   const toggle = (ind) => {
+    if (play) return;
     console.log(ind);
     let ar = [...maleArr];
     let temp = ar[ind].toggle;
@@ -156,6 +160,7 @@ const MaleList = ({
 
   const handleDeleteItem = (ind) => {
     // let temp = [...maleArr];
+    if (play) return;
     let tempIndex = maleArr[ind].index;
     maleArr.splice(ind, 1);
     console.log(maleArr, ind, tempIndex);
@@ -164,7 +169,13 @@ const MaleList = ({
   };
 
   const addMaleItem = () => {
+    if (play) return;
     handleAddMaleItem();
+  };
+
+  const showAnimation = (ind) => {
+    if (!play) return;
+    showAnimationCol("male", ind);
   };
 
   return (
@@ -186,10 +197,14 @@ const MaleList = ({
               className={"male-" + index}
               highlight={highlightMaleIndex === index ? true : false}
               bgColor={elem.color}
+              onClick={() => showAnimation(index)}
             >
               <List flag={elem.toggle}>
                 {!elem.toggle ? (
-                  <StyledFaChevronCircleRight onClick={() => toggle(index)} />
+                  <StyledFaChevronCircleRight
+                    onClick={() => toggle(index)}
+                    play={play}
+                  />
                 ) : (
                   <StyledFaChevronCircleDown onClick={() => toggle(index)} />
                 )}
@@ -200,9 +215,11 @@ const MaleList = ({
                   value={elem.name}
                   onChange={handleNameChange}
                   id={index}
+                  disabled={play}
                 />
                 <StyledRiDeleteBack2Fill
                   onClick={() => handleDeleteItem(index)}
+                  play={play}
                 />
               </List>
               {elem.toggle &&
@@ -236,7 +253,7 @@ const MaleList = ({
           </Collapse>
         );
       })}
-      <StyledMdAddCircle onClick={addMaleItem} />
+      <StyledMdAddCircle onClick={addMaleItem} play={play} />
     </LeftContainer>
   );
 };

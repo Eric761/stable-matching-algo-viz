@@ -28,8 +28,10 @@ const FemaleList = ({
   handleDeleteFemaleList,
   handleAddFemaleItem,
   flagBtn,
+  play,
   highlightFemaleIndex,
   bgColor,
+  showAnimationCol,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -52,8 +54,9 @@ const FemaleList = ({
       femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
     }
     if (Object.keys(bgColor).length !== 0) {
-      femaleArr[bgColor.index].color = bgColor.color;
-      setFemaleArr(femaleArr);
+      let ar = [...femaleArr];
+      ar[bgColor.index].color = bgColor.color;
+      setFemaleArr(ar);
     }
   }, [highlightFemaleIndex, bgColor]);
 
@@ -69,6 +72,7 @@ const FemaleList = ({
   }, [female]);
 
   const toggle = (ind) => {
+    if (play) return;
     console.log(ind);
     let ar = [...femaleArr];
     let temp = ar[ind].toggle;
@@ -146,6 +150,7 @@ const FemaleList = ({
 
   const handleDeleteItem = (ind) => {
     // let temp = [...femaleArr];
+    if (play) return;
     let tempIndex = femaleArr[ind].index;
     femaleArr.splice(ind, 1);
     console.log(femaleArr, ind, tempIndex);
@@ -154,7 +159,13 @@ const FemaleList = ({
   };
 
   const addFemaleItem = () => {
+    if (play) return;
     handleAddFemaleItem();
+  };
+
+  const showAnimation = (ind) => {
+    if (!play) return;
+    showAnimationCol("female", ind);
   };
 
   return (
@@ -176,10 +187,14 @@ const FemaleList = ({
               className={"female-" + index}
               highlight={highlightFemaleIndex === index ? true : false}
               bgColor={elem.color}
+              onClick={() => showAnimation(index)}
             >
               <List flag={elem.toggle}>
                 {!elem.toggle ? (
-                  <StyledFaChevronCircleRight onClick={() => toggle(index)} />
+                  <StyledFaChevronCircleRight
+                    onClick={() => toggle(index)}
+                    play={play}
+                  />
                 ) : (
                   <StyledFaChevronCircleDown onClick={() => toggle(index)} />
                 )}
@@ -190,9 +205,11 @@ const FemaleList = ({
                   value={elem.name}
                   onChange={handleNameChange}
                   id={index}
+                  disabled={play}
                 />
                 <StyledRiDeleteBack2Fill
                   onClick={() => handleDeleteItem(index)}
+                  play={play}
                 />
               </List>
               {elem.toggle &&
@@ -226,7 +243,7 @@ const FemaleList = ({
           </Collapse>
         );
       })}
-      <StyledMdAddCircle onClick={addFemaleItem} />
+      <StyledMdAddCircle onClick={addFemaleItem} play={play} />
     </LeftContainer>
   );
 };

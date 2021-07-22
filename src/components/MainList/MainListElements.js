@@ -35,11 +35,13 @@ export const AnimationStyledPaper = styled(Paper)`
   justify-content: center;
   align-items: center;
   opacity: ${({ styleElementFlag }) => (styleElementFlag ? "1" : "0")};
-  background-color: ${({ highlight, bgColor, engageIndex }) =>
+  background-color: ${({ highlight, bgColor, engageIndex, toggle }) =>
     highlight
       ? engageIndex === -1
         ? "#6cdbff !important"
         : "orange !important"
+      : toggle
+      ? ""
       : bgColor};
 `;
 
@@ -70,8 +72,14 @@ export const AnimationList = styled.div`
   border-bottom-right-radius: ${({ flag }) => (flag ? "0px" : "")};
   padding-top: ${({ flag }) => (flag ? "6px" : "")};
   padding-bottom: ${({ flag }) => (flag ? "5px" : "")};
-  background-color: ${({ flag, engageIndex }) =>
-    flag ? (engageIndex === -1 ? "#6cdbff" : "orange") : ""};
+  background-color: ${({ flag, engageIndex, showAnimationColor }) =>
+    flag
+      ? showAnimationColor
+        ? "green"
+        : engageIndex === -1
+        ? "#6cdbff"
+        : "orange"
+      : ""};
 `;
 
 export const Name = styled.span`
@@ -102,8 +110,14 @@ export const PreferenceList = styled.div`
   &:hover {
     background-color: lightgrey;
   }
-  background-color: ${({ highlight, engageHighlight }) =>
-    engageHighlight ? "orange" : highlight ? "lightgrey" : ""};
+  background-color: ${({ highlight, engageHighlight, showAnimationColor }) =>
+    engageHighlight
+      ? "orange"
+      : highlight
+      ? showAnimationColor
+        ? "#90ee90"
+        : "lightgrey"
+      : ""};
 `;
 
 export const StyledInput = styled(Input)`
@@ -133,7 +147,7 @@ export const StyledFaChevronCircleRight = styled(FaChevronCircleRight)`
   cursor: pointer;
 
   &:hover {
-    color: #000000;
+    color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
   }
 `;
 
@@ -158,9 +172,10 @@ export const StyledRiDeleteBack2Fill = styled(RiDeleteBack2Fill)`
   margin-left: 20px;
   color: #4a4a4a;
   cursor: pointer;
+  /* opacity: ${({ play }) => (play ? "0" : "1")}; */
 
   &:hover {
-    color: #000000;
+    color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
   }
 `;
 
@@ -195,6 +210,6 @@ export const StyledMdAddCircle = styled(MdAddCircle)`
   margin-top: 18px;
   cursor: pointer;
   &:hover {
-    color: #000000;
+    color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
   }
 `;
