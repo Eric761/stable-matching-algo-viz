@@ -108,7 +108,7 @@ export const PreferenceList = styled.div`
     ind === len - 1 ? "30px" : ""};
   /* margin-bottom: ${({ ind, len }) => (ind === len - 1 ? "6px" : "")}; */
   &:hover {
-    background-color: lightgrey;
+    background-color: ${({ play }) => (play ? "" : "lightgrey")};
   }
   background-color: ${({ highlight, engageHighlight, showAnimationColor }) =>
     engageHighlight

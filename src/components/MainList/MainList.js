@@ -625,6 +625,7 @@ const MainList = ({
         bgColor={bgColor}
         engageIndex={engageIndex}
         showAnimationColor={showAnimationColor}
+        play={play}
       />
       <FemaleList
         female={femaleArray}

@@ -24,6 +24,7 @@ const AnimationCol = ({
   bgColor,
   engageIndex,
   showAnimationColor,
+  play,
 }) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
@@ -114,6 +115,7 @@ const AnimationCol = ({
                     highlight={malePrefInd === ind ? true : false}
                     engageHighlight={false}
                     showAnimationColor={showAnimationColor}
+                    play={play}
                   >
                     <ListItem animation={true}>{pref}</ListItem>
                   </PreferenceList>
@@ -155,6 +157,7 @@ const AnimationCol = ({
                       highlight={femalePrefInd === ind ? true : false}
                       engageHighlight={engageIndex === ind ? true : false}
                       showAnimationColor={showAnimationColor}
+                      play={play}
                     >
                       <ListItem animation={true}>{pref}</ListItem>
                     </PreferenceList>
