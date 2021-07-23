@@ -82,6 +82,8 @@ const Header = ({
   handleSaveFile,
   handleInputFile,
   handlePlay,
+  handlePause,
+  handleSkip,
 }) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
@@ -115,8 +117,14 @@ const Header = ({
           className={`icon-style-${state}`}
           onClick={() => handlePlay(true)}
         />
-        <BsSkipForwardFill className={`icon-style-${state}`} />
-        <FaPause className={`icon-style-${state}`} />
+        <BsSkipForwardFill
+          className={`icon-style-${state}`}
+          onClick={() => handleSkip(true)}
+        />
+        <FaPause
+          className={`icon-style-${state}`}
+          onClick={() => handlePause(true)}
+        />
         <FaStop className={`icon-style-${state}`} />
         <FaSave
           className={`icon-style-${state}`}

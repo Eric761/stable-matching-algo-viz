@@ -40,6 +40,8 @@ const MainList = ({
   saveFile,
   uploadFile,
   play,
+  pause,
+  skip,
   SMPVizActive,
   SMPVizDone,
   handleRandomConfig,
@@ -49,6 +51,8 @@ const MainList = ({
   handlePlay,
   handleVizActive,
   handleVizDone,
+  handlePause,
+  handleSkip,
 }) => {
   const [maleArray, setMaleArray] = useState(
     JSON.parse(JSON.stringify(newMaleArray))
@@ -81,6 +85,8 @@ const MainList = ({
     animationQueue.clear();
     animationQueue.add(function () {
       setToggleOpacity(false);
+      setExpandMalePreference(false);
+      setExpandFemalePreference(false);
       setEntityMale({});
       setEntityFemale({});
       setShowFemaleEntity(false);
@@ -195,31 +201,37 @@ const MainList = ({
     handleVizDone(true);
     // Animation stops and containers are again uninteractive.
     animationQueue.clear();
+    setToggleOpacity(false);
+    setBgLeftColor({});
+    setBgRightColor({});
 
-    for (let entity of stableMarriageAlgorithm.male) {
-      console.log(entity);
-      let curMaleIndex = stableMarriageNameIndex[entity.name];
-      if (entity.partner !== null) {
-        setBgLeftColor({ index: curMaleIndex, color: "green !important" });
-      } else {
-        setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
+    setTimeout(function () {
+      console.log(stableMarriageAlgorithm);
+      for (let entity of stableMarriageAlgorithm.male) {
+        console.log(entity);
+        let curMaleIndex = stableMarriageNameIndex[entity.name];
+        if (entity.partner !== null) {
+          setBgLeftColor({ index: curMaleIndex, color: "green !important" });
+        } else {
+          setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
+        }
       }
-    }
-    for (let entity of stableMarriageAlgorithm.female) {
-      let curFemaleIndex = stableMarriageNameIndex[entity.name];
-      console.log(entity);
-      if (entity.partner !== null) {
-        setBgRightColor({
-          index: curFemaleIndex,
-          color: "green !important",
-        });
-      } else {
-        setBgRightColor({
-          index: curFemaleIndex,
-          color: "pink !important",
-        });
+      for (let entity of stableMarriageAlgorithm.female) {
+        let curFemaleIndex = stableMarriageNameIndex[entity.name];
+        console.log(entity);
+        if (entity.partner !== null) {
+          setBgRightColor({
+            index: curFemaleIndex,
+            color: "green !important",
+          });
+        } else {
+          setBgRightColor({
+            index: curFemaleIndex,
+            color: "pink !important",
+          });
+        }
       }
-    }
+    }, 0);
   };
 
   const animationStep = () => {
@@ -517,6 +529,7 @@ const MainList = ({
         handleVizActive(true);
         animationStep();
       } else if (SMPVizActive && animationQueue && animationQueue.disable) {
+        handlePause(false);
         animationQueue.continue();
         // notifier.queueMessage('valid', 'Visualization continuing.');
         // Third conditional is for when the visualization is done, and the user
@@ -527,6 +540,28 @@ const MainList = ({
       // }
     }
   }, [play]);
+
+  useEffect(() => {
+    if (pause) {
+      if (
+        (animationQueue && animationQueue.disable) ||
+        !SMPVizActive ||
+        SMPVizDone
+      ) {
+        return;
+      }
+      animationQueue.pause();
+      handlePlay(false);
+      // ADD Notifier
+    }
+    if (skip) {
+      if (!SMPVizActive || SMPVizDone) return;
+      showResult();
+      // Make reset button disable
+      handleSkip(false);
+      // ADD Notifier
+    }
+  }, [pause, skip]);
 
   const handleMaleArr = (arr) => {
     let tempArr = addMaleIndices(maleArray, arr);

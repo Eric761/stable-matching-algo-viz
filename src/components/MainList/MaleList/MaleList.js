@@ -47,7 +47,7 @@ const MaleList = ({
       maleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
     }
     if (Object.keys(bgColor).length !== 0) {
-      let ar = [...maleArr];
+      let ar = JSON.parse(JSON.stringify(maleArr));
       ar[bgColor.index].color = bgColor.color;
       setMaleArr(ar);
     }

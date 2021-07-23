@@ -105,6 +105,7 @@ const AnimationCol = ({
               <Name>{male.name}</Name>
             </AnimationList>
             {toggleMale &&
+              male &&
               male.preferencesName.map((pref, ind) => {
                 return (
                   <PreferenceList
@@ -147,6 +148,7 @@ const AnimationCol = ({
                 <Name>{female.name}</Name>
               </AnimationList>
               {toggleFemale &&
+                female &&
                 female.preferencesName.map((pref, ind) => {
                   return (
                     <PreferenceList

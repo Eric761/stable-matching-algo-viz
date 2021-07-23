@@ -15,6 +15,8 @@ const App = () => {
     event: "",
   });
   const [play, setPlay] = useState(false);
+  const [pause, setPause] = useState(false);
+  const [skip, setSkip] = useState(false);
   const [SMPVizActive, setSMPVizActive] = useState(false);
   const [SMPVizDone, setSMPVizDone] = useState(false);
 
@@ -53,6 +55,13 @@ const App = () => {
   const handleVizDone = (state) => {
     setSMPVizDone(state);
   };
+  const handlePause = (state) => {
+    setPause(state);
+  };
+  const handleSkip = (state) => {
+    setSkip(state);
+  };
+
   return (
     <div className="App" style={styleBg}>
       <Notifier />
@@ -63,6 +72,8 @@ const App = () => {
         handleSaveFile={handleSaveFile}
         handleInputFile={handleInputFile}
         handlePlay={handlePlay}
+        handlePause={handlePause}
+        handleSkip={handleSkip}
       />
       <MainList
         shuffle={shuffle}
@@ -70,6 +81,8 @@ const App = () => {
         saveFile={saveFile}
         uploadFile={uploadFile}
         play={play}
+        pause={pause}
+        skip={skip}
         SMPVizActive={SMPVizActive}
         SMPVizDone={SMPVizDone}
         handleRandomConfig={handleRandomConfig}
@@ -79,6 +92,8 @@ const App = () => {
         handlePlay={handlePlay}
         handleVizActive={handleVizActive}
         handleVizDone={handleVizDone}
+        handlePause={handlePause}
+        handleSkip={handleSkip}
       />
     </div>
   );
