@@ -18,7 +18,6 @@ import {
   NavContainer,
   IconContainer,
   ToggleContainer,
-  StyledLink,
 } from "./HeaderElements";
 
 const StyledSwitch = withStyles((theme) => ({
@@ -84,6 +83,7 @@ const Header = ({
   handlePlay,
   handlePause,
   handleSkip,
+  handleStop,
 }) => {
   const [state, setState] = useState(true);
   const handleChange = () => {
@@ -125,7 +125,10 @@ const Header = ({
           className={`icon-style-${state}`}
           onClick={() => handlePause(true)}
         />
-        <FaStop className={`icon-style-${state}`} />
+        <FaStop
+          className={`icon-style-${state}`}
+          onClick={() => handleStop(true)}
+        />
         <FaSave
           className={`icon-style-${state}`}
           onClick={() => handleSaveFile(true)}

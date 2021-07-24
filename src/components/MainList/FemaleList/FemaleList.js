@@ -32,6 +32,7 @@ const FemaleList = ({
   highlightFemaleIndex,
   bgColor,
   showAnimationCol,
+  resetFemaleArray,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -70,6 +71,17 @@ const FemaleList = ({
     }
     setFemaleArr(obj);
   }, [female]);
+
+  useEffect(() => {
+    if (resetFemaleArray) {
+      let ar = JSON.parse(JSON.stringify(femaleArr));
+      ar.map((elem) => {
+        elem.color = "";
+        elem.toggle = false;
+      });
+      setFemaleArr(ar);
+    }
+  }, [resetFemaleArray]);
 
   const toggle = (ind) => {
     if (play) return;

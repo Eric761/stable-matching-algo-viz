@@ -17,6 +17,7 @@ const App = () => {
   const [play, setPlay] = useState(false);
   const [pause, setPause] = useState(false);
   const [skip, setSkip] = useState(false);
+  const [stop, setStop] = useState(false);
   const [SMPVizActive, setSMPVizActive] = useState(false);
   const [SMPVizDone, setSMPVizDone] = useState(false);
 
@@ -61,6 +62,9 @@ const App = () => {
   const handleSkip = (state) => {
     setSkip(state);
   };
+  const handleStop = (state) => {
+    setStop(state);
+  };
 
   return (
     <div className="App" style={styleBg}>
@@ -74,6 +78,7 @@ const App = () => {
         handlePlay={handlePlay}
         handlePause={handlePause}
         handleSkip={handleSkip}
+        handleStop={handleStop}
       />
       <MainList
         shuffle={shuffle}
@@ -83,6 +88,7 @@ const App = () => {
         play={play}
         pause={pause}
         skip={skip}
+        stop={stop}
         SMPVizActive={SMPVizActive}
         SMPVizDone={SMPVizDone}
         handleRandomConfig={handleRandomConfig}
@@ -94,6 +100,7 @@ const App = () => {
         handleVizDone={handleVizDone}
         handlePause={handlePause}
         handleSkip={handleSkip}
+        handleStop={handleStop}
       />
     </div>
   );

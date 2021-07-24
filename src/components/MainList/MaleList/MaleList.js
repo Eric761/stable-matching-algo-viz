@@ -25,6 +25,7 @@ const MaleList = ({
   highlightMaleIndex,
   bgColor,
   showAnimationCol,
+  resetMaleArray,
 }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -63,6 +64,16 @@ const MaleList = ({
     }
     setMaleArr(obj);
   }, [male]);
+  useEffect(() => {
+    if (resetMaleArray) {
+      let ar = JSON.parse(JSON.stringify(maleArr));
+      ar.map((elem) => {
+        elem.color = "";
+        elem.toggle = false;
+      });
+      setMaleArr(ar);
+    }
+  }, [resetMaleArray]);
 
   const toggle = (ind) => {
     if (play) return;

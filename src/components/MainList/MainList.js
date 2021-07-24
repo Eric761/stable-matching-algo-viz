@@ -42,6 +42,7 @@ const MainList = ({
   play,
   pause,
   skip,
+  stop,
   SMPVizActive,
   SMPVizDone,
   handleRandomConfig,
@@ -53,6 +54,7 @@ const MainList = ({
   handleVizDone,
   handlePause,
   handleSkip,
+  handleStop,
 }) => {
   const [maleArray, setMaleArray] = useState(
     JSON.parse(JSON.stringify(newMaleArray))
@@ -60,6 +62,9 @@ const MainList = ({
   const [femaleArray, setFemaleArray] = useState(
     JSON.parse(JSON.stringify(newFemaleArray))
   );
+  const [resetMaleArray, setResetMaleArray] = useState(false);
+  const [resetFemaleArray, setResetFemaleArray] = useState(false);
+
   const [entityMale, setEntityMale] = useState({});
   const [entityFemale, setEntityFemale] = useState({});
   const [flagBtn, setFlagBtn] = useState(true);
@@ -89,6 +94,8 @@ const MainList = ({
       setExpandFemalePreference(false);
       setEntityMale({});
       setEntityFemale({});
+      setHighlightMaleIndex(-1);
+      setHighlightFemaleIndex(-1);
       setShowFemaleEntity(false);
       setScrollMaleIndex(false);
       setScrollFemaleIndex(false);
@@ -563,6 +570,56 @@ const MainList = ({
     }
   }, [pause, skip]);
 
+  useEffect(() => {
+    if (stop) {
+      animationQueue.clear();
+
+      // Reset the necessary variables.
+      stableMarriageAlgorithm = null;
+      stableMarriageNameIndex = null;
+      stableMarriageProcessQueue = [];
+      handleVizActive(false);
+      handleVizDone(false);
+      handlePlay(false);
+      handleSkip(false);
+      handlePause(false);
+      setHighlightMaleIndex(-1);
+      setHighlightFemaleIndex(-1);
+
+      // TODO - > Reset the controls to correct state.
+
+      // Animate the removal of the entities.
+      let timeoutQueue = new Scheduler();
+      timeoutQueue.add(function () {
+        setToggleOpacity(false);
+        setExpandMalePreference(false);
+        setExpandFemalePreference(false);
+        setEntityMale({});
+        setEntityFemale({});
+        setShowFemaleEntity(false);
+        setScrollMaleIndex(false);
+        setScrollFemaleIndex(false);
+        setBgColor("");
+        setBgLeftColor({});
+        setBgRightColor({});
+        setHighlightMalePrefIndex(-1);
+        setHighlightFemalePrefIndex(-1);
+        setEngageIndex(-1);
+        setShowAnimationColor(false);
+      }, 100);
+
+      // Repopulate the DOM.
+      setResetMaleArray(true);
+      setResetFemaleArray(true);
+      timeoutQueue.add(function () {
+        console.log(maleArray, resetMaleArray);
+        setResetMaleArray(false);
+        setResetFemaleArray(false);
+        handleStop(false);
+      }, 2000);
+    }
+  }, [stop]);
+
   const handleMaleArr = (arr) => {
     let tempArr = addMaleIndices(maleArray, arr);
     setMaleArray(tempArr);
@@ -645,6 +702,7 @@ const MainList = ({
         highlightMaleIndex={highlightMaleIndex}
         bgColor={bgLeftColor}
         showAnimationCol={showAnimationCol}
+        resetMaleArray={resetMaleArray}
       />
       <AnimationCol
         male={entityMale}
@@ -673,6 +731,7 @@ const MainList = ({
         highlightFemaleIndex={highlightFemaleIndex}
         bgColor={bgRightColor}
         showAnimationCol={showAnimationCol}
+        resetFemaleArray={resetFemaleArray}
       />
     </div>
   );
