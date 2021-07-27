@@ -99,7 +99,16 @@ const MaleList = ({
     let ind = event.target.id;
     // Make a shallow copy of the array
     let ar = [...maleArr];
-    ar[ind].name = event.target.value;
+    let temp = event.target.value;
+    if (temp.length > maximumCharCount) {
+      informer.queueMessage(
+        "warning",
+        `Only ${maximumCharCount} characters are allowed!`,
+        2000
+      );
+      return;
+    }
+    ar[ind].name = temp;
     handleFemalePreferences(ind, event.target.value);
     setMaleArr(ar);
   };

@@ -104,7 +104,16 @@ const FemaleList = ({
     let ind = event.target.id;
     // Make a shallow copy of the array
     let ar = [...femaleArr];
-    ar[ind].name = event.target.value;
+    let temp = event.target.value;
+    if (temp.length > maximumCharCount) {
+      informer.queueMessage(
+        "warning",
+        `Only ${maximumCharCount} characters are allowed!`,
+        2000
+      );
+      return;
+    }
+    ar[ind].name = temp;
     handleMalePreferences(ind, event.target.value);
     setFemaleArr(ar);
   };
@@ -173,8 +182,7 @@ const FemaleList = ({
       informer.queueMessage(
         "warning",
         `Number of female entities cannot go below minimum ${minimumEntityCount}.`,
-        1500,
-        "top-right"
+        1500
       );
       return;
     }
@@ -197,8 +205,7 @@ const FemaleList = ({
       informer.queueMessage(
         "warning",
         `Maximum number of entities (${maximumEntityCount}) has been reached.`,
-        1500,
-        "top-right"
+        1500
       );
       return;
     }
