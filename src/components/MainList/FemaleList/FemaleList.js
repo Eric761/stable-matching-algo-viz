@@ -13,6 +13,11 @@ import {
   StyledMdAddCircle,
 } from "../MainListElements";
 import Collapse from "@material-ui/core/Collapse";
+import {
+  minimumEntityCount,
+  maximumEntityCount,
+  maximumCharCount,
+} from "../../helper/arrangement";
 
 // let femaleConfig = defaultArrangement.female.map((elem) => {
 //   return elem.name;
@@ -33,6 +38,7 @@ const FemaleList = ({
   bgColor,
   showAnimationCol,
   resetFemaleArray,
+  informer,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -163,6 +169,15 @@ const FemaleList = ({
   const handleDeleteItem = (ind) => {
     // let temp = [...femaleArr];
     if (play) return;
+    if (femaleArr.length - 1 < minimumEntityCount) {
+      informer.queueMessage(
+        "warning",
+        `Number of female entities cannot go below minimum ${minimumEntityCount}.`,
+        1500,
+        "top-right"
+      );
+      return;
+    }
     let tempIndex = femaleArr[ind].index;
     femaleArr.splice(ind, 1);
     console.log(femaleArr, ind, tempIndex);
@@ -171,7 +186,22 @@ const FemaleList = ({
   };
 
   const addFemaleItem = () => {
-    if (play) return;
+    if (play) {
+      informer.queueMessage(
+        "warning",
+        "Use stop button to edit configuration."
+      );
+      return;
+    }
+    if (femaleArr.length + 1 > maximumEntityCount) {
+      informer.queueMessage(
+        "warning",
+        `Maximum number of entities (${maximumEntityCount}) has been reached.`,
+        1500,
+        "top-right"
+      );
+      return;
+    }
     handleAddFemaleItem();
   };
 

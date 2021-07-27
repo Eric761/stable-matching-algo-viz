@@ -13,6 +13,11 @@ import {
   StyledMdAddCircle,
 } from "../MainListElements";
 import Collapse from "@material-ui/core/Collapse";
+import {
+  minimumEntityCount,
+  maximumEntityCount,
+  maximumCharCount,
+} from "../../helper/arrangement";
 
 const MaleList = ({
   male,
@@ -26,6 +31,7 @@ const MaleList = ({
   bgColor,
   showAnimationCol,
   resetMaleArray,
+  informer,
 }) => {
   let obj = male.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -172,6 +178,14 @@ const MaleList = ({
   const handleDeleteItem = (ind) => {
     // let temp = [...maleArr];
     if (play) return;
+    if (maleArr.length - 1 < minimumEntityCount) {
+      informer.queueMessage(
+        "warning",
+        `Number of male entities cannot go below minimum ${minimumEntityCount}.`,
+        1500
+      );
+      return;
+    }
     let tempIndex = maleArr[ind].index;
     maleArr.splice(ind, 1);
     console.log(maleArr, ind, tempIndex);
@@ -180,7 +194,21 @@ const MaleList = ({
   };
 
   const addMaleItem = () => {
-    if (play) return;
+    if (play) {
+      informer.queueMessage(
+        "warning",
+        "Use stop button to edit configuration."
+      );
+      return;
+    }
+    if (maleArr.length + 1 > maximumEntityCount) {
+      informer.queueMessage(
+        "warning",
+        `Maximum number of entities (${maximumEntityCount}) has been reached.`,
+        1500
+      );
+      return;
+    }
     handleAddMaleItem();
   };
 

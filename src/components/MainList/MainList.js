@@ -18,6 +18,7 @@ import {
 } from "../helper/helperFns";
 import { SMPAlgo } from "../helper/algorithm";
 import Scheduler from "../helper/scheduler";
+import Informer from "../helper/informer";
 
 let newMaleArray = addMaleIndices(
   defaultArrangement.male,
@@ -33,6 +34,7 @@ let animationQueue;
 let stableMarriageNameIndex;
 let stableMarriageAlgorithm;
 let stableMarriageProcessQueue;
+// let informer = new Informer();
 
 const MainList = ({
   shuffle,
@@ -83,6 +85,7 @@ const MainList = ({
   const [bgRightColor, setBgRightColor] = useState({});
   const [engageIndex, setEngageIndex] = useState(-1);
   const [showAnimationColor, setShowAnimationColor] = useState(false);
+  const [informer, setInformer] = useState(new Informer());
 
   const showAnimationCol = (state, index) => {
     if (!stableMarriageAlgorithm || !SMPVizDone) return;
@@ -151,7 +154,7 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        // TODO
+        informer.queueMessage("warning", `${entity.name} has no partner.`);
       }
     } else if (state === "female" && index !== undefined) {
       let entity = stableMarriageAlgorithm.female[index];
@@ -197,7 +200,7 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        // TODO
+        informer.queueMessage("warning", `${entity.name} has no partner.`);
       }
     }
   };
@@ -311,11 +314,11 @@ const MainList = ({
           index: curFemaleIndex,
           color: "orange !important",
         });
-        // notifier.queueMessage(
-        //   "warning",
-        //   `${male.name} is engaged with ${female.name}.`,
-        //   1000
-        // );
+        informer.queueMessage(
+          "warning",
+          `${male.name} is engaged with ${female.name}.`,
+          1000
+        );
       }, 500);
     }
 
@@ -337,7 +340,11 @@ const MainList = ({
       animationQueue.add(function () {
         let maleIndex = female.preferencesName.indexOf(male.name);
         setHighlightFemalePrefIndex(maleIndex);
-        // notifier.queueMessage('warning', `${female.name} breaks up with current partner ${dumped.name} and engages with ${male.name}.`, 2000);
+        informer.queueMessage(
+          "warning",
+          `${female.name} breaks up with current partner ${dumped.name} and engages with ${male.name}.`,
+          2000
+        );
       }, 500);
       animationQueue.add(function () {
         setExpandMalePreference(false);
@@ -383,11 +390,11 @@ const MainList = ({
 
       animationQueue.add(function () {
         setBgColor("pink !important");
-        // notifier.queueMessage(
-        //   "warning",
-        //   `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name}.`,
-        //   2000
-        // );
+        informer.queueMessage(
+          "warning",
+          `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name}.`,
+          2000
+        );
       }, 250);
       animationQueue.add(function () {
         setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
@@ -428,6 +435,7 @@ const MainList = ({
     if (stableMarriageProcessQueue.length === 0) {
       animationQueue.add(function () {
         showResult();
+        informer.queueMessage("valid", "Tap an entity to show its partner.");
       }, 100);
     } else {
       animationQueue.add(function () {
@@ -447,6 +455,11 @@ const MainList = ({
       setTimeout(() => {
         setFlagBtn(true);
       }, 500);
+      informer.queueMessage(
+        "valid",
+        "Configuration has been randomized.",
+        1500
+      );
     }
     if (reset) {
       setFlagBtn(false);
@@ -457,6 +470,11 @@ const MainList = ({
         console.log(maleArray, femaleArray);
         setFlagBtn(true);
       }, 500);
+      informer.queueMessage(
+        "valid",
+        "Configuration has been reset to default.",
+        1500
+      );
     }
   }, [shuffle, reset]);
 
@@ -468,8 +486,15 @@ const MainList = ({
           "configuration.json",
           "application/json"
         );
+        informer.queueMessage(
+          "valid",
+          "The configuration file is being saved at your device as configuration.json"
+        );
       } else {
-        alert("Invalid config!");
+        informer.queueMessage(
+          "error",
+          "Configuration is invalid. Please use unique names for all entities."
+        );
       }
       handleSaveFile(false);
     }
@@ -487,13 +512,14 @@ const MainList = ({
           setFlagBtn(false);
           setMaleArray([...config.male]);
           setFemaleArray([...config.female]);
+          informer.queueMessage("valid", "Configuration loaded successfully.");
           setTimeout(() => {
             handleInputFile("", false);
             setFlagBtn(true);
           }, 500);
         } catch (error) {
           // Shows an error in the UI.
-          alert(error);
+          informer.queueMessage("error", error);
         } finally {
           // Make sure to reset the value of this file input to reload the same file, if given the same file.
           uploadFile.event.target.value = "";
@@ -510,7 +536,10 @@ const MainList = ({
           female: femaleArray,
         };
         if (!isValidConfig(maleArray, femaleArray)) {
-          // TODO
+          informer.queueMessage(
+            "warning",
+            "Configuration is invalid. Please use unique names for all entities."
+          );
           return;
         }
         animationQueue = new Scheduler();
@@ -532,19 +561,21 @@ const MainList = ({
         // Make the containers uninteractive
         // TODO
 
-        // notifier.queueMessage('valid', 'Visualization start.');
+        informer.queueMessage("valid", "Visualization start.");
         handleVizActive(true);
         animationStep();
       } else if (SMPVizActive && animationQueue && animationQueue.disable) {
         handlePause(false);
         animationQueue.continue();
-        // notifier.queueMessage('valid', 'Visualization continuing.');
+        informer.queueMessage("valid", "Visualization continuing.");
         // Third conditional is for when the visualization is done, and the user
         // can only use stop to reset everything.
+      } else {
+        informer.queueMessage(
+          "warning",
+          "Use the stop button to reset the visualization."
+        );
       }
-      // else {
-      //     notifier.queueMessage('warning', 'Use the stop button to reset the visualization.');
-      // }
     }
   }, [play]);
 
@@ -558,15 +589,18 @@ const MainList = ({
         return;
       }
       animationQueue.pause();
+      informer.queueMessage("valid", "Visualization paused.");
       handlePlay(false);
-      // ADD Notifier
     }
     if (skip) {
       if (!SMPVizActive || SMPVizDone) return;
       showResult();
+      informer.queueMessage(
+        "valid",
+        "Toggle an entity with their angle button to see their partner."
+      );
       // Make reset button disable
       handleSkip(false);
-      // ADD Notifier
     }
   }, [pause, skip]);
 
@@ -689,6 +723,7 @@ const MainList = ({
       style={{
         display: "flex",
         justifyContent: "space-evenly",
+        marginTop: "15px",
       }}
     >
       <MaleList
@@ -703,6 +738,7 @@ const MainList = ({
         bgColor={bgLeftColor}
         showAnimationCol={showAnimationCol}
         resetMaleArray={resetMaleArray}
+        informer={informer}
       />
       <AnimationCol
         male={entityMale}
@@ -732,6 +768,7 @@ const MainList = ({
         bgColor={bgRightColor}
         showAnimationCol={showAnimationCol}
         resetFemaleArray={resetFemaleArray}
+        informer={informer}
       />
     </div>
   );
