@@ -197,7 +197,9 @@ const FemaleList = ({
     if (play) {
       informer.queueMessage(
         "warning",
-        "Use stop button to edit configuration."
+        "Use stop button to edit configuration.",
+        1000,
+        "bottom-right"
       );
       return;
     }

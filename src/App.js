@@ -70,6 +70,9 @@ const App = () => {
     <div className="App" style={styleBg}>
       <Notifier />
       <Header
+        pause={pause}
+        SMPVizActive={SMPVizActive}
+        SMPVizDone={SMPVizDone}
         handleChangeBgColor={handleChangeBgColor}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}

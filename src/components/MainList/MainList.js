@@ -540,6 +540,8 @@ const MainList = ({
             "warning",
             "Configuration is invalid. Please use unique names for all entities."
           );
+          // To enable the play control btn again
+          handlePlay(false);
           return;
         }
         animationQueue = new Scheduler();
@@ -557,24 +559,25 @@ const MainList = ({
         animationQueue.disable = false;
         console.log(stableMarriageProcessQueue);
 
-        // Disable controls except for play, skip, pause, and stop.
-        // Make the containers uninteractive
-        // TODO
-
         informer.queueMessage("valid", "Visualization start.");
         handleVizActive(true);
         animationStep();
-      } else if (SMPVizActive && animationQueue && animationQueue.disable) {
+      } else if (
+        pause &&
+        SMPVizActive &&
+        animationQueue &&
+        animationQueue.disable
+      ) {
         handlePause(false);
         animationQueue.continue();
         informer.queueMessage("valid", "Visualization continuing.");
-        // Third conditional is for when the visualization is done, and the user
-        // can only use stop to reset everything.
+        // Third conditional is for when the visualization is done, and the user can only use stop to reset everything.
       } else {
         informer.queueMessage(
           "warning",
           "Use the stop button to reset the visualization."
         );
+        if (SMPVizDone) handlePlay(false);
       }
     }
   }, [play]);
@@ -592,6 +595,9 @@ const MainList = ({
       informer.queueMessage("valid", "Visualization paused.");
       handlePlay(false);
     }
+  }, [pause]);
+
+  useEffect(() => {
     if (skip) {
       if (!SMPVizActive || SMPVizDone) return;
       showResult();
@@ -599,10 +605,11 @@ const MainList = ({
         "valid",
         "Toggle an entity with their angle button to see their partner."
       );
-      // Make reset button disable
       handleSkip(false);
+      handlePlay(false);
+      handlePause(false);
     }
-  }, [pause, skip]);
+  }, [skip]);
 
   useEffect(() => {
     if (stop) {
@@ -619,8 +626,6 @@ const MainList = ({
       handlePause(false);
       setHighlightMaleIndex(-1);
       setHighlightFemaleIndex(-1);
-
-      // TODO - > Reset the controls to correct state.
 
       // Animate the removal of the entities.
       let timeoutQueue = new Scheduler();

@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
-import {
-  FaStop,
-  FaPlay,
-  FaPause,
-  FaInfoCircle,
-  FaGithub,
-  FaFileUpload,
-  FaSave,
-} from "react-icons/fa";
-import { BsSkipForwardFill } from "react-icons/bs";
-import { ImShuffle } from "react-icons/im";
-import { RiRestartFill } from "react-icons/ri";
+import { FaInfoCircle, FaGithub } from "react-icons/fa";
+
 import {
   HeaderContainer,
   NavContainer,
   IconContainer,
   ToggleContainer,
+  StyledRiRestartFill,
+  StyledImShuffle,
+  StyledFaPlay,
+  StyledFaPause,
+  StyledBsSkipForwardFill,
+  StyledFaStop,
+  StyledFaSave,
+  StyledFaFileUpload,
 } from "./HeaderElements";
 
 const StyledSwitch = withStyles((theme) => ({
@@ -75,6 +73,9 @@ const StyledSwitch = withStyles((theme) => ({
 });
 
 const Header = ({
+  pause,
+  SMPVizActive,
+  SMPVizDone,
   handleChangeBgColor,
   handleRandomConfig,
   handleReset,
@@ -86,6 +87,13 @@ const Header = ({
   handleStop,
 }) => {
   const [state, setState] = useState(true);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    let f = SMPVizActive;
+    setActive(f);
+  }, [SMPVizActive]);
+
   const handleChange = () => {
     setState(!state);
     handleChangeBgColor(!state);
@@ -105,43 +113,68 @@ const Header = ({
         </a>
       </NavContainer>
       <IconContainer>
-        <RiRestartFill
-          className={`restart-icon-style-${state}`}
-          onClick={() => handleReset(true)}
+        <StyledRiRestartFill
+          onClick={() => {
+            if (active) return;
+            handleReset(true);
+          }}
+          active={!active}
+          state={state}
         />
-        <ImShuffle
-          className={`icon-style-${state}`}
-          onClick={() => handleRandomConfig(true)}
+        <StyledImShuffle
+          onClick={() => {
+            if (active) return;
+            handleRandomConfig(true);
+          }}
+          active={!active}
+          state={state}
         />
-        <FaPlay
-          className={`icon-style-${state}`}
-          onClick={() => handlePlay(true)}
+        <StyledFaPlay onClick={() => handlePlay(true)} state={state} />
+        <StyledBsSkipForwardFill
+          onClick={() => {
+            if (!active || SMPVizDone) return;
+            handleSkip(true);
+            console.log("Working");
+          }}
+          active={active && !SMPVizDone}
+          state={state}
         />
-        <BsSkipForwardFill
-          className={`icon-style-${state}`}
-          onClick={() => handleSkip(true)}
+        <StyledFaPause
+          onClick={() => {
+            if (!active) return;
+            handlePause(true);
+          }}
+          active={active}
+          state={state}
+          isPaused={pause && !SMPVizDone}
         />
-        <FaPause
-          className={`icon-style-${state}`}
-          onClick={() => handlePause(true)}
+        <StyledFaStop
+          onClick={() => {
+            if (!active) return;
+            handleStop(true);
+          }}
+          active={active}
+          state={state}
         />
-        <FaStop
-          className={`icon-style-${state}`}
-          onClick={() => handleStop(true)}
-        />
-        <FaSave
-          className={`icon-style-${state}`}
-          onClick={() => handleSaveFile(true)}
+        <StyledFaSave
+          onClick={() => {
+            if (active) return;
+            handleSaveFile(true);
+          }}
+          active={!active}
+          state={state}
         />
         <label for="upload-file">
-          <FaFileUpload className={`icon-style-${state}`} />
+          <StyledFaFileUpload active={!active} state={state} />
         </label>
-        <input
-          id="upload-file"
-          type="file"
-          accept="application/json"
-          onChange={handleUploadFile}
-        />
+        {!active && (
+          <input
+            id="upload-file"
+            type="file"
+            accept="application/json"
+            onChange={handleUploadFile}
+          />
+        )}
       </IconContainer>
       <ToggleContainer>
         <StyledSwitch checked={state} onChange={handleChange} />
