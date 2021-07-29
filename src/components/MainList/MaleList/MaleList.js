@@ -26,7 +26,8 @@ const MaleList = ({
   handleDeleteMaleList,
   handleAddMaleItem,
   flagBtn,
-  play,
+  SMPVizActive,
+  SMPVizDone,
   highlightMaleIndex,
   bgColor,
   showAnimationCol,
@@ -82,7 +83,7 @@ const MaleList = ({
   }, [resetMaleArray]);
 
   const toggle = (ind) => {
-    if (play) return;
+    if (SMPVizActive) return;
     console.log(ind);
     let ar = [...maleArr];
     let temp = ar[ind].toggle;
@@ -186,7 +187,7 @@ const MaleList = ({
 
   const handleDeleteItem = (ind) => {
     // let temp = [...maleArr];
-    if (play) return;
+    if (SMPVizActive) return;
     if (maleArr.length - 1 < minimumEntityCount) {
       informer.queueMessage(
         "warning",
@@ -203,13 +204,14 @@ const MaleList = ({
   };
 
   const addMaleItem = () => {
-    if (play) {
-      informer.queueMessage(
-        "warning",
-        "Use stop button to edit configuration.",
-        1000,
-        "bottom-left"
-      );
+    if (SMPVizActive) {
+      if (SMPVizDone)
+        informer.queueMessage(
+          "warning",
+          "Use stop button to edit configuration.",
+          1000,
+          "bottom-left"
+        );
       return;
     }
     if (maleArr.length + 1 > maximumEntityCount) {
@@ -224,7 +226,7 @@ const MaleList = ({
   };
 
   const showAnimation = (ind) => {
-    if (!play) return;
+    if (!SMPVizActive) return;
     showAnimationCol("male", ind);
   };
 
@@ -249,14 +251,18 @@ const MaleList = ({
               bgColor={elem.color}
               onClick={() => showAnimation(index)}
             >
-              <List flag={elem.toggle}>
+              <List flag={elem.toggle} pointer={SMPVizActive && !SMPVizDone}>
                 {!elem.toggle ? (
                   <StyledFaChevronCircleRight
                     onClick={() => toggle(index)}
-                    play={play}
+                    play={SMPVizActive}
+                    pointer={SMPVizActive && !SMPVizDone}
                   />
                 ) : (
-                  <StyledFaChevronCircleDown onClick={() => toggle(index)} />
+                  <StyledFaChevronCircleDown
+                    onClick={() => toggle(index)}
+                    play={SMPVizActive}
+                  />
                 )}
                 <StyledInput
                   autoComplete="off"
@@ -265,11 +271,13 @@ const MaleList = ({
                   value={elem.name}
                   onChange={handleNameChange}
                   id={index}
-                  disabled={play}
+                  disabled={SMPVizActive}
+                  pointer={SMPVizActive && !SMPVizDone}
                 />
                 <StyledRiDeleteBack2Fill
                   onClick={() => handleDeleteItem(index)}
-                  play={play}
+                  play={SMPVizActive}
+                  pointer={SMPVizActive && !SMPVizDone}
                 />
               </List>
               {elem.toggle &&
@@ -303,7 +311,11 @@ const MaleList = ({
           </Collapse>
         );
       })}
-      <StyledMdAddCircle onClick={addMaleItem} play={play} />
+      <StyledMdAddCircle
+        onClick={addMaleItem}
+        play={SMPVizActive}
+        pointer={SMPVizActive && !SMPVizDone}
+      />
     </LeftContainer>
   );
 };

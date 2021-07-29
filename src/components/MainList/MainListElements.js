@@ -50,7 +50,7 @@ export const List = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   padding: 0 3px;
   border-radius: 30px;
   border-bottom-left-radius: ${({ flag }) => (flag ? "0px" : "")};
@@ -65,7 +65,7 @@ export const AnimationList = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   padding: 0 3px;
   border-radius: 30px;
   border-bottom-left-radius: ${({ flag }) => (flag ? "0px" : "")};
@@ -88,7 +88,7 @@ export const Name = styled.span`
   font-family: "Baloo Chettan 2", cursive;
   color: grey;
   text-align: left;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   text-transform: capitalize;
 `;
 
@@ -97,7 +97,7 @@ export const PreferenceList = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  cursor: ${({ animation }) => (animation ? "" : "grab")};
+  cursor: ${({ animation }) => (animation ? "default" : "grab")};
   padding: 8px;
   padding-left: 5px;
   min-height: 53px;
@@ -108,7 +108,7 @@ export const PreferenceList = styled.div`
     ind === len - 1 ? "30px" : ""};
   /* margin-bottom: ${({ ind, len }) => (ind === len - 1 ? "6px" : "")}; */
   &:hover {
-    background-color: ${({ play }) => (play ? "" : "lightgrey")};
+    background-color: ${({ active }) => (active ? "" : "lightgrey")};
   }
   background-color: ${({ highlight, engageHighlight, showAnimationColor }) =>
     engageHighlight
@@ -133,7 +133,7 @@ export const StyledInput = styled(Input)`
     font-family: "Baloo Chettan 2", cursive;
     color: grey;
     text-align: left;
-    cursor: pointer;
+    cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
     text-transform: capitalize;
   }
 `;
@@ -144,7 +144,7 @@ export const StyledFaChevronCircleRight = styled(FaChevronCircleRight)`
   margin: 0 10px;
   margin-right: 22px;
   color: #4a4a4a;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
 
   &:hover {
     color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
@@ -158,10 +158,10 @@ export const StyledFaChevronCircleDown = styled(FaChevronCircleDown)`
   margin-right: 22px;
   margin-left: ${({ animation }) => (animation ? "12px" : "10px")};
   color: #4a4a4a;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
 
   &:hover {
-    color: #000000;
+    color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
   }
 `;
 
@@ -171,7 +171,7 @@ export const StyledRiDeleteBack2Fill = styled(RiDeleteBack2Fill)`
   margin: 0 12px;
   margin-left: 20px;
   color: #4a4a4a;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   /* opacity: ${({ play }) => (play ? "0" : "1")}; */
 
   &:hover {
@@ -208,7 +208,7 @@ export const StyledMdAddCircle = styled(MdAddCircle)`
   width: 50px;
   color: #4a4a4a;
   margin-top: 18px;
-  cursor: pointer;
+  cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   &:hover {
     color: ${({ play }) => (play ? "#4a4a4a" : "#000000")};
   }

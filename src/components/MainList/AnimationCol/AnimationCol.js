@@ -24,7 +24,7 @@ const AnimationCol = ({
   bgColor,
   engageIndex,
   showAnimationColor,
-  play,
+  SMPVizActive,
 }) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
@@ -96,13 +96,22 @@ const AnimationCol = ({
               flag={toggleMale}
               engageIndex={-1}
               showAnimationColor={showAnimationColor}
+              pointer={SMPVizActive}
             >
               {!toggleMale ? (
-                <StyledFaChevronCircleRight animation={true} />
+                <StyledFaChevronCircleRight
+                  animation={true}
+                  pointer={SMPVizActive}
+                  play={SMPVizActive}
+                />
               ) : (
-                <StyledFaChevronCircleDown animation={true} />
+                <StyledFaChevronCircleDown
+                  animation={true}
+                  pointer={SMPVizActive}
+                  play={SMPVizActive}
+                />
               )}
-              <Name>{male.name}</Name>
+              <Name pointer={SMPVizActive}>{male.name}</Name>
             </AnimationList>
             {toggleMale &&
               male &&
@@ -116,7 +125,7 @@ const AnimationCol = ({
                     highlight={malePrefInd === ind ? true : false}
                     engageHighlight={false}
                     showAnimationColor={showAnimationColor}
-                    play={play}
+                    active={SMPVizActive}
                   >
                     <ListItem animation={true}>{pref}</ListItem>
                   </PreferenceList>
@@ -139,13 +148,22 @@ const AnimationCol = ({
                 flag={toggleFemale}
                 engageIndex={engageIndex}
                 showAnimationColor={showAnimationColor}
+                pointer={SMPVizActive}
               >
                 {!toggleFemale ? (
-                  <StyledFaChevronCircleRight animation={true} />
+                  <StyledFaChevronCircleRight
+                    animation={true}
+                    pointer={SMPVizActive}
+                    play={SMPVizActive}
+                  />
                 ) : (
-                  <StyledFaChevronCircleDown animation={true} />
+                  <StyledFaChevronCircleDown
+                    animation={true}
+                    pointer={SMPVizActive}
+                    play={SMPVizActive}
+                  />
                 )}
-                <Name>{female.name}</Name>
+                <Name pointer={SMPVizActive}>{female.name}</Name>
               </AnimationList>
               {toggleFemale &&
                 female &&
@@ -159,7 +177,7 @@ const AnimationCol = ({
                       highlight={femalePrefInd === ind ? true : false}
                       engageHighlight={engageIndex === ind ? true : false}
                       showAnimationColor={showAnimationColor}
-                      play={play}
+                      active={SMPVizActive}
                     >
                       <ListItem animation={true}>{pref}</ListItem>
                     </PreferenceList>
