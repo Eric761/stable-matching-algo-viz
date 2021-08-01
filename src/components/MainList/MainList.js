@@ -561,7 +561,9 @@ const MainList = ({
 
         informer.queueMessage("valid", "Visualization start.");
         handleVizActive(true);
-        animationStep();
+        setTimeout(() => {
+          animationStep();
+        }, 1200);
       } else if (
         pause &&
         SMPVizActive &&

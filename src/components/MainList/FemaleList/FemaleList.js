@@ -81,7 +81,7 @@ const FemaleList = ({
   }, [female]);
 
   useEffect(() => {
-    if (resetFemaleArray) {
+    if (resetFemaleArray || SMPVizActive) {
       let ar = JSON.parse(JSON.stringify(femaleArr));
       ar.map((elem) => {
         elem.color = "";
@@ -89,7 +89,7 @@ const FemaleList = ({
       });
       setFemaleArr(ar);
     }
-  }, [resetFemaleArray]);
+  }, [resetFemaleArray, SMPVizActive]);
 
   const toggle = (ind) => {
     if (SMPVizActive) return;

@@ -73,7 +73,7 @@ const MaleList = ({
     setMaleArr(obj);
   }, [male]);
   useEffect(() => {
-    if (resetMaleArray) {
+    if (resetMaleArray || SMPVizActive) {
       let ar = JSON.parse(JSON.stringify(maleArr));
       ar.map((elem) => {
         elem.color = "";
@@ -81,7 +81,7 @@ const MaleList = ({
       });
       setMaleArr(ar);
     }
-  }, [resetMaleArray]);
+  }, [resetMaleArray, SMPVizActive]);
 
   const toggle = (ind) => {
     if (SMPVizActive) return;
