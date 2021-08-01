@@ -70,6 +70,7 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 108px;
 
   label {
     display: flex;

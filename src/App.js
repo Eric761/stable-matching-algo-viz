@@ -11,7 +11,7 @@ const App = () => {
     overflowX: "hidden",
     display: "grid",
     gridTemplateColumns: "33% 34% 33%",
-    gridTemplateRows: "25px 60px auto",
+    gridTemplateRows: "15px 90px auto",
   });
   const [shuffle, setShuffle] = useState(false);
   const [reset, setReset] = useState(false);
@@ -36,7 +36,7 @@ const App = () => {
         overflowX: "hidden",
         display: "grid",
         gridTemplateColumns: "33% 34% 33%",
-        gridTemplateRows: "25px 60px auto",
+        gridTemplateRows: "15px 90px auto",
       });
     } else {
       setStyleBg({
@@ -46,7 +46,7 @@ const App = () => {
         overflowX: "hidden",
         display: "grid",
         gridTemplateColumns: "33% 34% 33%",
-        gridTemplateRows: "25px 60px auto",
+        gridTemplateRows: "15px 90px auto",
       });
     }
   };

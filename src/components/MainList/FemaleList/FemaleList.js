@@ -224,7 +224,7 @@ const FemaleList = ({
 
   return (
     <LeftContainer id="female">
-      <Scrollbars style={{ width: 480, height: 635 }} autoHide>
+      <Scrollbars style={{ width: 480, height: 615 }} autoHide>
         {femaleArr.map((elem, index) => {
           return (
             <Collapse
