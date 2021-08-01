@@ -6,6 +6,12 @@ import MainList from "./components/MainList/MainList";
 const App = () => {
   const [styleBg, setStyleBg] = useState({
     backgroundColor: "#0e0e0e",
+    height: "100%",
+    overflowY: "auto",
+    overflowX: "hidden",
+    display: "grid",
+    gridTemplateColumns: "33% 34% 33%",
+    gridTemplateRows: "25px 60px auto",
   });
   const [shuffle, setShuffle] = useState(false);
   const [reset, setReset] = useState(false);
@@ -25,10 +31,22 @@ const App = () => {
     if (val) {
       setStyleBg({
         backgroundColor: "#0e0e0e",
+        height: "100%",
+        overflowY: "auto",
+        overflowX: "hidden",
+        display: "grid",
+        gridTemplateColumns: "33% 34% 33%",
+        gridTemplateRows: "25px 60px auto",
       });
     } else {
       setStyleBg({
         backgroundColor: "white",
+        height: "100%",
+        overflowY: "auto",
+        overflowX: "hidden",
+        display: "grid",
+        gridTemplateColumns: "33% 34% 33%",
+        gridTemplateRows: "25px 60px auto",
       });
     }
   };

@@ -6,7 +6,10 @@ import { BsSkipForwardFill } from "react-icons/bs";
 import { FaStop, FaPlay, FaPause, FaFileUpload, FaSave } from "react-icons/fa";
 
 export const HeaderContainer = styled.div`
-  height: 60px;
+  grid-column-start: 1;
+  grid-column-end: column3-end;
+  grid-row-start: 2;
+  grid-row-end: 2;
   display: flex;
   justify-content: space-around;
   align-items: center;

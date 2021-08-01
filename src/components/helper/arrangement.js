@@ -1,7 +1,7 @@
 // Minimum number of entity for arrangement to be valid!
 const minimumEntityCount = 1;
 // Maximum number of entity for arrangement to be valid!
-const maximumEntityCount = 6;
+const maximumEntityCount = 8;
 // Maximum number of characters a name of an entity has!
 const maximumCharCount = 15;
 

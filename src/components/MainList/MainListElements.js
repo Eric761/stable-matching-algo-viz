@@ -9,6 +9,14 @@ export const LeftContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  height: 100%;
+
+  #male {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 3;
+    grid-row-end: 3;
+  }
 `;
 
 export const StyledPaper = styled(Paper)`
@@ -23,6 +31,8 @@ export const StyledPaper = styled(Paper)`
   background-color: ${({ highlight, bgColor }) =>
     bgColor !== "" ? bgColor : highlight ? "#6cdbff !important" : ""};
   /* transition: min-height 0.25s ease-in !important; */
+  box-shadow: 0px 8px 6px -3px rgb(0 0 0 / 20%), 0px 9px 7px 1px rgb(0 0 0 / 5%),
+    0px 4px 18px 3px rgb(0 0 0 / 10%) !important;
 `;
 
 export const AnimationStyledPaper = styled(Paper)`
@@ -43,6 +53,8 @@ export const AnimationStyledPaper = styled(Paper)`
       : toggle
       ? ""
       : bgColor};
+  box-shadow: 0px 8px 6px -3px rgb(0 0 0 / 20%), 0px 9px 7px 1px rgb(0 0 0 / 5%),
+    0px 4px 18px 3px rgb(0 0 0 / 10%) !important;
 `;
 
 export const List = styled.div`
@@ -207,6 +219,7 @@ export const StyledMdAddCircle = styled(MdAddCircle)`
   height: 50px;
   width: 50px;
   color: #4a4a4a;
+  margin-left: 200px;
   margin-top: 18px;
   cursor: ${({ pointer }) => (pointer ? "default" : "pointer")};
   &:hover {

@@ -724,13 +724,12 @@ const MainList = ({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        marginTop: "15px",
-      }}
-    >
+    // <div
+    //   style={{
+    //     marginTop: "15px",
+    //   }}
+    // >
+    <>
       <MaleList
         male={maleArray}
         handleFemalePreferences={handleFemalePreferences}
@@ -777,7 +776,7 @@ const MainList = ({
         resetFemaleArray={resetFemaleArray}
         informer={informer}
       />
-    </div>
+    </>
   );
 };
 

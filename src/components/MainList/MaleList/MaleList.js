@@ -18,6 +18,7 @@ import {
   maximumEntityCount,
   maximumCharCount,
 } from "../../helper/arrangement";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const MaleList = ({
   male,
@@ -231,91 +232,95 @@ const MaleList = ({
   };
 
   return (
-    <LeftContainer>
-      {maleArr.map((elem, index) => {
-        return (
-          <Collapse
-            in={elem.toggle}
-            collapsedHeight="85px"
-            timeout="auto"
-            style={{
-              overflow: "inherit",
-            }}
-          >
-            <StyledPaper
-              elevation={10}
-              key={index}
-              // ref={(element) => myRef.current.push(element)}
-              className={"male-" + index}
-              highlight={highlightMaleIndex === index ? true : false}
-              bgColor={elem.color}
-              onClick={() => showAnimation(index)}
+    <LeftContainer id="male">
+      <Scrollbars style={{ width: 480, height: 635 }} autoHide>
+        {maleArr.map((elem, index) => {
+          return (
+            <Collapse
+              in={elem.toggle}
+              collapsedHeight="85px"
+              timeout="auto"
+              style={{
+                overflow: "hidden",
+                width: "450px",
+                borderRadius: "30px",
+              }}
             >
-              <List flag={elem.toggle} pointer={SMPVizActive && !SMPVizDone}>
-                {!elem.toggle ? (
-                  <StyledFaChevronCircleRight
-                    onClick={() => toggle(index)}
+              <StyledPaper
+                elevation={10}
+                key={index}
+                // ref={(element) => myRef.current.push(element)}
+                className={"male-" + index}
+                highlight={highlightMaleIndex === index ? true : false}
+                bgColor={elem.color}
+                onClick={() => showAnimation(index)}
+              >
+                <List flag={elem.toggle} pointer={SMPVizActive && !SMPVizDone}>
+                  {!elem.toggle ? (
+                    <StyledFaChevronCircleRight
+                      onClick={() => toggle(index)}
+                      play={SMPVizActive}
+                      pointer={SMPVizActive && !SMPVizDone}
+                    />
+                  ) : (
+                    <StyledFaChevronCircleDown
+                      onClick={() => toggle(index)}
+                      play={SMPVizActive}
+                    />
+                  )}
+                  <StyledInput
+                    autoComplete="off"
+                    placeholder="Enter name"
+                    spellCheck="false"
+                    value={elem.name}
+                    onChange={handleNameChange}
+                    id={index}
+                    disabled={SMPVizActive}
+                    pointer={SMPVizActive && !SMPVizDone}
+                  />
+                  <StyledRiDeleteBack2Fill
+                    onClick={() => handleDeleteItem(index)}
                     play={SMPVizActive}
                     pointer={SMPVizActive && !SMPVizDone}
                   />
-                ) : (
-                  <StyledFaChevronCircleDown
-                    onClick={() => toggle(index)}
-                    play={SMPVizActive}
-                  />
-                )}
-                <StyledInput
-                  autoComplete="off"
-                  placeholder="Enter name"
-                  spellCheck="false"
-                  value={elem.name}
-                  onChange={handleNameChange}
-                  id={index}
-                  disabled={SMPVizActive}
-                  pointer={SMPVizActive && !SMPVizDone}
-                />
-                <StyledRiDeleteBack2Fill
-                  onClick={() => handleDeleteItem(index)}
-                  play={SMPVizActive}
-                  pointer={SMPVizActive && !SMPVizDone}
-                />
-              </List>
-              {elem.toggle &&
-                elem.preferences.map((pref, ind) => {
-                  return (
-                    <PreferenceList
-                      ind={ind}
-                      len={elem.preferences.length}
-                      key={ind}
-                      draggable
-                      onDragStart={(e) => handleDragStart(e, { index, ind })}
-                      onDragEnter={
-                        dragging
-                          ? (e) => {
-                              handleDragEnter(e, { index, ind });
-                            }
-                          : null
-                      }
-                      styleFlag={getStyles({ index, ind })}
-                    >
-                      <StyledMdDragHandle
+                </List>
+                {elem.toggle &&
+                  elem.preferences.map((pref, ind) => {
+                    return (
+                      <PreferenceList
+                        ind={ind}
+                        len={elem.preferences.length}
+                        key={ind}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, { index, ind })}
+                        onDragEnter={
+                          dragging
+                            ? (e) => {
+                                handleDragEnter(e, { index, ind });
+                              }
+                            : null
+                        }
                         styleFlag={getStyles({ index, ind })}
-                      />
-                      <ListItem styleFlag={getStyles({ index, ind })}>
-                        {pref}
-                      </ListItem>
-                    </PreferenceList>
-                  );
-                })}
-            </StyledPaper>
-          </Collapse>
-        );
-      })}
-      <StyledMdAddCircle
-        onClick={addMaleItem}
-        play={SMPVizActive}
-        pointer={SMPVizActive && !SMPVizDone}
-      />
+                      >
+                        <StyledMdDragHandle
+                          styleFlag={getStyles({ index, ind })}
+                        />
+                        <ListItem styleFlag={getStyles({ index, ind })}>
+                          {pref}
+                        </ListItem>
+                      </PreferenceList>
+                    );
+                  })}
+              </StyledPaper>
+            </Collapse>
+          );
+        })}
+        <StyledMdAddCircle
+          onClick={addMaleItem}
+          play={SMPVizActive}
+          pointer={SMPVizActive && !SMPVizDone}
+        />
+      </Scrollbars>
     </LeftContainer>
   );
 };

@@ -9,6 +9,7 @@ import {
   StyledFaChevronCircleDown,
 } from "../MainListElements";
 import Collapse from "@material-ui/core/Collapse";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const AnimationCol = ({
   male,
@@ -75,82 +76,33 @@ const AnimationCol = ({
           alignItems: "center",
         }}
       >
-        <Collapse
-          in={toggleMale}
-          collapsedHeight="85px"
-          timeout="auto"
-          style={{
-            overflow: "inherit",
-          }}
-        >
-          <AnimationStyledPaper
-            elevation={10}
-            styleElementFlag={styleElementFlag}
-            highlight={!toggleMale && bgColor === ""}
-            className="entity-male"
-            bgColor={bgColor}
-            engageIndex={-1}
-            toggle={toggleMale}
+        <Scrollbars style={{ width: 480, height: 635 }} autoHide>
+          <Collapse
+            in={toggleMale}
+            collapsedHeight="85px"
+            timeout="auto"
+            style={{
+              overflow: "hidden",
+              width: "450px",
+              borderRadius: "30px",
+            }}
           >
-            <AnimationList
-              flag={toggleMale}
-              engageIndex={-1}
-              showAnimationColor={showAnimationColor}
-              pointer={SMPVizActive}
-            >
-              {!toggleMale ? (
-                <StyledFaChevronCircleRight
-                  animation={true}
-                  pointer={SMPVizActive}
-                  play={SMPVizActive}
-                />
-              ) : (
-                <StyledFaChevronCircleDown
-                  animation={true}
-                  pointer={SMPVizActive}
-                  play={SMPVizActive}
-                />
-              )}
-              <Name pointer={SMPVizActive}>{male.name}</Name>
-            </AnimationList>
-            {toggleMale &&
-              male &&
-              male.preferencesName.map((pref, ind) => {
-                return (
-                  <PreferenceList
-                    ind={ind}
-                    len={male.preferencesName.length}
-                    key={ind}
-                    animation={true}
-                    highlight={malePrefInd === ind ? true : false}
-                    engageHighlight={false}
-                    showAnimationColor={showAnimationColor}
-                    active={SMPVizActive}
-                  >
-                    <ListItem animation={true}>{pref}</ListItem>
-                  </PreferenceList>
-                );
-              })}
-          </AnimationStyledPaper>
-        </Collapse>
-        {showFemaleEntity && (
-          <>
             <AnimationStyledPaper
               elevation={10}
               styleElementFlag={styleElementFlag}
-              highlight={!toggleFemale && bgColor === ""}
-              className="entity-female"
+              highlight={!toggleMale && bgColor === ""}
+              className="entity-male"
               bgColor={bgColor}
-              engageIndex={engageIndex}
-              toggle={toggleFemale}
+              engageIndex={-1}
+              toggle={toggleMale}
             >
               <AnimationList
-                flag={toggleFemale}
-                engageIndex={engageIndex}
+                flag={toggleMale}
+                engageIndex={-1}
                 showAnimationColor={showAnimationColor}
                 pointer={SMPVizActive}
               >
-                {!toggleFemale ? (
+                {!toggleMale ? (
                   <StyledFaChevronCircleRight
                     animation={true}
                     pointer={SMPVizActive}
@@ -163,19 +115,19 @@ const AnimationCol = ({
                     play={SMPVizActive}
                   />
                 )}
-                <Name pointer={SMPVizActive}>{female.name}</Name>
+                <Name pointer={SMPVizActive}>{male.name}</Name>
               </AnimationList>
-              {toggleFemale &&
-                female &&
-                female.preferencesName.map((pref, ind) => {
+              {toggleMale &&
+                male &&
+                male.preferencesName.map((pref, ind) => {
                   return (
                     <PreferenceList
                       ind={ind}
-                      len={female.preferencesName.length}
+                      len={male.preferencesName.length}
                       key={ind}
                       animation={true}
-                      highlight={femalePrefInd === ind ? true : false}
-                      engageHighlight={engageIndex === ind ? true : false}
+                      highlight={malePrefInd === ind ? true : false}
+                      engageHighlight={false}
                       showAnimationColor={showAnimationColor}
                       active={SMPVizActive}
                     >
@@ -184,8 +136,72 @@ const AnimationCol = ({
                   );
                 })}
             </AnimationStyledPaper>
-          </>
-        )}
+          </Collapse>
+          {showFemaleEntity && (
+            <>
+              <Collapse
+                in={toggleFemale}
+                collapsedHeight="85px"
+                timeout="auto"
+                style={{
+                  overflow: "hidden",
+                  width: "450px",
+                  borderRadius: "30px",
+                }}
+              >
+                <AnimationStyledPaper
+                  elevation={10}
+                  styleElementFlag={styleElementFlag}
+                  highlight={!toggleFemale && bgColor === ""}
+                  className="entity-female"
+                  bgColor={bgColor}
+                  engageIndex={engageIndex}
+                  toggle={toggleFemale}
+                >
+                  <AnimationList
+                    flag={toggleFemale}
+                    engageIndex={engageIndex}
+                    showAnimationColor={showAnimationColor}
+                    pointer={SMPVizActive}
+                  >
+                    {!toggleFemale ? (
+                      <StyledFaChevronCircleRight
+                        animation={true}
+                        pointer={SMPVizActive}
+                        play={SMPVizActive}
+                      />
+                    ) : (
+                      <StyledFaChevronCircleDown
+                        animation={true}
+                        pointer={SMPVizActive}
+                        play={SMPVizActive}
+                      />
+                    )}
+                    <Name pointer={SMPVizActive}>{female.name}</Name>
+                  </AnimationList>
+                  {toggleFemale &&
+                    female &&
+                    female.preferencesName.map((pref, ind) => {
+                      return (
+                        <PreferenceList
+                          ind={ind}
+                          len={female.preferencesName.length}
+                          key={ind}
+                          animation={true}
+                          highlight={femalePrefInd === ind ? true : false}
+                          engageHighlight={engageIndex === ind ? true : false}
+                          showAnimationColor={showAnimationColor}
+                          active={SMPVizActive}
+                        >
+                          <ListItem animation={true}>{pref}</ListItem>
+                        </PreferenceList>
+                      );
+                    })}
+                </AnimationStyledPaper>
+              </Collapse>
+            </>
+          )}
+        </Scrollbars>
       </div>
     </>
   );
