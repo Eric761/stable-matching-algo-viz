@@ -26,6 +26,7 @@ const AnimationCol = ({
   engageIndex,
   showAnimationColor,
   SMPVizActive,
+  darkMode,
 }) => {
   const [toggleMale, setToggleMale] = useState(false);
   const [toggleFemale, setToggleFemale] = useState(false);
@@ -45,15 +46,23 @@ const AnimationCol = ({
   useEffect(() => {
     if (scrollMaleIndex) {
       let maleEntity = document.getElementsByClassName("entity-male");
-      console.log(maleEntity[0]);
-      maleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      console.log(maleEntity[0], "Eric", maleEntity[0].parentNode);
+      maleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   }, [scrollMaleIndex]);
   useEffect(() => {
     if (scrollFemaleIndex) {
       let femaleEntity = document.getElementsByClassName("entity-female");
-      console.log(femaleEntity[0]);
-      femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      console.log(femaleEntity[0], "Eric", femaleEntity[0].parentNode);
+      femaleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
   }, [scrollFemaleIndex]);
   useEffect(() => {
@@ -66,6 +75,10 @@ const AnimationCol = ({
     setFemalePrefInd(highlightFemalePrefIndex);
   }, [highlightMalePrefIndex, highlightFemalePrefIndex]);
 
+  const handleScrollFrame = (values) => {
+    console.log(values);
+  };
+
   return (
     <>
       <div
@@ -76,7 +89,11 @@ const AnimationCol = ({
           alignItems: "center",
         }}
       >
-        <Scrollbars style={{ width: 480, height: 635 }} autoHide>
+        <Scrollbars
+          style={{ width: 480, height: 635 }}
+          autoHide
+          onScrollFrame={handleScrollFrame}
+        >
           <Collapse
             in={toggleMale}
             collapsedHeight="85px"
@@ -95,27 +112,33 @@ const AnimationCol = ({
               bgColor={bgColor}
               engageIndex={-1}
               toggle={toggleMale}
+              darkMode={darkMode}
             >
               <AnimationList
                 flag={toggleMale}
                 engageIndex={-1}
                 showAnimationColor={showAnimationColor}
                 pointer={SMPVizActive}
+                darkMode={darkMode}
               >
                 {!toggleMale ? (
                   <StyledFaChevronCircleRight
                     animation={true}
                     pointer={SMPVizActive}
                     play={SMPVizActive}
+                    darkMode={darkMode}
                   />
                 ) : (
                   <StyledFaChevronCircleDown
                     animation={true}
                     pointer={SMPVizActive}
                     play={SMPVizActive}
+                    darkMode={darkMode}
                   />
                 )}
-                <Name pointer={SMPVizActive}>{male.name}</Name>
+                <Name pointer={SMPVizActive} darkMode={darkMode}>
+                  {male.name}
+                </Name>
               </AnimationList>
               {toggleMale &&
                 male &&
@@ -130,8 +153,15 @@ const AnimationCol = ({
                       engageHighlight={false}
                       showAnimationColor={showAnimationColor}
                       active={SMPVizActive}
+                      darkMode={darkMode}
                     >
-                      <ListItem animation={true}>{pref}</ListItem>
+                      <ListItem
+                        animation={true}
+                        darkMode={darkMode}
+                        disabled={SMPVizActive}
+                      >
+                        {pref}
+                      </ListItem>
                     </PreferenceList>
                   );
                 })}
@@ -157,27 +187,33 @@ const AnimationCol = ({
                   bgColor={bgColor}
                   engageIndex={engageIndex}
                   toggle={toggleFemale}
+                  darkMode={darkMode}
                 >
                   <AnimationList
                     flag={toggleFemale}
                     engageIndex={engageIndex}
                     showAnimationColor={showAnimationColor}
                     pointer={SMPVizActive}
+                    darkMode={darkMode}
                   >
                     {!toggleFemale ? (
                       <StyledFaChevronCircleRight
                         animation={true}
                         pointer={SMPVizActive}
                         play={SMPVizActive}
+                        darkMode={darkMode}
                       />
                     ) : (
                       <StyledFaChevronCircleDown
                         animation={true}
                         pointer={SMPVizActive}
                         play={SMPVizActive}
+                        darkMode={darkMode}
                       />
                     )}
-                    <Name pointer={SMPVizActive}>{female.name}</Name>
+                    <Name pointer={SMPVizActive} darkMode={darkMode}>
+                      {female.name}
+                    </Name>
                   </AnimationList>
                   {toggleFemale &&
                     female &&
@@ -192,8 +228,15 @@ const AnimationCol = ({
                           engageHighlight={engageIndex === ind ? true : false}
                           showAnimationColor={showAnimationColor}
                           active={SMPVizActive}
+                          darkMode={darkMode}
                         >
-                          <ListItem animation={true}>{pref}</ListItem>
+                          <ListItem
+                            animation={true}
+                            darkMode={darkMode}
+                            disabled={SMPVizActive}
+                          >
+                            {pref}
+                          </ListItem>
                         </PreferenceList>
                       );
                     })}

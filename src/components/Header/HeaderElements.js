@@ -31,14 +31,14 @@ export const NavContainer = styled.div`
   }
 
   .nav-icon-style-true {
-    color: #b5b9aa;
+    color: #b3b3a9;
     height: 32px;
     width: 32px;
     margin: 0 20px;
     cursor: pointer;
 
     &:hover {
-      color: #ffffff;
+      color: #d8d8cd;
     }
   }
 
@@ -71,6 +71,9 @@ export const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 108px;
+  border: ${({ state }) => (state ? "3px solid grey" : "3px solid #6f6f6f")};
+  border-radius: 28px;
+  height: 60px;
 
   label {
     display: flex;
@@ -111,7 +114,7 @@ export const ToggleContainer = styled.div`
 
 export const StyledRiRestartFill = styled(RiRestartFill)`
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   height: 30px;
   width: 30px;
   margin: 0 12px;
@@ -119,7 +122,7 @@ export const StyledRiRestartFill = styled(RiRestartFill)`
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;
@@ -128,12 +131,12 @@ export const StyledImShuffle = styled(ImShuffle)`
   width: 25px;
   margin: 0 12px;
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;
@@ -142,11 +145,11 @@ export const StyledFaPlay = styled(FaPlay)`
   height: 25px;
   width: 25px;
   margin: 0 12px;
-  color: ${({ state }) => (state ? "#a9bf20" : "#545454")};
+  color: ${({ state }) => (state ? "#b3b3a9" : "#545454")};
   cursor: pointer;
 
   &:hover {
-    color: ${({ state }) => (state ? "#dcff00" : "#000000")};
+    color: ${({ state }) => (state ? "#d8d8cd" : "#000000")};
     transition: 0.1s ease-in;
   }
 `;
@@ -156,12 +159,12 @@ export const StyledBsSkipForwardFill = styled(BsSkipForwardFill)`
   width: 25px;
   margin: 0 12px;
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;
@@ -173,10 +176,14 @@ export const StyledFaPause = styled(FaPause)`
   color: ${({ active, state, isPaused }) =>
     active
       ? isPaused
-        ? "#e0004f"
+        ? state
+          ? "#fff7ed"
+          : "#0c0c0c"
         : state
-        ? "#a9bf20"
+        ? "#b3b3a9"
         : "#545454"
+      : state
+      ? "#616161"
       : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
@@ -184,10 +191,14 @@ export const StyledFaPause = styled(FaPause)`
     color: ${({ active, state, isPaused }) =>
       active
         ? isPaused
-          ? "#a73a60"
+          ? state
+            ? "#ffffff"
+            : "black"
           : state
-          ? "#dcff00"
+          ? "#d8d8cd"
           : "#000000"
+        : state
+        ? "#616161"
         : "#adadad"};
     transition: 0.1s ease-in;
   }
@@ -198,12 +209,12 @@ export const StyledFaStop = styled(FaStop)`
   width: 25px;
   margin: 0 12px;
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;
@@ -213,12 +224,12 @@ export const StyledFaSave = styled(FaSave)`
   width: 25px;
   margin: 0 12px;
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;
@@ -228,12 +239,12 @@ export const StyledFaFileUpload = styled(FaFileUpload)`
   width: 25px;
   margin: 0 12px;
   color: ${({ active, state }) =>
-    active ? (state ? "#a9bf20" : "#545454") : "#adadad"};
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
     color: ${({ active, state }) =>
-      active ? (state ? "#dcff00" : "#000000") : "#adadad"};
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;

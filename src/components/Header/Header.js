@@ -85,6 +85,7 @@ const Header = ({
   handlePause,
   handleSkip,
   handleStop,
+  handleDarkMode,
 }) => {
   const [state, setState] = useState(true);
   const [active, setActive] = useState(false);
@@ -95,8 +96,10 @@ const Header = ({
   }, [SMPVizActive]);
 
   const handleChange = () => {
-    setState(!state);
+    if (active) return;
     handleChangeBgColor(!state);
+    handleDarkMode(!state);
+    setState(!state);
   };
   const handleUploadFile = (event) => {
     handleInputFile(event, true);
@@ -112,7 +115,7 @@ const Header = ({
           <FaGithub className={`nav-icon-style-${state}`} />
         </a>
       </NavContainer>
-      <IconContainer>
+      <IconContainer state={state}>
         <StyledRiRestartFill
           onClick={() => {
             if (active) return;

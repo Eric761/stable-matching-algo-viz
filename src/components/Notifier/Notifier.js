@@ -27,6 +27,8 @@ const NotifierContainer = styled.div`
   grid-column-end: column3-end;
   grid-row-start: 1;
   grid-row-end: 1;
+  /* height: 15px;
+  margin-top: -15px; */
 `;
 
 export default Notifier;

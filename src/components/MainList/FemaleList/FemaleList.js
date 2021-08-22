@@ -41,6 +41,7 @@ const FemaleList = ({
   showAnimationCol,
   resetFemaleArray,
   informer,
+  darkMode,
 }) => {
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
@@ -60,7 +61,11 @@ const FemaleList = ({
         `female-${highlightFemaleIndex}`
       );
       console.log(femaleEntity[0]);
-      femaleEntity[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      femaleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
     }
     if (Object.keys(bgColor).length !== 0) {
       let ar = [...femaleArr];
@@ -244,19 +249,26 @@ const FemaleList = ({
                 className={"female-" + index}
                 highlight={highlightFemaleIndex === index ? true : false}
                 bgColor={elem.color}
+                darkMode={darkMode}
                 onClick={() => showAnimation(index)}
               >
-                <List flag={elem.toggle} pointer={SMPVizActive && !SMPVizDone}>
+                <List
+                  flag={elem.toggle}
+                  pointer={SMPVizActive && !SMPVizDone}
+                  darkMode={darkMode}
+                >
                   {!elem.toggle ? (
                     <StyledFaChevronCircleRight
                       onClick={() => toggle(index)}
                       play={SMPVizActive}
                       pointer={SMPVizActive && !SMPVizDone}
+                      darkMode={darkMode}
                     />
                   ) : (
                     <StyledFaChevronCircleDown
                       onClick={() => toggle(index)}
                       play={SMPVizActive}
+                      darkMode={darkMode}
                     />
                   )}
                   <StyledInput
@@ -267,12 +279,15 @@ const FemaleList = ({
                     onChange={handleNameChange}
                     id={index}
                     disabled={SMPVizActive}
+                    done={SMPVizDone}
                     pointer={SMPVizActive && !SMPVizDone}
+                    darkMode={darkMode}
                   />
                   <StyledRiDeleteBack2Fill
                     onClick={() => handleDeleteItem(index)}
                     play={SMPVizActive}
                     pointer={SMPVizActive && !SMPVizDone}
+                    darkMode={darkMode}
                   />
                 </List>
                 {elem.toggle &&
@@ -292,11 +307,17 @@ const FemaleList = ({
                             : null
                         }
                         styleFlag={getStyles({ index, ind })}
+                        darkMode={darkMode}
                       >
                         <StyledMdDragHandle
                           styleFlag={getStyles({ index, ind })}
+                          darkMode={darkMode}
                         />
-                        <ListItem styleFlag={getStyles({ index, ind })}>
+                        <ListItem
+                          styleFlag={getStyles({ index, ind })}
+                          darkMode={darkMode}
+                          disabled={SMPVizActive}
+                        >
                           {pref}
                         </ListItem>
                       </PreferenceList>
@@ -310,6 +331,7 @@ const FemaleList = ({
           onClick={addFemaleItem}
           play={SMPVizActive}
           pointer={SMPVizActive && !SMPVizDone}
+          darkMode={darkMode}
         />
       </Scrollbars>
     </LeftContainer>

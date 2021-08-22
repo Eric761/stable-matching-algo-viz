@@ -47,6 +47,7 @@ const MainList = ({
   stop,
   SMPVizActive,
   SMPVizDone,
+  darkMode,
   handleRandomConfig,
   handleReset,
   handleSaveFile,
@@ -118,7 +119,11 @@ const MainList = ({
         animationQueue.add(function () {
           setEntityMale(male);
           setEntityFemale(female);
-          setBgColor("green !important");
+          setBgColor(
+            darkMode
+              ? "linear-gradient(45deg,black,#b9ffc7) !important"
+              : "linear-gradient(45deg,#00a460,#b0ffc0) !important"
+          );
           setShowAnimationColor(true);
         }, 250);
         animationQueue.add(function () {
@@ -164,7 +169,11 @@ const MainList = ({
         animationQueue.add(function () {
           setEntityMale(male);
           setEntityFemale(female);
-          setBgColor("green !important");
+          setBgColor(
+            darkMode
+              ? "linear-gradient(45deg,black,#b9ffc7) !important"
+              : "linear-gradient(45deg,#00a460,#b0ffc0) !important"
+          );
           setShowAnimationColor(true);
         }, 250);
         animationQueue.add(function () {
@@ -221,9 +230,19 @@ const MainList = ({
         console.log(entity);
         let curMaleIndex = stableMarriageNameIndex[entity.name];
         if (entity.partner !== null) {
-          setBgLeftColor({ index: curMaleIndex, color: "green !important" });
+          setBgLeftColor({
+            index: curMaleIndex,
+            color: darkMode
+              ? "linear-gradient(45deg,black,#b9ffc7) !important"
+              : "linear-gradient(45deg,#00a460,#b0ffc0) !important",
+          });
         } else {
-          setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
+          setBgLeftColor({
+            index: curMaleIndex,
+            color: darkMode
+              ? "linear-gradient(45deg,black,#ff4747) !important"
+              : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important",
+          });
         }
       }
       for (let entity of stableMarriageAlgorithm.female) {
@@ -232,12 +251,16 @@ const MainList = ({
         if (entity.partner !== null) {
           setBgRightColor({
             index: curFemaleIndex,
-            color: "green !important",
+            color: darkMode
+              ? "linear-gradient(45deg,black,#b9ffc7) !important"
+              : "linear-gradient(45deg,#00a460,#b0ffc0) !important",
           });
         } else {
           setBgRightColor({
             index: curFemaleIndex,
-            color: "pink !important",
+            color: darkMode
+              ? "linear-gradient(45deg,black,#ff4747) !important"
+              : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important",
           });
         }
       }
@@ -306,13 +329,24 @@ const MainList = ({
         setExpandFemalePreference(false);
       }, 250);
       animationQueue.add(function () {
-        setBgColor("orange !important");
+        setBgColor(
+          darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important"
+        );
       }, 500);
       animationQueue.add(function () {
-        setBgLeftColor({ index: curMaleIndex, color: "orange !important" });
+        setBgLeftColor({
+          index: curMaleIndex,
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important",
+        });
         setBgRightColor({
           index: curFemaleIndex,
-          color: "orange !important",
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important",
         });
         informer.queueMessage(
           "warning",
@@ -354,9 +388,23 @@ const MainList = ({
       }, 250);
       animationQueue.add(function () {
         let dumpedMaleIndex = stableMarriageNameIndex[dumped.name];
-        setBgColor("orange !important");
-        setBgLeftColor({ index: curMaleIndex, color: "orange !important" });
-        setBgLeftColor({ index: dumpedMaleIndex, color: "pink !important" });
+        setBgColor(
+          darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important"
+        );
+        setBgLeftColor({
+          index: curMaleIndex,
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important",
+        });
+        setBgLeftColor({
+          index: dumpedMaleIndex,
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff4747) !important"
+            : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important",
+        });
       }, 500);
     }
 
@@ -389,7 +437,11 @@ const MainList = ({
       }, 250);
 
       animationQueue.add(function () {
-        setBgColor("pink !important");
+        setBgColor(
+          darkMode
+            ? "linear-gradient(45deg,black,#ff4747) !important"
+            : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important"
+        );
         informer.queueMessage(
           "warning",
           `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name}.`,
@@ -397,17 +449,26 @@ const MainList = ({
         );
       }, 250);
       animationQueue.add(function () {
-        setBgLeftColor({ index: curMaleIndex, color: "pink !important" });
+        setBgLeftColor({
+          index: curMaleIndex,
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff4747) !important"
+            : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important",
+        });
         setBgRightColor({
           index: curFemaleIndex,
-          color: "pink !important",
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff4747) !important"
+            : "linear-gradient(45deg,#e62a2a,#ffb6b6) !important",
         });
       }, 250);
 
       animationQueue.add(function () {
         setBgRightColor({
           index: curFemaleIndex,
-          color: "orange !important",
+          color: darkMode
+            ? "linear-gradient(45deg,black,#ff8535) !important"
+            : "linear-gradient(45deg, #f79f00, #ffd174) !important",
         });
       }, 500);
     }
@@ -726,11 +787,6 @@ const MainList = ({
   };
 
   return (
-    // <div
-    //   style={{
-    //     marginTop: "15px",
-    //   }}
-    // >
     <>
       <MaleList
         male={maleArray}
@@ -746,6 +802,7 @@ const MainList = ({
         showAnimationCol={showAnimationCol}
         resetMaleArray={resetMaleArray}
         informer={informer}
+        darkMode={darkMode}
       />
       <AnimationCol
         male={entityMale}
@@ -762,6 +819,7 @@ const MainList = ({
         engageIndex={engageIndex}
         showAnimationColor={showAnimationColor}
         SMPVizActive={SMPVizActive}
+        darkMode={darkMode}
       />
       <FemaleList
         female={femaleArray}
@@ -777,6 +835,7 @@ const MainList = ({
         showAnimationCol={showAnimationCol}
         resetFemaleArray={resetFemaleArray}
         informer={informer}
+        darkMode={darkMode}
       />
     </>
   );

@@ -5,7 +5,7 @@ import MainList from "./components/MainList/MainList";
 
 const App = () => {
   const [styleBg, setStyleBg] = useState({
-    backgroundColor: "#0e0e0e",
+    backgroundColor: "#212121",
     height: "100%",
     overflowY: "auto",
     overflowX: "hidden",
@@ -26,11 +26,12 @@ const App = () => {
   const [stop, setStop] = useState(false);
   const [SMPVizActive, setSMPVizActive] = useState(false);
   const [SMPVizDone, setSMPVizDone] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   const handleChangeBgColor = (val) => {
     if (val) {
       setStyleBg({
-        backgroundColor: "#0e0e0e",
+        backgroundColor: "#212121",
         height: "100%",
         overflowY: "auto",
         overflowX: "hidden",
@@ -83,6 +84,9 @@ const App = () => {
   const handleStop = (state) => {
     setStop(state);
   };
+  const handleDarkMode = (state) => {
+    setDarkMode(state);
+  };
 
   return (
     <div className="App" style={styleBg}>
@@ -100,6 +104,7 @@ const App = () => {
         handlePause={handlePause}
         handleSkip={handleSkip}
         handleStop={handleStop}
+        handleDarkMode={handleDarkMode}
       />
       <MainList
         shuffle={shuffle}
@@ -112,6 +117,7 @@ const App = () => {
         stop={stop}
         SMPVizActive={SMPVizActive}
         SMPVizDone={SMPVizDone}
+        darkMode={darkMode}
         handleRandomConfig={handleRandomConfig}
         handleReset={handleReset}
         handleSaveFile={handleSaveFile}
