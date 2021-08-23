@@ -724,15 +724,19 @@ const MainList = ({
   }, [stop]);
 
   const handleMaleArr = (arr) => {
-    let tempArr = addMaleIndices(maleArray, arr);
-    setMaleArray(tempArr);
-    console.log(tempArr);
+    let tempMlArr = addMaleIndices(maleArray, arr);
+    let tempFlArr = removeColorAndToggle(arr);
+    setMaleArray(tempMlArr);
+    setFemaleArray(tempFlArr);
+    console.log(tempMlArr, tempFlArr);
   };
 
   const handleFemaleArr = (arr) => {
-    let tempArr = addFemaleIndices(arr, femaleArray);
-    setFemaleArray(tempArr);
-    console.log(tempArr);
+    let tempFlArr = addFemaleIndices(arr, femaleArray);
+    let tempMlArr = removeColorAndToggle(arr);
+    setMaleArray(tempMlArr);
+    setFemaleArray(tempFlArr);
+    console.log(tempMlArr, tempFlArr);
   };
 
   const handleMalePreferences = (ind, val) => {
