@@ -137,7 +137,6 @@ const Header = ({
           onClick={() => {
             if (!active || SMPVizDone) return;
             handleSkip(true);
-            console.log("Working");
           }}
           active={active && !SMPVizDone}
           state={state}

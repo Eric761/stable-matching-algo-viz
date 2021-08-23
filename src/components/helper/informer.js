@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 class Informer {
   constructor() {
@@ -59,7 +58,6 @@ class Informer {
     type = "empty",
     message = "",
     duration = 1500,
-    // pos = "top-left"
     pos = "bottom-center"
   ) {
     if (type !== "empty" && this.queue.length + 1 <= this.queueLimit) {

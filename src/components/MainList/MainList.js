@@ -159,7 +159,7 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        informer.queueMessage("warning", `${entity.name} has no partner.`);
+        informer.queueMessage("warning", `${entity.name} has no partner. 😢`);
       }
     } else if (state === "female" && index !== undefined) {
       let entity = stableMarriageAlgorithm.female[index];
@@ -209,7 +209,7 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        informer.queueMessage("warning", `${entity.name} has no partner.`);
+        informer.queueMessage("warning", `${entity.name} has no partner. 😢`);
       }
     }
   };
@@ -376,7 +376,7 @@ const MainList = ({
         setHighlightFemalePrefIndex(maleIndex);
         informer.queueMessage(
           "warning",
-          `${female.name} breaks up with current partner ${dumped.name} and engages with ${male.name}.`,
+          `${female.name} breaks up with current partner ${dumped.name} and engages with ${male.name} 🤝.`,
           2000
         );
       }, 500);
@@ -444,7 +444,7 @@ const MainList = ({
         );
         informer.queueMessage(
           "warning",
-          `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name}.`,
+          `${female.name} stays with current partner ${female.partner.name} and rejects ${male.name} 💔.`,
           2000
         );
       }, 250);
@@ -598,7 +598,7 @@ const MainList = ({
         };
         if (!isValidConfig(maleArray, femaleArray)) {
           informer.queueMessage(
-            "warning",
+            "error",
             "Configuration is invalid. Please use unique names for all entities."
           );
           // To enable the play control btn again
@@ -638,7 +638,7 @@ const MainList = ({
       } else {
         informer.queueMessage(
           "warning",
-          "Use the stop button to reset the visualization."
+          "Use stop button to reset the visualization."
         );
         if (SMPVizDone) handlePlay(false);
       }
@@ -666,7 +666,7 @@ const MainList = ({
       showResult();
       informer.queueMessage(
         "valid",
-        "Toggle an entity with their angle button to see their partner."
+        "Toggle an entity with the button to see their partner."
       );
       handleSkip(false);
       handlePlay(false);

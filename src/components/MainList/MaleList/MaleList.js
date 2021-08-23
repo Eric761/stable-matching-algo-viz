@@ -215,8 +215,7 @@ const MaleList = ({
         informer.queueMessage(
           "warning",
           "Use stop button to edit configuration.",
-          1000,
-          "bottom-left"
+          1000
         );
       return;
     }
