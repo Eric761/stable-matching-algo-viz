@@ -46,7 +46,7 @@ const FemaleList = ({
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
   });
-  console.log(obj);
+  // console.log(obj);
 
   const [femaleArr, setFemaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
@@ -98,13 +98,13 @@ const FemaleList = ({
 
   const toggle = (ind) => {
     if (SMPVizActive) return;
-    console.log(ind);
+    // console.log(ind);
     let ar = [...femaleArr];
     let temp = ar[ind].toggle;
     ar[ind].toggle = !temp;
     setFemaleArr(ar);
   };
-  console.log(femaleArr);
+  // console.log(femaleArr);
 
   const handleNameChange = (event) => {
     console.log(event.target);
@@ -196,7 +196,7 @@ const FemaleList = ({
     let tempIndex = femaleArr[ind].index;
     femaleArr.splice(ind, 1);
     console.log(femaleArr, ind, tempIndex);
-    handleDeleteFemaleList(femaleArr, tempIndex);
+    handleDeleteFemaleList(femaleArr, tempIndex, ind);
     // setFemaleArr(femaleArr);
   };
 

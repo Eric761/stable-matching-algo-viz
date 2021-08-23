@@ -53,18 +53,60 @@ const addFemaleIndices = (male, female) => {
   return newFemaleArray;
 };
 
-const removeMaleIndex = (female, ind) => {
-  female.forEach((elem, i) => {
-    elem.preferences.splice(ind[i], 1);
+// O(N2*M) -> O(N)
+const removeColorAndToggle = (arr) => {
+  let newArray = [];
+  arr.forEach((elem) => {
+    let { name, preferences, index } = elem;
+    let tempObj = {
+      name,
+      preferences,
+      index,
+    };
+    newArray.push(tempObj);
   });
-  return female;
+  return newArray;
 };
 
-const removeFemaleIndex = (male, ind) => {
+const removeMaleIndex = (male, female, ind, idx) => {
+  male.forEach((elem) => {
+    elem.index.forEach((val, j) => {
+      if (ind[j] < val) {
+        elem.index[j] = val - 1;
+      }
+    });
+  });
+  female.forEach((elem, i) => {
+    elem.preferences.splice(ind[i], 1);
+    elem.index.splice(idx, 1);
+  });
+  console.log(male, female);
+
+  return {
+    tempMale: male,
+    tempFemale: female,
+  };
+};
+
+const removeFemaleIndex = (male, female, ind, idx) => {
+  female.forEach((elem) => {
+    elem.index.forEach((val, j) => {
+      if (ind[j] < val) {
+        elem.index[j] = val - 1;
+      }
+    });
+  });
   male.forEach((elem, i) => {
     elem.preferences.splice(ind[i], 1);
+    elem.index.splice(idx, 1);
   });
-  return male;
+
+  console.log(male, female);
+
+  return {
+    tempMale: male,
+    tempFemale: female,
+  };
 };
 
 const shuffleArray = (preferenceArr) => {
@@ -333,6 +375,7 @@ const nameIndexMapper = (config) => {
 export {
   addMaleIndices,
   addFemaleIndices,
+  removeColorAndToggle,
   removeFemaleIndex,
   removeMaleIndex,
   addMaleItem,

@@ -6,6 +6,7 @@ import { defaultArrangement } from "../helper/arrangement";
 import {
   addMaleIndices,
   addFemaleIndices,
+  removeColorAndToggle,
   removeMaleIndex,
   removeFemaleIndex,
   addMaleItem,
@@ -760,16 +761,31 @@ const MainList = ({
     setFemaleArray(tempFemale);
   };
 
-  const handleDeleteMaleList = (maleArr, indexArr) => {
-    let tempFemale = removeMaleIndex(femaleArray, indexArr);
-    let tempArr = addMaleIndices(maleArr, tempFemale);
+  // Bug -> Forgot to update index array of opposite gender & index array of same gender whose preference was lower than current!
+  const handleDeleteMaleList = (maleArr, indexArr, idx) => {
+    let { tempMale, tempFemale } = removeMaleIndex(
+      maleArr,
+      femaleArray,
+      indexArr,
+      idx
+    );
+    // let tempArr = addMaleIndices(maleArr, tempFemale);
+    let tempArr = removeColorAndToggle(tempMale);
+    // console.log(tempFemale, tempArr, maleArr);
     setFemaleArray(tempFemale);
     setMaleArray(tempArr);
   };
 
-  const handleDeleteFemaleList = (femaleArr, indexArr) => {
-    let tempMale = removeFemaleIndex(maleArray, indexArr);
-    let tempArr = addFemaleIndices(tempMale, femaleArr);
+  const handleDeleteFemaleList = (femaleArr, indexArr, idx) => {
+    let { tempMale, tempFemale } = removeFemaleIndex(
+      maleArray,
+      femaleArr,
+      indexArr,
+      idx
+    );
+    // let tempArr = addFemaleIndices(tempMale, femaleArr);
+    let tempArr = removeColorAndToggle(tempFemale);
+    // console.log(tempMale, tempArr, femaleArr);
     setMaleArray(tempMale);
     setFemaleArray(tempArr);
   };
