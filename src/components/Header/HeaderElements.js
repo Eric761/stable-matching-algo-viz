@@ -19,6 +19,7 @@ export const NavContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 70px;
 
   a {
     text-decoration: none;
@@ -70,7 +71,7 @@ export const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 108px;
+  margin-left: 75px;
   border: ${({ state }) => (state ? "3px solid grey" : "3px solid #6f6f6f")};
   border-radius: 28px;
   height: 60px;
@@ -110,6 +111,15 @@ export const ToggleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 125px;
+`;
+
+export const Title = styled.h3`
+  color: ${({ state }) => (state ? "grey" : "#5f5f5f")};
+  font-weight: 900;
+  margin-left: 10px;
+  opacity: ${({ active }) => (active ? "0.2" : "1")};
+  cursor: ${({ active }) => (active ? "" : "pointer")};
 `;
 
 export const StyledRiRestartFill = styled(RiRestartFill)`
@@ -125,6 +135,13 @@ export const StyledRiRestartFill = styled(RiRestartFill)`
       active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
+`;
+
+export const Dummy = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: ${({ active }) => (active ? "0.3" : "1")};
 `;
 export const StyledImShuffle = styled(ImShuffle)`
   height: 25px;

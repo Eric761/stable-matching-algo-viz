@@ -160,7 +160,11 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        informer.queueMessage("warning", `${entity.name} has no partner. 😢`);
+        informer.queueMessage(
+          "warning",
+          `${entity.name} has no partner. 😢`,
+          2000
+        );
       }
     } else if (state === "female" && index !== undefined) {
       let entity = stableMarriageAlgorithm.female[index];
@@ -210,7 +214,11 @@ const MainList = ({
           setExpandFemalePreference(false);
         }, 250);
       } else {
-        informer.queueMessage("warning", `${entity.name} has no partner. 😢`);
+        informer.queueMessage(
+          "warning",
+          `${entity.name} has no partner. 😢`,
+          2000
+        );
       }
     }
   };
@@ -621,7 +629,7 @@ const MainList = ({
         animationQueue.disable = false;
         console.log(stableMarriageProcessQueue);
 
-        informer.queueMessage("valid", "Visualization start.");
+        informer.queueMessage("valid", "Visualization starts.");
         handleVizActive(true);
         setTimeout(() => {
           animationStep();
@@ -667,7 +675,8 @@ const MainList = ({
       showResult();
       informer.queueMessage(
         "valid",
-        "Toggle an entity with the button to see their partner."
+        "Click an entity to see the partner.",
+        3000
       );
       handleSkip(false);
       handlePlay(false);

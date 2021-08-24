@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { withStyles } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles,
+} from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
+import Tooltip from "@material-ui/core/Tooltip";
 import { FaInfoCircle, FaGithub } from "react-icons/fa";
 
 import {
@@ -8,6 +13,8 @@ import {
   NavContainer,
   IconContainer,
   ToggleContainer,
+  Title,
+  Dummy,
   StyledRiRestartFill,
   StyledImShuffle,
   StyledFaPlay,
@@ -17,6 +24,20 @@ import {
   StyledFaSave,
   StyledFaFileUpload,
 } from "./HeaderElements";
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiTooltip: {
+      tooltip: {
+        fontSize: "1em",
+        color: "#ececec",
+        backgroundColor: "#404040",
+        fontFamily: '"Baloo Chettan 2",cursive',
+        maxWidth: "200px",
+      },
+    },
+  },
+});
 
 const StyledSwitch = withStyles((theme) => ({
   root: {
@@ -179,7 +200,30 @@ const Header = ({
         )}
       </IconContainer>
       <ToggleContainer>
-        <StyledSwitch checked={state} onChange={handleChange} />
+        {active ? (
+          <MuiThemeProvider theme={theme}>
+            <Tooltip
+              disableFocusListener
+              disableTouchListener
+              title={`Use stop button to switch to ${
+                state ? "light" : "dark"
+              } mode !`}
+              placement="left"
+              arrow
+            >
+              <Dummy active={active}>
+                <StyledSwitch checked={state} onChange={handleChange} />
+              </Dummy>
+            </Tooltip>
+          </MuiThemeProvider>
+        ) : (
+          <Dummy active={active}>
+            <StyledSwitch checked={state} onChange={handleChange} />
+          </Dummy>
+        )}
+        <Title state={state} active={active} onClick={handleChange}>
+          {state ? "Switch to light" : "Switch to dark"}
+        </Title>
       </ToggleContainer>
     </HeaderContainer>
   );
