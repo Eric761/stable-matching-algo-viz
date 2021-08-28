@@ -62,7 +62,7 @@ class Entity {
 
   getNonRejectedPreferenceIndex() {
     for (let index = 0; index < this.preferencesIndex.length; index++) {
-      if (this.rejects.indexOf(this.preferencesIndex[index]) == -1)
+      if (this.rejects.indexOf(this.preferencesIndex[index]) === -1)
         return this.preferencesIndex[index];
     }
     return -1;
@@ -79,7 +79,7 @@ class SMPAlgo {
     this.nosolution = [];
 
     // This iteration prepares a dictionary for O(1) time complexity on later lookups.
-    if (Object.keys(this.nameIndex).length == 0) {
+    if (Object.keys(this.nameIndex).length === 0) {
       for (let group in config) {
         for (let index = 0; index < config[group].length; index++) {
           let { name } = config[group][index];

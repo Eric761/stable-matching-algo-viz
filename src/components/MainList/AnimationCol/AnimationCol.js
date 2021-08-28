@@ -46,7 +46,6 @@ const AnimationCol = ({
   useEffect(() => {
     if (scrollMaleIndex) {
       let maleEntity = document.getElementsByClassName("entity-male");
-      console.log(maleEntity[0], "Eric", maleEntity[0].parentNode);
       maleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -57,7 +56,6 @@ const AnimationCol = ({
   useEffect(() => {
     if (scrollFemaleIndex) {
       let femaleEntity = document.getElementsByClassName("entity-female");
-      console.log(femaleEntity[0], "Eric", femaleEntity[0].parentNode);
       femaleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -75,10 +73,6 @@ const AnimationCol = ({
     setFemalePrefInd(highlightFemalePrefIndex);
   }, [highlightMalePrefIndex, highlightFemalePrefIndex]);
 
-  const handleScrollFrame = (values) => {
-    console.log(values);
-  };
-
   return (
     <>
       <div
@@ -89,11 +83,7 @@ const AnimationCol = ({
           alignItems: "center",
         }}
       >
-        <Scrollbars
-          style={{ width: 480, height: 635 }}
-          autoHide
-          onScrollFrame={handleScrollFrame}
-        >
+        <Scrollbars style={{ width: 480, height: 635 }} autoHide>
           <Collapse
             in={toggleMale}
             collapsedHeight="85px"

@@ -10,10 +10,20 @@ import {
 const Page8 = () => {
   return (
     <PageContainer>
-      <Heading style={{ fontSize: "45px" }}>Enjoy !</Heading>
+      <Heading sz="45px">Enjoy !</Heading>
       <InfoContent style={{ fontSize: "28px", marginTop: "15px" }}>
         I hope you have just as much fun playing around with this visualization
         tool as I had building it ❤️
+      </InfoContent>
+      <InfoContent style={{ fontSize: "26px", marginTop: "15px" }}>
+        You can learn more about the stable marriage problem by watching this{" "}
+        <PageLink
+          href="https://www.youtube.com/watch?v=Qcv1IqHWAzg"
+          target="_blank"
+        >
+          video
+        </PageLink>{" "}
+        from Numberphile.
       </InfoContent>
       <InfoContent style={{ fontSize: "28px", marginTop: "15px" }}>
         If you want to see the source code for this application, check out my{" "}

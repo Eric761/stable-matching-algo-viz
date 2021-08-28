@@ -10,7 +10,7 @@ import {
 const Page4 = () => {
   return (
     <PageContainer>
-      <Heading>How do I put it to use ?</Heading>
+      <Heading sz="35px">How do I put it to use ?</Heading>
       <InfoContent>
         You can edit the names of everyone in either <strong>male</strong> or{" "}
         <strong>female</strong> groups, and you can also see their list by
@@ -21,7 +21,11 @@ const Page4 = () => {
         .
       </InfoContent>
       <PageNumber>4/8</PageNumber>
-      <img src={gif} style={{ width: "300px", height: "295px" }} />
+      <img
+        src={gif}
+        style={{ width: "300px", height: "295px" }}
+        alt="Toggle preferences snapshot"
+      />
     </PageContainer>
   );
 };

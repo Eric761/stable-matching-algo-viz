@@ -10,7 +10,7 @@ import {
 const Page6 = () => {
   return (
     <PageContainer>
-      <Heading style={{ fontSize: "45px" }}>Visualizing and more</Heading>
+      <Heading sz="45px">Visualizing and more</Heading>
       <InfoContent>
         To begin the visualisation, press the <strong>play button</strong>. The
         application seamlessly starts the animation on demand and the user can
@@ -27,6 +27,7 @@ const Page6 = () => {
       <img
         src={gif}
         style={{ width: "250px", height: "80px", marginTop: "15px" }}
+        alt="Switching mode snapshot"
       />
     </PageContainer>
   );

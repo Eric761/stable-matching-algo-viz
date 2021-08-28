@@ -145,6 +145,7 @@ const Header = ({
             <a
               href="https://github.com/Eric761/stable-matching-algo-viz"
               target="_blank"
+              rel="noreferrer"
             >
               <StyledFaGithub active={active} state={state} />
             </a>

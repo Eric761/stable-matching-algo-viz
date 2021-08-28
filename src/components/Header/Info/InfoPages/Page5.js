@@ -10,7 +10,7 @@ import {
 const Page5 = () => {
   return (
     <PageContainer>
-      <Heading>How do I put it to use ?</Heading>
+      <Heading sz="35px">Drag N Drop</Heading>
       <InfoContent>
         Preference list of both male and female groups can be rearranged by{" "}
         <strong>
@@ -21,7 +21,11 @@ const Page5 = () => {
         <strong>add icon</strong>.
       </InfoContent>
       <PageNumber>5/8</PageNumber>
-      <img src={gif} style={{ width: "300px", height: "275px" }} />
+      <img
+        src={gif}
+        style={{ width: "300px", height: "275px" }}
+        alt="Swapping preference list members snapshot"
+      />
     </PageContainer>
   );
 };

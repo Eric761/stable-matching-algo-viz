@@ -80,7 +80,6 @@ const removeMaleIndex = (male, female, ind, idx) => {
     elem.preferences.splice(ind[i], 1);
     elem.index.splice(idx, 1);
   });
-  console.log(male, female);
 
   return {
     tempMale: male,
@@ -100,8 +99,6 @@ const removeFemaleIndex = (male, female, ind, idx) => {
     elem.preferences.splice(ind[i], 1);
     elem.index.splice(idx, 1);
   });
-
-  console.log(male, female);
 
   return {
     tempMale: male,
@@ -150,9 +147,8 @@ const addMaleItem = (maleArr, femaleArr) => {
   let randomName = "";
   do {
     randomName = maleNames[Math.floor(Math.random() * maleNames.length)];
-  } while (nameMaleArr.indexOf(randomName) != -1);
+  } while (nameMaleArr.indexOf(randomName) !== -1);
   let { preferenceArr, mapIndex } = shuffleArray(nameFemaleArr);
-  console.log(preferenceArr, mapIndex);
   let indexArr = femaleArr.map((val) => {
     return maleArr.length;
   });
@@ -175,7 +171,6 @@ const addMaleItem = (maleArr, femaleArr) => {
       index: tempIndex,
     };
   });
-  console.log(newMaleArr, newFemaleArr);
   return { newMaleArr, newFemaleArr };
 };
 
@@ -191,7 +186,7 @@ const addFemaleItem = (maleArr, femaleArr) => {
   let randomName = "";
   do {
     randomName = femaleNames[Math.floor(Math.random() * femaleNames.length)];
-  } while (nameFemaleArr.indexOf(randomName) != -1);
+  } while (nameFemaleArr.indexOf(randomName) !== -1);
   let { preferenceArr, mapIndex } = shuffleArray(nameMaleArr);
   let indexArr = maleArr.map((val) => {
     return femaleArr.length;
@@ -247,7 +242,6 @@ const randomConfigClick = () => {
   });
   let randomFinalMaleArr = addMaleIndices(randomMaleArr, randomFemaleArr);
   let randomFinalFemaleArr = addFemaleIndices(randomMaleArr, randomFemaleArr);
-  console.log(randomFinalMaleArr, randomFinalFemaleArr);
   return {
     randomFinalMaleArr,
     randomFinalFemaleArr,
@@ -271,11 +265,11 @@ const isValidConfig = (maleArr, femaleArr) => {
 
     // if any required property is undefined then the configuration is invalid
     if (!entity || !name1 || !preferences) return false;
-    let group1 = maleName.indexOf(name1) == -1 ? "female" : "male";
+    let group1 = maleName.indexOf(name1) === -1 ? "female" : "male";
 
     ct[group1][name1] = !ct[group1][name1] ? 1 : ct[group1][name1] + 1;
     for (let name2 of preferences) {
-      let group2 = group1 == "male" ? "female" : "male";
+      let group2 = group1 === "male" ? "female" : "male";
       ct[group2][name2] = !ct[group2][name2] ? 1 : ct[group2][name2] + 1;
     }
   }
@@ -283,7 +277,7 @@ const isValidConfig = (maleArr, femaleArr) => {
   // For the configuration to be valid, all entities of the same group must have the same number of countings.
   for (let group in ct) {
     let counts = Object.values(ct[group]);
-    if (!counts.every((x) => x == counts[0])) return false;
+    if (!counts.every((x) => x === counts[0])) return false;
   }
 
   return true;
@@ -313,51 +307,96 @@ const userSaveFile = (data, filename, type) => {
 const validateJSONConfig = (config) => {
   let { male, female } = config;
   if (!male || !Array.isArray(male)) {
-    throw "Missing male array in configuration object.";
+    const errorMessage = {
+      message: "Missing male array in configuration object.",
+    };
+    throw errorMessage;
   }
   if (!female || !Array.isArray(female)) {
-    throw "Missing female array in configuration object.";
+    const errorMessage = {
+      message: "Missing female array in configuration object.",
+    };
+    throw errorMessage;
+    // throw "Missing female array in configuration object.";
   }
   if (male.length < minimumEntityCount) {
-    throw "Male array does not meet minimum length of required elements.";
+    const errorMessage = {
+      message: "Male array does not meet minimum length of required elements.",
+    };
+    throw errorMessage;
+    // throw "Male array does not meet minimum length of required elements.";
   }
   if (male.length > maximumEntityCount) {
-    throw "Male array exceeds maximum length of required elements.";
+    const errorMessage = {
+      message: "Male array exceeds maximum length of required elements.",
+    };
+    throw errorMessage;
+    // throw "Male array exceeds maximum length of required elements.";
   }
   if (female.length < minimumEntityCount) {
-    throw "Female array does not meet minimum length of required elements.";
+    const errorMessage = {
+      message:
+        "Female array does not meet minimum length of required elements.",
+    };
+    throw errorMessage;
+    // throw "Female array does not meet minimum length of required elements.";
   }
   if (female.length > maximumEntityCount) {
-    throw "Female array exceeds maximum length of required elements.";
+    const errorMessage = {
+      message: "Female array exceeds maximum length of required elements.",
+    };
+    throw errorMessage;
+    // throw "Female array exceeds maximum length of required elements.";
   }
 
   for (let entity of [...male, ...female]) {
     let { name, preferences, index } = entity;
-    if (!name || !preferences || !index)
-      throw "An entity is missing required fields.";
+    if (!name || !preferences || !index) {
+      const errorMessage = {
+        message: "An entity is missing required fields.",
+      };
+      throw errorMessage;
+    }
     if (
       !(typeof name == "string" || name instanceof String) ||
       name.length > maximumCharCount ||
       /[^a-z]/gi.test(name)
     ) {
-      throw "An entity has an invalid name.";
+      const errorMessage = {
+        message: "An entity has an invalid name.",
+      };
+      throw errorMessage;
+      // throw "An entity has an invalid name.";
     }
     if (
       !Array.isArray(preferences) ||
       !preferences.every((x) => typeof x == "string" || x instanceof String)
     ) {
-      throw "An entity has invalid preferences.";
+      const errorMessage = {
+        message: "An entity has invalid preferences.",
+      };
+      throw errorMessage;
+      // throw "An entity has invalid preferences.";
     }
     if (
       !Array.isArray(index) ||
       !index.every((x) => typeof x == "number" || x instanceof Number)
     ) {
-      throw "An entity has invalid index array.";
+      const errorMessage = {
+        message: "An entity has invalid index array.",
+      };
+      throw errorMessage;
+      // throw "An entity has invalid index array.";
     }
   }
 
   if (!isValidConfig(male, female)) {
-    throw "The configuration is invalid due to inconsistencies in entity occurence.";
+    const errorMessage = {
+      message:
+        "The configuration is invalid due to inconsistencies in entity occurence.",
+    };
+    throw errorMessage;
+    // throw "The configuration is invalid due to inconsistencies in entity occurence.";
   }
 };
 

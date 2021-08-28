@@ -91,7 +91,6 @@ const MainList = ({
 
   const showAnimationCol = (state, index) => {
     if (!stableMarriageAlgorithm || !SMPVizDone) return;
-    console.log(state, index);
     animationQueue.clear();
     animationQueue.add(function () {
       setToggleOpacity(false);
@@ -234,9 +233,7 @@ const MainList = ({
     setBgRightColor({});
 
     setTimeout(function () {
-      console.log(stableMarriageAlgorithm);
       for (let entity of stableMarriageAlgorithm.male) {
-        console.log(entity);
         let curMaleIndex = stableMarriageNameIndex[entity.name];
         if (entity.partner !== null) {
           setBgLeftColor({
@@ -256,7 +253,6 @@ const MainList = ({
       }
       for (let entity of stableMarriageAlgorithm.female) {
         let curFemaleIndex = stableMarriageNameIndex[entity.name];
-        console.log(entity);
         if (entity.partner !== null) {
           setBgRightColor({
             index: curFemaleIndex,
@@ -537,7 +533,6 @@ const MainList = ({
       setFemaleArray(JSON.parse(JSON.stringify(newFemaleArray)));
       handleReset(false);
       setTimeout(() => {
-        console.log(maleArray, femaleArray);
         setFlagBtn(true);
       }, 500);
       informer.queueMessage(
@@ -569,7 +564,6 @@ const MainList = ({
       handleSaveFile(false);
     }
     if (uploadFile.state && uploadFile.event) {
-      console.log(uploadFile);
       let file = uploadFile.event.target.files[0];
       let reader = new FileReader();
       reader.readAsText(file, "UTF-8");
@@ -577,7 +571,6 @@ const MainList = ({
         try {
           let config = JSON.parse(readerEvent.target.result);
           // This would throw an error if anything is wrong and prevent further lines in the same block from being executed;
-          console.log(config);
           validateJSONConfig(config);
           setFlagBtn(false);
           setMaleArray([...config.male]);
@@ -589,7 +582,7 @@ const MainList = ({
           }, 500);
         } catch (error) {
           // Shows an error in the UI.
-          informer.queueMessage("error", error);
+          informer.queueMessage("error", error.message);
         } finally {
           // Make sure to reset the value of this file input to reload the same file, if given the same file.
           uploadFile.event.target.value = "";
@@ -627,7 +620,6 @@ const MainList = ({
         }
         // Make sure the animationQueue is not disabled.
         animationQueue.disable = false;
-        console.log(stableMarriageProcessQueue);
 
         informer.queueMessage("valid", "Visualization starts.");
         handleVizActive(true);
@@ -724,7 +716,6 @@ const MainList = ({
       setResetMaleArray(true);
       setResetFemaleArray(true);
       timeoutQueue.add(function () {
-        console.log(maleArray, resetMaleArray);
         setResetMaleArray(false);
         setResetFemaleArray(false);
         handleStop(false);
@@ -737,7 +728,6 @@ const MainList = ({
     let tempFlArr = removeColorAndToggle(arr);
     setMaleArray(tempMlArr);
     setFemaleArray(tempFlArr);
-    console.log(tempMlArr, tempFlArr);
   };
 
   const handleFemaleArr = (arr) => {
@@ -745,7 +735,6 @@ const MainList = ({
     let tempMlArr = removeColorAndToggle(arr);
     setMaleArray(tempMlArr);
     setFemaleArray(tempFlArr);
-    console.log(tempMlArr, tempFlArr);
   };
 
   const handleMalePreferences = (ind, val) => {
@@ -763,7 +752,6 @@ const MainList = ({
   const handleFemalePreferences = (ind, val) => {
     let tempFemale = [...femaleArray];
     let tempMale = [...maleArray];
-    console.log(ind, val, maleArray, femaleArray);
     let newInd = parseInt(ind);
     maleArray[newInd].index.forEach((id, i) => {
       tempFemale[i].preferences[id] = val;
@@ -784,7 +772,6 @@ const MainList = ({
     );
     // let tempArr = addMaleIndices(maleArr, tempFemale);
     let tempArr = removeColorAndToggle(tempMale);
-    // console.log(tempFemale, tempArr, maleArr);
     setFemaleArray(tempFemale);
     setMaleArray(tempArr);
   };
@@ -798,7 +785,6 @@ const MainList = ({
     );
     // let tempArr = addFemaleIndices(tempMale, femaleArr);
     let tempArr = removeColorAndToggle(tempFemale);
-    // console.log(tempMale, tempArr, femaleArr);
     setMaleArray(tempMale);
     setFemaleArray(tempArr);
   };

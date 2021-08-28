@@ -35,11 +35,13 @@ export const PageNumber = styled.div`
   font-size: 20px;
   color: #1d1d1d;
 `;
+
 export const Heading = styled.h3`
-  font-size: 35px;
+  font-size: ${({ sz }) => sz};
   line-height: 1.8;
   color: #1c464e;
 `;
+
 export const Description = styled.div`
   font-size: 22px;
   line-height: 1.5;
@@ -47,6 +49,7 @@ export const Description = styled.div`
   text-align: center;
   color: #11373e;
 `;
+
 export const Def = styled.div`
   font-size: 20px;
   line-height: 1.3;
@@ -54,6 +57,7 @@ export const Def = styled.div`
   text-align: center;
   color: ${({ col }) => col};
 `;
+
 export const PageLink = styled.a`
   text-decoration: none;
   position: relative;

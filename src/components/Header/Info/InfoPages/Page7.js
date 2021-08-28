@@ -8,6 +8,7 @@ const Page7 = () => {
       <img
         src={img}
         style={{ width: "400px", height: "80px", marginBottom: "15px" }}
+        alt="ControlButton_Image"
       />
       <ul>
         <FunctionList>

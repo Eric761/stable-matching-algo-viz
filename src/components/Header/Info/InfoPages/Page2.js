@@ -11,7 +11,7 @@ import {
 const Page2 = () => {
   return (
     <PageContainer>
-      <Heading>What is stm_algoviz ?</Heading>
+      <Heading sz="40px">What is stm_algoviz ?</Heading>
       <Description>
         <PageLink
           href="https://github.com/Eric761/stable-matching-algo-viz"
@@ -26,9 +26,9 @@ const Page2 = () => {
         >
           Stable Marriage Algorithm
         </PageLink>{" "}
-        Visualizer. This application uses the classic version made by David Gale
-        and Lloyd Shapley. The visualizer allows you to see how the algorithm
-        works step by step.
+        Visualizer. This application uses the classic version made by{" "}
+        <strong>David Gale</strong> and <strong>Lloyd Shapley</strong>. The
+        visualizer allows you to see how the algorithm works step by step.
       </Description>
       <Def col="#004769">
         In its most basic form, the <strong>Stable Matching Problem</strong>{" "}

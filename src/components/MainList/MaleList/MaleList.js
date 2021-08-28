@@ -39,13 +39,11 @@ const MaleList = ({
   let obj = male.map((elem) => {
     return { ...elem, toggle: false, color: "" };
   });
-  // console.log(obj);
 
   const [maleArr, setMaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragItemNode = useRef();
-  // const myRef = useRef(new Array());
 
   useEffect(() => {
     if (highlightMaleIndex !== -1) {
@@ -53,7 +51,6 @@ const MaleList = ({
       let maleEntity = document.getElementsByClassName(
         `male-${highlightMaleIndex}`
       );
-      console.log(maleEntity[0]);
       maleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -90,16 +87,13 @@ const MaleList = ({
 
   const toggle = (ind) => {
     if (SMPVizActive) return;
-    // console.log(ind);
     let ar = [...maleArr];
     let temp = ar[ind].toggle;
     ar[ind].toggle = !temp;
     setMaleArr(ar);
   };
-  // console.log(maleArr);
 
   const handleNameChange = (event) => {
-    console.log(event.target);
     // Wrong Approach: Everytime new element gets created
     // setMaleArr([...maleArr, ([event.target.name] = event.target.value)]);
     // Right Approach
@@ -121,7 +115,7 @@ const MaleList = ({
   };
 
   const handleDragStart = (e, item) => {
-    console.log("Staring Drag...");
+    // console.log("Staring Drag...");
     dragItemNode.current = e.target;
     dragItemNode.current.addEventListener("dragend", handleDragEnd);
     dragItem.current = item;
@@ -131,7 +125,7 @@ const MaleList = ({
   };
 
   const handleDragEnter = (e, targetItem) => {
-    console.log("Entering a drag target", targetItem);
+    // console.log("Entering a drag target", targetItem);
     // 1st condition: Items should be different
     // (inorder to place the item in original position, 1st condition is removed !)
     // 2nd condition: Group should be same
@@ -139,7 +133,7 @@ const MaleList = ({
       // dragItemNode.current !== e.target &&
       dragItem.current.index === targetItem.index
     ) {
-      console.log("Swapping..");
+      // console.log("Swapping..");
       setMaleArr((maleArr) => {
         // let newMaleArr = JSON.parse(JSON.stringify(maleArr));
         // Make a shallow copy of the array
@@ -159,7 +153,6 @@ const MaleList = ({
         // tempArr.forEach((val) => {
         //   delete val.toggle;
         // });
-        console.log(newMaleArr);
         handleFemaleArr(newMaleArr);
         return newMaleArr;
       });
@@ -187,7 +180,6 @@ const MaleList = ({
   //  let temp = [...maleArr];
   //  let tempIndex = maleArr[ind].index;
   //  maleArr.splice(ind, 1);
-  //  console.log(maleArr, ind, tempIndex);
   //  let newMaleArr = handleDeleteMaleList(maleArr, tempIndex);
   //  setMaleArr(newMaleArr);
 
@@ -204,7 +196,6 @@ const MaleList = ({
     }
     let tempIndex = maleArr[ind].index;
     maleArr.splice(ind, 1);
-    console.log(maleArr, ind, tempIndex);
     handleDeleteMaleList(maleArr, tempIndex, ind);
     // setMaleArr(temp);
   };

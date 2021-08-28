@@ -20,13 +20,6 @@ import {
 } from "../../helper/arrangement";
 import { Scrollbars } from "react-custom-scrollbars";
 
-// let femaleConfig = defaultArrangement.female.map((elem) => {
-//   return elem.name;
-// });
-// let obj = defaultArrangement.female.map((elem) => {
-//   return { name: elem.name, preferences: elem.preferences, toggle: false };
-// });
-
 const FemaleList = ({
   female,
   handleMalePreferences,
@@ -46,13 +39,11 @@ const FemaleList = ({
   let obj = female.map((elem) => {
     return { ...elem, toggle: false, color: "" };
   });
-  // console.log(obj);
 
   const [femaleArr, setFemaleArr] = useState(obj);
   const [dragging, setDragging] = useState(false);
   const dragItem = useRef();
   const dragItemNode = useRef();
-  // const myRef = useRef(new Array());
 
   useEffect(() => {
     if (highlightFemaleIndex !== -1) {
@@ -60,7 +51,6 @@ const FemaleList = ({
       let femaleEntity = document.getElementsByClassName(
         `female-${highlightFemaleIndex}`
       );
-      console.log(femaleEntity[0]);
       femaleEntity[0].parentNode.parentNode.parentNode.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -98,17 +88,15 @@ const FemaleList = ({
 
   const toggle = (ind) => {
     if (SMPVizActive) return;
-    // console.log(ind);
     let ar = [...femaleArr];
     let temp = ar[ind].toggle;
     ar[ind].toggle = !temp;
     setFemaleArr(ar);
   };
-  // console.log(femaleArr);
 
   const handleNameChange = (event) => {
-    console.log(event.target);
     let ind = event.target.id;
+    ind -= 20; // For creating unique id, adding 20 (id => index + 20)
     // Make a shallow copy of the array
     let ar = [...femaleArr];
     let temp = event.target.value;
@@ -126,7 +114,7 @@ const FemaleList = ({
   };
 
   const handleDragStart = (e, item) => {
-    console.log("Staring Drag...");
+    // console.log("Staring Drag...");
     dragItemNode.current = e.target;
     dragItemNode.current.addEventListener("dragend", handleDragEnd);
     dragItem.current = item;
@@ -136,7 +124,7 @@ const FemaleList = ({
   };
 
   const handleDragEnter = (e, targetItem) => {
-    console.log("Entering a drag target", targetItem);
+    // console.log("Entering a drag target", targetItem);
     // 1st condition: Items should be different
     // (inorder to place the item in original position, 1st condition is removed !)
     // 2nd condition: Group should be same
@@ -157,7 +145,6 @@ const FemaleList = ({
           )[0]
         );
         dragItem.current = targetItem;
-        // localStorage.setItem('List', JSON.stringify(newList));
         handleMaleArr(newFemaleArr);
         return newFemaleArr;
       });
@@ -195,7 +182,6 @@ const FemaleList = ({
     }
     let tempIndex = femaleArr[ind].index;
     femaleArr.splice(ind, 1);
-    console.log(femaleArr, ind, tempIndex);
     handleDeleteFemaleList(femaleArr, tempIndex, ind);
     // setFemaleArr(femaleArr);
   };
@@ -276,7 +262,7 @@ const FemaleList = ({
                     spellCheck="false"
                     value={elem.name}
                     onChange={handleNameChange}
-                    id={index}
+                    id={index + 20}
                     disabled={SMPVizActive}
                     done={SMPVizDone}
                     pointer={SMPVizActive && !SMPVizDone}
