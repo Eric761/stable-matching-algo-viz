@@ -72,11 +72,14 @@ const Info = ({ open, handleOpen }) => {
 
   return (
     <div>
+      {/* Modal will disappear only on clicking close button (Skip Tutorial) ! */}
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
+        disableBackdropClick
+        disableEscapeKeyDown
       >
         <Container>
           <Helper pageNumber={pageNumber} />
