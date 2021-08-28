@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { RiRestartFill } from "react-icons/ri";
 import { ImShuffle } from "react-icons/im";
 import { BsSkipForwardFill } from "react-icons/bs";
-import { FaStop, FaPlay, FaPause, FaFileUpload, FaSave } from "react-icons/fa";
+import {
+  FaInfoCircle,
+  FaGithub,
+  FaStop,
+  FaPlay,
+  FaPause,
+  FaFileUpload,
+  FaSave,
+} from "react-icons/fa";
 
 export const HeaderContainer = styled.div`
   grid-column-start: 1;
@@ -30,30 +38,47 @@ export const NavContainer = styled.div`
       text-decoration: none;
     }
   }
+`;
 
-  .nav-icon-style-true {
-    color: #b3b3a9;
-    height: 32px;
-    width: 32px;
-    margin: 0 20px;
-    cursor: pointer;
+export const StyledFaInfoCircle = styled(FaInfoCircle)`
+  color: ${({ state }) => (state ? "#b3b3a9" : "#545454")};
+  height: 32px;
+  width: 32px;
+  margin: 0 20px;
+  transition: 0.1s ease-in;
+  opacity: ${({ active }) => (active ? "0.3" : "1")};
+  cursor: ${({ active }) => (active ? "" : "pointer")};
 
-    &:hover {
-      color: #d8d8cd;
-    }
+  &:hover {
+    color: ${({ state, active }) =>
+      state
+        ? active
+          ? "#b3b3a9"
+          : "#d8d8cd"
+        : active
+        ? "#545454"
+        : "#000000"};
   }
+`;
 
-  .nav-icon-style-false {
-    color: #545454;
-    height: 32px;
-    width: 32px;
-    margin: 0 20px;
-    cursor: pointer;
-    transition: 0.1s ease-in;
+export const StyledFaGithub = styled(FaGithub)`
+  color: ${({ state }) => (state ? "#b3b3a9" : "#545454")};
+  height: 32px;
+  width: 32px;
+  margin: 0 20px;
+  transition: 0.1s ease-in;
+  opacity: ${({ active }) => (active ? "0.3" : "1")};
+  cursor: ${({ active }) => (active ? "" : "pointer")};
 
-    &:hover {
-      color: #000000;
-    }
+  &:hover {
+    color: ${({ state, active }) =>
+      state
+        ? active
+          ? "#b3b3a9"
+          : "#d8d8cd"
+        : active
+        ? "#545454"
+        : "#000000"};
   }
 `;
 

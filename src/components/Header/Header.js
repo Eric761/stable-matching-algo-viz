@@ -6,7 +6,7 @@ import {
 } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import Tooltip from "@material-ui/core/Tooltip";
-import { FaInfoCircle, FaGithub } from "react-icons/fa";
+import Info from "./Info/Info";
 
 import {
   HeaderContainer,
@@ -15,6 +15,8 @@ import {
   ToggleContainer,
   Title,
   Dummy,
+  StyledFaInfoCircle,
+  StyledFaGithub,
   StyledRiRestartFill,
   StyledImShuffle,
   StyledFaPlay,
@@ -110,6 +112,7 @@ const Header = ({
 }) => {
   const [state, setState] = useState(true);
   const [active, setActive] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     let f = SMPVizActive;
@@ -125,16 +128,33 @@ const Header = ({
   const handleUploadFile = (event) => {
     handleInputFile(event, true);
   };
+  const handleOpen = (flag) => {
+    setOpen(flag);
+  };
   return (
     <HeaderContainer>
       <NavContainer>
-        <FaInfoCircle className={`nav-icon-style-${state}`} />
-        <a
-          href="https://github.com/Eric761/stable-matching-algo-viz"
-          target="_blank"
-        >
-          <FaGithub className={`nav-icon-style-${state}`} />
-        </a>
+        {!active ? (
+          <>
+            <StyledFaInfoCircle
+              active={active}
+              state={state}
+              onClick={() => handleOpen(true)}
+            />
+            <Info open={open} handleOpen={handleOpen} />
+            <a
+              href="https://github.com/Eric761/stable-matching-algo-viz"
+              target="_blank"
+            >
+              <StyledFaGithub active={active} state={state} />
+            </a>
+          </>
+        ) : (
+          <>
+            <StyledFaInfoCircle active={active} state={state} />
+            <StyledFaGithub active={active} state={state} />
+          </>
+        )}
       </NavContainer>
       <IconContainer state={state}>
         <StyledRiRestartFill
