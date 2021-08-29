@@ -25,7 +25,7 @@ export const Content = styled.div`
   line-height: 1.5;
   margin: 5px 0 15px;
   text-align: center;
-  color: #01005a;
+  color: rgb(4 37 47);
 `;
 
 export const PageNumber = styled.div`
