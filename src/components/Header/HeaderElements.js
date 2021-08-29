@@ -215,33 +215,21 @@ export const StyledFaPause = styled(FaPause)`
   height: 25px;
   width: 25px;
   margin: 0 12px;
-  color: ${({ active, state, isPaused }) =>
+  border: ${({ active, state, isPaused }) =>
     active
       ? isPaused
         ? state
-          ? "#fff7ed"
-          : "#0c0c0c"
-        : state
-        ? "#b3b3a9"
-        : "#545454"
-      : state
-      ? "#616161"
-      : "#adadad"};
+          ? "1px solid #bdbdbd"
+          : "2px solid #4c4949"
+        : ""
+      : ""};
+  color: ${({ active, state }) =>
+    active ? (state ? "#b3b3a9" : "#545454") : state ? "#616161" : "#adadad"};
   cursor: ${({ active }) => (active ? "pointer" : "")};
 
   &:hover {
-    color: ${({ active, state, isPaused }) =>
-      active
-        ? isPaused
-          ? state
-            ? "#ffffff"
-            : "black"
-          : state
-          ? "#d8d8cd"
-          : "#000000"
-        : state
-        ? "#616161"
-        : "#adadad"};
+    color: ${({ active, state }) =>
+      active ? (state ? "#d8d8cd" : "#000000") : state ? "#616161" : "#adadad"};
     transition: 0.1s ease-in;
   }
 `;

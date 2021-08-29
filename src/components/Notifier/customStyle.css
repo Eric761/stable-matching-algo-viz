@@ -16,7 +16,8 @@
   background: linear-gradient(45deg, #03bb6e, #5afc7b) !important;
 }
 .Toastify__toast--warning {
-  background: linear-gradient(45deg, #fffb00, #7bf1ce) !important;
+  background: linear-gradient(45deg, #37cafc, #aaeaff) !important;
+  /* background: linear-gradient(45deg, #fffb00, #7bf1ce) !important; */
 }
 .Toastify__toast--error {
   background: linear-gradient(45deg, #f51313, #e24949) !important;

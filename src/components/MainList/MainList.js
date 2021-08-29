@@ -216,7 +216,7 @@ const MainList = ({
         informer.queueMessage(
           "warning",
           `${entity.name} has no partner. 😢`,
-          2000
+          1500
         );
       }
     }
@@ -356,7 +356,7 @@ const MainList = ({
         informer.queueMessage(
           "warning",
           `${male.name} is engaged with ${female.name}.`,
-          1000
+          2000
         );
       }, 500);
     }
@@ -501,7 +501,11 @@ const MainList = ({
     if (stableMarriageProcessQueue.length === 0) {
       animationQueue.add(function () {
         showResult();
-        informer.queueMessage("valid", "Tap an entity to show its partner.");
+        informer.queueMessage(
+          "valid",
+          "Tap an entity to show its partner.",
+          2500
+        );
       }, 100);
     } else {
       animationQueue.add(function () {
@@ -621,7 +625,7 @@ const MainList = ({
         // Make sure the animationQueue is not disabled.
         animationQueue.disable = false;
 
-        informer.queueMessage("valid", "Visualization starts.");
+        informer.queueMessage("valid", "Visualization starts 🚀");
         handleVizActive(true);
         setTimeout(() => {
           animationStep();
@@ -667,7 +671,7 @@ const MainList = ({
       showResult();
       informer.queueMessage(
         "valid",
-        "Click an entity to see the partner.",
+        "Tap an entity to show its partner.",
         3000
       );
       handleSkip(false);

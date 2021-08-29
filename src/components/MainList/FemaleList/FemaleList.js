@@ -192,7 +192,7 @@ const FemaleList = ({
         informer.queueMessage(
           "warning",
           "Use stop button to edit configuration.",
-          1000
+          1500
         );
       return;
     }
