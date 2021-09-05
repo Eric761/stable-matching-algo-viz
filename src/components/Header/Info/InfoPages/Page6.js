@@ -23,7 +23,7 @@ const Page6 = () => {
         <strong>dark</strong>. The user can easily switch between these modes
         before beginning the visualisation.
       </InfoContent>
-      <PageNumber>6/8</PageNumber>
+      <PageNumber>6/9</PageNumber>
       <img
         src={gif}
         style={{ width: "250px", height: "80px", marginTop: "15px" }}

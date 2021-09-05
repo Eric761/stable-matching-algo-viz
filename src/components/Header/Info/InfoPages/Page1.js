@@ -15,7 +15,7 @@ const Page1 = () => {
         <strong>Skip Tutorial</strong> button below. Otherwise, press{" "}
         <strong>Next</strong> !
       </Content>
-      <PageNumber>1/8</PageNumber>
+      <PageNumber>1/9</PageNumber>
       <img src={img} style={{ width: "35%" }} alt="Algo_Image" />
     </PageContainer>
   );

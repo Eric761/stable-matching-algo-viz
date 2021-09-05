@@ -20,7 +20,7 @@ const Page5 = () => {
         <strong>delete icon</strong>, or add more by clicking the{" "}
         <strong>add icon</strong>.
       </InfoContent>
-      <PageNumber>5/8</PageNumber>
+      <PageNumber>5/9</PageNumber>
       <img
         src={gif}
         style={{ width: "300px", height: "275px" }}

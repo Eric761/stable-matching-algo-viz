@@ -19,6 +19,7 @@ import Page5 from "./InfoPages/Page5";
 import Page6 from "./InfoPages/Page6";
 import Page7 from "./InfoPages/Page7";
 import Page8 from "./InfoPages/Page8";
+import Page9 from "./InfoPages/Page9";
 
 const Helper = ({ pageNumber }) => {
   let component;
@@ -47,6 +48,9 @@ const Helper = ({ pageNumber }) => {
     case 8:
       component = <Page8 />;
       break;
+    case 9:
+      component = <Page9 />;
+      break;
     default:
       component = <Page1 />;
   }
@@ -60,7 +64,7 @@ const Info = ({ open, handleOpen }) => {
     setPageNumber(1);
   };
   const increasePageNumber = () => {
-    if (pageNumber === 8) {
+    if (pageNumber === 9) {
       handleClose();
       return;
     }
@@ -102,12 +106,12 @@ const Info = ({ open, handleOpen }) => {
           <NextBtn
             variant="contained"
             startIcon={
-              pageNumber === 8 ? <CheckCircleIcon /> : <NavigateNextIcon />
+              pageNumber === 9 ? <CheckCircleIcon /> : <NavigateNextIcon />
             }
             onClick={increasePageNumber}
-            flag={pageNumber === 8}
+            flag={pageNumber === 9}
           >
-            <BtnTitle>{pageNumber === 8 ? "Finish" : "Next"}</BtnTitle>
+            <BtnTitle>{pageNumber === 9 ? "Finish" : "Next"}</BtnTitle>
           </NextBtn>
         </Container>
       </Modal>

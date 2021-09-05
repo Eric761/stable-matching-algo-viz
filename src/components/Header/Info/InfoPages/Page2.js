@@ -41,7 +41,7 @@ const Page2 = () => {
         A matching is <strong>stable</strong> when there is no match (A, B)
         where both participants prefer someone else to their current partner.
       </Def>
-      <PageNumber>2/8</PageNumber>
+      <PageNumber>2/9</PageNumber>
     </PageContainer>
   );
 };

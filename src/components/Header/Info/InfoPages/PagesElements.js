@@ -50,6 +50,15 @@ export const Description = styled.div`
   color: #11373e;
 `;
 
+export const ControlBar = styled.h3`
+  font-size: 38px;
+  line-height: 1.8;
+  color: #1c464e;
+  position: absolute;
+  top: 0;
+  right: 35%;
+`;
+
 export const Def = styled.div`
   font-size: 20px;
   line-height: 1.3;
@@ -91,7 +100,7 @@ export const InfoContent = styled.div`
 
 export const FunctionList = styled.li`
   list-style: disc;
-  font-size: 18px;
+  font-size: 18.5px;
   color: #11373e;
   padding: 0 2px;
 `;

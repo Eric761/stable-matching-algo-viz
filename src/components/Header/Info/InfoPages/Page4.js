@@ -20,7 +20,7 @@ const Page4 = () => {
         </strong>
         .
       </InfoContent>
-      <PageNumber>4/8</PageNumber>
+      <PageNumber>4/9</PageNumber>
       <img
         src={gif}
         style={{ width: "300px", height: "295px" }}

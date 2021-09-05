@@ -15,7 +15,7 @@ const Page3 = () => {
         </PageLink>
         :
       </H6>
-      <PageNumber>3/8</PageNumber>
+      <PageNumber>3/9</PageNumber>
       <img
         src={gif}
         style={{ width: "470px", height: "370px", marginTop: "10px" }}
