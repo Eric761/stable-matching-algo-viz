@@ -83,7 +83,7 @@ const AnimationCol = ({
           alignItems: "center",
         }}
       >
-        <Scrollbars style={{ width: 480, height: 635 }} autoHide>
+        <Scrollbars style={{ width: 480, height: '90%' }} autoHide>
           <Collapse
             in={toggleMale}
             collapsedHeight="85px"

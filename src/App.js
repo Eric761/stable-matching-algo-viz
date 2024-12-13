@@ -6,7 +6,7 @@ import MainList from "./components/MainList/MainList";
 const App = () => {
   const [styleBg, setStyleBg] = useState({
     backgroundColor: "#212121",
-    height: "100%",
+    height: "100vh",
     overflowY: "auto",
     overflowX: "hidden",
     display: "grid",
@@ -32,7 +32,7 @@ const App = () => {
     if (val) {
       setStyleBg({
         backgroundColor: "#212121",
-        height: "100%",
+        height: "100vh",
         overflowY: "auto",
         overflowX: "hidden",
         display: "grid",
@@ -42,7 +42,7 @@ const App = () => {
     } else {
       setStyleBg({
         backgroundColor: "white",
-        height: "100%",
+        height: "100vh",
         overflowY: "auto",
         overflowX: "hidden",
         display: "grid",
